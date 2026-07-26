@@ -23,7 +23,8 @@ running Foundry normally on the big screen.
 It's built for **dnd5e** (tested on 5.2.4) on **Foundry v13**.
 
 It's part of a bigger thing called TableOS, but Scry works fine on its own. If TableOS
-happens to be installed, Scry uses it for better player/table detection
+happens to be installed, Scry uses it for better player/table detection and for the
+fancy A* pathfinding walk.
 
 ---
 
@@ -142,13 +143,13 @@ The main combat tab and the busiest screen in the app.
 - Full midi-qol attack pipeline is wired in if you have it.
 - **Status conditions panel** lives here too (the shield button opens straight to it).
 
-### Spells
+### 🧙 Spells
 
 Grouped by level with slot pips per level. Cast/Enter modes same as Actions. Tap a
 spell name for the description in a modal. Prepared/unprepared handled. Cantrips
 don't eat slots, obviously.
 
-###  Gear
+### 🎒 Gear
 
 Everything you're carrying, split into Weapons / Equipment / Consumables / Loot.
 
@@ -158,7 +159,7 @@ Everything you're carrying, split into Weapons / Equipment / Consumables / Loot.
 - Encumbrance readout
 - **Containers** expand and collapse; the 📦 button moves an item into one
 
-### Character
+### 👤 Character
 
 Ability scores with a roll/enter toggle, saving throws, skills with passives, hit
 dice.
@@ -167,13 +168,13 @@ On the **Foundry and Beyond templates this tab is trimmed** — it's just abilit
 saves, and skills, because features moved to Traits. On Core, everything's still on
 this one tab.
 
-###  Traits
+### 🛡 Traits
 
 Foundry/Beyond only. Class features, racial traits, feats, proficiencies, languages,
 plus personality/ideals/bonds/flaws down the bottom. Features with limited uses get a
 **Use** button that burns a charge.
 
-### Table
+### 🎲 Table
 
 Not a tab exactly — this one drops you onto the map. See below.
 
@@ -358,8 +359,8 @@ File it at https://github.com/ArnoldZoo/Scry/issues or just message me directly.
 
 ## Credits and license
 
-Author: **DudleyDoRight**
-Coder: **ArnoldZoo**
+Author: **Loremaster-DudleyDoRight**
+Coder: **ArcaneLogix-ArnoldZoo**
 
 Copyright © 2026 ArcaneLogix. All rights reserved. **This is not open source.** The
 source is public so you can playtest it and see what you're installing. You may
