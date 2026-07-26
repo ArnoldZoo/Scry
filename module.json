@@ -1,0 +1,46 @@
+{
+  "id": "table-os-scry",
+  "title": "TableOS Scry - Mobile Player Companion",
+  "description": "Personal device companion for TableOS. Gives players a phone and tablet optimized character interface during in-person Foundry VTT sessions.",
+  "version": "2.5.12",
+  "authors": [
+    { "name": "Loremaster-DudleyDoRight" },
+    { "name": "ArcaneLogix-ArnoldZoo" }
+  ],
+  "url": "https://github.com/ArnoldZoo/Scry",
+  "readme": "https://github.com/ArnoldZoo/Scry#readme",
+  "bugs": "https://github.com/ArnoldZoo/Scry/issues",
+  "license": "https://github.com/ArnoldZoo/Scry/blob/master/LICENSE",
+  "manifest": "https://github.com/ArnoldZoo/Scry/releases/latest/download/module.json",
+  "download": "https://github.com/ArnoldZoo/Scry/releases/latest/download/module.zip",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/scry.css",
+    "styles/scry-core.css",
+    "styles/scry-anvil.css",
+    "styles/scry-foundry.css"
+  ],
+  "socket": true,
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": { "minimum": "3.0.0" }
+      }
+    ],
+    "optional": [
+      {
+        "id": "table-os",
+        "type": "module",
+        "reason": "Enables precise user-type detection. Scry works standalone but integrates with TableOS when present."
+      }
+    ]
+  }
+}

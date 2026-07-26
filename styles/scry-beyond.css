@@ -1,0 +1,805 @@
+﻿/*
+Module: TableOS Scry — Mobile Player Companion
+Component: scry-beyond.css
+Purpose: Scry-BEYOND template — theme variables (Dark, Light, Parchment) + full layout CSS.
+
+Author: Loremaster-DudleyDoRight
+Coder: ArcaneLogix-ArnoldZoo
+Revision: 2.5.12
+Copyright (c) 2026 ArcaneLogix. All rights reserved.
+Licensed for personal tabletop play only - see LICENSE.
+No redistribution, derivative works, or resale without written permission.
+*/
+
+/* ============================================================
+   THEME: Beyond Dark  (D&D Beyond dark mode — near-black / blue)
+   ============================================================ */
+.scry-overlay.theme-beyond-dark {
+  --scry-bg:           #0e0e12;
+  --scry-bg-card:      #1e1e28;
+  --scry-bg-card-alt:  #252535;
+  --scry-bg-surface:   #161620;
+  --scry-border:       rgba(255,255,255,0.09);
+  --scry-accent:       #1A6FE3;
+  --scry-accent-dim:   #1454b0;
+  --scry-accent-glow:  rgba(26,111,227,0.2);
+  --scry-text:         #f0f0f5;
+  --scry-text-muted:   #8a8aaa;
+  --scry-text-label:   #6a6a8a;
+  --scry-hp-color:     #22c55e;
+  --scry-hp-bloodied:  #f97316;
+  --scry-hp-critical:  #ef4444;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #252535;
+  --scry-btn-hover:    #2e2e42;
+  --scry-btn-active:   #1A6FE3;
+  --scry-tab-active:   #1A6FE3;
+  --scry-gold:         #1A6FE3;
+  --scry-shadow:       0 4px 14px rgba(0,0,0,0.65);
+  /* Beyond template tokens */
+  --sbnd-header-bg:    #13131a;
+  --sbnd-topbar-border:rgba(255,255,255,0.07);
+  --sbnd-section-bg:   #18181f;
+  --sbnd-tab-bar-bg:   #13131a;
+  --sbnd-tab-bar-border:rgba(255,255,255,0.07);
+  --sbnd-card-base:    #1e1e28;
+  --sbnd-card-top:     #2a2a3a;
+  --sbnd-card-highlight:rgba(255,255,255,0.07);
+  --sbnd-shadow-deep:  rgba(0,0,0,0.65);
+  --sbnd-hp-pill-bg:   #1A6FE3;
+  --sbnd-hp-pill-text: #ffffff;
+  --sbnd-hp-pill-bloodied: #f97316;
+  --sbnd-hp-pill-critical: #ef4444;
+  --sbnd-dot-off:      rgba(255,255,255,0.18);
+  --sbnd-dot-on:       #ffffff;
+  --sbnd-sec-header-color: #6a6aaa;
+  --sbnd-trait-row-hover: rgba(255,255,255,0.04);
+  --sbnd-card-border:      rgba(110,110,180,0.5);
+  --sbnd-card-inner-border:rgba(255,255,255,0.07);
+  /* SVG badge tokens */
+  --sbnd-badge-fill:       #17202c;
+  --sbnd-badge-fill-2:     #1e2d3e;
+  --sbnd-badge-line:       #2e4860;
+  --sbnd-badge-line-soft:  rgba(70,110,145,0.5);
+  --sbnd-badge-text:       #e8edf2;
+  --sbnd-badge-muted:      #8a9aaa;
+  --sbnd-badge-shadow:     rgba(0,0,0,0.65);
+}
+
+/* ============================================================
+   THEME: Beyond Light  (Atlas-inspired — off-white / navy / blue)
+   ============================================================ */
+.scry-overlay.theme-beyond-light {
+  --scry-bg:           #eef2f8;
+  --scry-bg-card:      #ffffff;
+  --scry-bg-card-alt:  #f0f4fc;
+  --scry-bg-surface:   #f5f7fd;
+  --scry-border:       rgba(26,42,74,0.13);
+  --scry-accent:       #1A6FE3;
+  --scry-accent-dim:   #1454b0;
+  --scry-accent-glow:  rgba(26,111,227,0.12);
+  --scry-text:         #1a2a4a;
+  --scry-text-muted:   #5a6a8a;
+  --scry-text-label:   #7a8aaa;
+  --scry-hp-color:     #16a34a;
+  --scry-hp-bloodied:  #ea580c;
+  --scry-hp-critical:  #dc2626;
+  --scry-danger:       #dc2626;
+  --scry-btn-bg:       #e2e8f4;
+  --scry-btn-hover:    #d4dcee;
+  --scry-btn-active:   #1A6FE3;
+  --scry-tab-active:   #1A6FE3;
+  --scry-gold:         #1A6FE3;
+  --scry-shadow:       0 2px 10px rgba(26,42,74,0.12);
+  /* Beyond template tokens */
+  --sbnd-header-bg:    #ffffff;
+  --sbnd-topbar-border:rgba(26,42,74,0.1);
+  --sbnd-section-bg:   #e8edf8;
+  --sbnd-tab-bar-bg:   #ffffff;
+  --sbnd-tab-bar-border:rgba(26,42,74,0.1);
+  --sbnd-card-base:    #ffffff;
+  --sbnd-card-top:     #f4f7ff;
+  --sbnd-card-highlight:rgba(255,255,255,0.9);
+  --sbnd-shadow-deep:  rgba(26,42,74,0.12);
+  --sbnd-hp-pill-bg:   #1A6FE3;
+  --sbnd-hp-pill-text: #ffffff;
+  --sbnd-hp-pill-bloodied: #ea580c;
+  --sbnd-hp-pill-critical: #dc2626;
+  --sbnd-dot-off:      rgba(26,42,74,0.2);
+  --sbnd-dot-on:       #1A6FE3;
+  --sbnd-sec-header-color: #7a8aaa;
+  --sbnd-trait-row-hover: rgba(26,42,74,0.05);
+  --sbnd-card-border:      rgba(26,90,200,0.3);
+  --sbnd-card-inner-border:rgba(26,42,74,0.12);
+  /* SVG badge tokens */
+  --sbnd-badge-fill:       #c8d8ec;
+  --sbnd-badge-fill-2:     #b8c8e0;
+  --sbnd-badge-line:       #5880a8;
+  --sbnd-badge-line-soft:  rgba(60,90,140,0.4);
+  --sbnd-badge-text:       #1a2a4a;
+  --sbnd-badge-muted:      #4a6080;
+  --sbnd-badge-shadow:     rgba(26,42,74,0.18);
+}
+
+/* ============================================================
+   THEME: Beyond Parchment  (Aged paper — warm cream / saddle brown)
+   ============================================================ */
+.scry-overlay.theme-beyond-parchment {
+  --scry-bg:           #f0e8d5;
+  --scry-bg-card:      #fffbf0;
+  --scry-bg-card-alt:  #f5eed8;
+  --scry-bg-surface:   #faf3e4;
+  --scry-border:       rgba(61,43,26,0.18);
+  --scry-accent:       #8b4513;
+  --scry-accent-dim:   #6b3510;
+  --scry-accent-glow:  rgba(139,69,19,0.14);
+  --scry-text:         #3d2b1a;
+  --scry-text-muted:   #7a5a3a;
+  --scry-text-label:   #9a7a5a;
+  --scry-hp-color:     #2e7d32;
+  --scry-hp-bloodied:  #bf360c;
+  --scry-hp-critical:  #b71c1c;
+  --scry-danger:       #b71c1c;
+  --scry-btn-bg:       #e8dcc8;
+  --scry-btn-hover:    #ddd0b8;
+  --scry-btn-active:   #8b4513;
+  --scry-tab-active:   #8b4513;
+  --scry-gold:         #8b4513;
+  --scry-shadow:       0 2px 8px rgba(61,43,26,0.2);
+  /* Beyond template tokens */
+  --sbnd-header-bg:    #ede0c4;
+  --sbnd-topbar-border:rgba(61,43,26,0.18);
+  --sbnd-section-bg:   #e4d8be;
+  --sbnd-tab-bar-bg:   #ede0c4;
+  --sbnd-tab-bar-border:rgba(61,43,26,0.18);
+  --sbnd-card-base:    #fffbf0;
+  --sbnd-card-top:     #fff8e8;
+  --sbnd-card-highlight:rgba(255,252,240,0.8);
+  --sbnd-shadow-deep:  rgba(61,43,26,0.22);
+  --sbnd-hp-pill-bg:   #8b4513;
+  --sbnd-hp-pill-text: #fff8e8;
+  --sbnd-hp-pill-bloodied: #bf360c;
+  --sbnd-hp-pill-critical: #b71c1c;
+  --sbnd-dot-off:      rgba(61,43,26,0.22);
+  --sbnd-dot-on:       #8b4513;
+  --sbnd-sec-header-color: #9a7a5a;
+  --sbnd-trait-row-hover: rgba(61,43,26,0.06);
+  --sbnd-card-border:      rgba(139,69,19,0.45);
+  --sbnd-card-inner-border:rgba(61,43,26,0.12);
+  /* SVG badge tokens */
+  --sbnd-badge-fill:       #ede0c0;
+  --sbnd-badge-fill-2:     #e0cda0;
+  --sbnd-badge-line:       #8b6030;
+  --sbnd-badge-line-soft:  rgba(120,80,30,0.4);
+  --sbnd-badge-text:       #3d2b1a;
+  --sbnd-badge-muted:      #7a5a30;
+  --sbnd-badge-shadow:     rgba(61,43,26,0.25);
+}
+
+/* ============================================================
+   LAYOUT — Shell
+   ============================================================ */
+#scry-overlay.sbnd-layout {
+  display: flex;
+  flex-direction: column;
+  background: var(--scry-bg);
+  color: var(--scry-text);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.sbnd-header {
+  flex-shrink: 0;
+  background: var(--sbnd-header-bg);
+  border-bottom: 1px solid var(--sbnd-topbar-border);
+  z-index: 10;
+}
+
+/* top bar: tools | identity | hp pill */
+.sbnd-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 6px;
+}
+
+.sbnd-tools-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--scry-text-muted);
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0;
+}
+.sbnd-tools-btn:hover { background: var(--scry-btn-bg); color: var(--scry-text); }
+
+.sbnd-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sbnd-portrait {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--scry-border);
+  flex-shrink: 0;
+}
+
+.sbnd-identity-text {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sbnd-char-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--scry-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sbnd-char-sub {
+  font-size: 11px;
+  color: var(--scry-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* HP pill */
+.sbnd-hp-pill {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--sbnd-hp-pill-bg);
+  color: var(--sbnd-hp-pill-text);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  min-width: 96px;
+  min-height: 52px;
+  gap: 3px;
+  line-height: 1;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+  transition: filter 0.15s;
+  box-sizing: border-box;
+}
+.sbnd-hp-pill:hover { filter: brightness(1.12); }
+.sbnd-hp-pill:active { filter: brightness(0.92); }
+.sbnd-hp-pill.bloodied { background: var(--sbnd-hp-pill-bloodied); }
+.sbnd-hp-pill.critical { background: var(--sbnd-hp-pill-critical); }
+
+.sbnd-hp-nums {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.sbnd-hp-temp {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-left: 2px;
+}
+
+.sbnd-hp-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  line-height: 1;
+}
+
+/* section bar: current tab name + chips */
+.sbnd-section-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px 6px;
+  border-top: 1px solid var(--sbnd-topbar-border);
+}
+
+.sbnd-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--scry-text);
+  letter-spacing: 0.01em;
+}
+
+.sbnd-section-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sbnd-ac-chip {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--scry-text-muted);
+}
+.sbnd-ac-chip i { font-size: 11px; }
+
+.sbnd-conc-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--sbnd-hp-pill-text);
+  background: var(--scry-accent);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+.sbnd-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--scry-bg);
+}
+
+/* Unprepared spells — base scry.css uses opacity:.5 which is too invisible on dark Beyond themes */
+#scry-overlay.sbnd-layout .scry-spell-row.unprepared { opacity: 0.72; }
+
+/* ============================================================
+   TAB BAR (bottom)
+   ============================================================ */
+.sbnd-tab-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background: var(--sbnd-tab-bar-bg);
+  border-top: 1px solid var(--sbnd-tab-bar-border);
+  height: 62px;
+  min-height: 62px;
+}
+
+.sbnd-tab-btn {
+  flex: 1;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: var(--scry-text-muted);
+  cursor: pointer;
+  padding: 10px 2px;
+  font-size: 10px;
+  transition: color 0.15s;
+  box-sizing: border-box;
+}
+.sbnd-tab-btn i { font-size: 16px; }
+.sbnd-tab-btn.active { color: var(--scry-accent); }
+.sbnd-tab-btn:hover:not(.active) { color: var(--scry-text); }
+
+.sbnd-tab-label {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+/* ============================================================
+   ABILITY SCORE BADGES  (SVG-backed crest frames)
+   ============================================================ */
+.sbnd-abilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 10px 4px;
+}
+
+/* Card container — aspect ratio matches SVG viewBox 100:142 */
+.sbnd-ability-card {
+  position: relative;
+  aspect-ratio: 100 / 142;
+  background: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: filter 0.14s;
+  overflow: visible;
+}
+.sbnd-ability-card::before { display: none; }
+.sbnd-ability-card:active { filter: brightness(1.1); }
+
+/* SVG frame fills the container */
+.sbnd-ability-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 8px var(--sbnd-badge-shadow));
+}
+
+/* SVG element classes */
+.sbnd-frm-outer {
+  fill: var(--sbnd-badge-fill);
+  stroke: var(--sbnd-badge-line);
+  stroke-width: 1.2;
+}
+.sbnd-frm-inner {
+  fill: none;
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+.sbnd-frm-rule {
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+.sbnd-frm-modbox {
+  fill: var(--sbnd-badge-fill-2);
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+.sbnd-frm-filigree {
+  fill: none;
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+  stroke-linecap: square;
+}
+.sbnd-frm-med-out {
+  fill: var(--sbnd-badge-fill);
+  stroke: var(--sbnd-badge-line);
+  stroke-width: 1.2;
+}
+.sbnd-frm-med-in {
+  fill: none;
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+
+/* Text layers — absolute over the SVG */
+.sbnd-ability-name {
+  position: absolute;
+  top: 8%;
+  width: 100%;
+  text-align: center;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--sbnd-badge-muted);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.sbnd-ability-mod {
+  position: absolute;
+  top: 38%;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--sbnd-badge-text);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.sbnd-ability-score {
+  position: absolute;
+  top: 88%;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sbnd-badge-text);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   GENERIC SECTION WRAPPER
+   ============================================================ */
+.sbnd-section {
+  margin: 0 0 2px;
+  background: var(--scry-bg);
+}
+
+.sbnd-sec-header {
+  padding: 8px 12px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sbnd-sec-header-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sbnd-sec-count {
+  background: var(--scry-btn-bg);
+  color: var(--scry-text-muted);
+  border-radius: 10px;
+  font-size: 9px;
+  padding: 1px 6px;
+}
+
+/* ============================================================
+   SAVE ROWS  (SVG nameplate badges)
+   ============================================================ */
+.sbnd-saves-list {
+  padding: 4px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sbnd-save-row {
+  position: relative;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: filter 0.1s;
+}
+.sbnd-save-row:hover { filter: brightness(1.06); }
+
+/* SVG nameplate fills the row */
+.sbnd-save-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* SVG nameplate element classes */
+.sbnd-sv-bg {
+  fill: var(--sbnd-badge-fill);
+}
+.sbnd-sv-border {
+  fill: none;
+  stroke: var(--sbnd-badge-line);
+  stroke-width: 1.2;
+}
+.sbnd-sv-pod {
+  fill: var(--sbnd-badge-fill-2);
+}
+.sbnd-sv-div {
+  stroke: var(--sbnd-badge-line);
+  stroke-width: 1;
+}
+.sbnd-sv-inner {
+  fill: none;
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+.sbnd-sv-pod-inner {
+  fill: none;
+  stroke: var(--sbnd-badge-line-soft);
+  stroke-width: 0.7;
+}
+
+/* Text children sit on top of SVG */
+.sbnd-save-row .sbnd-dot {
+  position: relative;
+  z-index: 1;
+  margin-left: 18px;
+  flex-shrink: 0;
+}
+.sbnd-save-row .sbnd-row-label {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  margin-left: 10px;
+}
+.sbnd-save-row .sbnd-row-val {
+  position: relative;
+  z-index: 1;
+  width: 22%;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SKILL ROWS  (standard list)
+   ============================================================ */
+.sbnd-skill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--sbnd-card-base);
+  border-bottom: 1px solid var(--scry-border);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.1s;
+}
+.sbnd-skill-row:last-child { border-bottom: none; }
+.sbnd-skill-row:hover { background: var(--sbnd-trait-row-hover); }
+
+/* Proficiency dot */
+.sbnd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sbnd-dot-off);
+  flex-shrink: 0;
+  border: 1px solid var(--scry-border);
+}
+.sbnd-dot.sbnd-dot-on {
+  background: var(--sbnd-dot-on);
+  border-color: transparent;
+}
+
+.sbnd-row-label {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--scry-text);
+  letter-spacing: 0.03em;
+}
+.sbnd-skill-row .sbnd-row-label {
+  text-transform: none;
+}
+.sbnd-save-row .sbnd-row-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sbnd-skill-abl {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--scry-text-muted);
+  letter-spacing: 0.06em;
+  width: 24px;
+  text-align: center;
+}
+
+.sbnd-row-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--scry-text);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ============================================================
+   SENSES ROW
+   ============================================================ */
+.sbnd-senses-row {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px 10px;
+}
+
+.sbnd-sense-chip {
+  flex: 1;
+  background: var(--sbnd-card-base);
+  border: 1px solid var(--scry-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px 6px;
+  box-shadow: inset 0 1px 0 var(--sbnd-card-highlight);
+}
+
+.sbnd-sense-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--scry-text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.sbnd-sense-label {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--scry-text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ============================================================
+   TRAITS TAB
+   ============================================================ */
+.sbnd-traits-wrap {
+  padding-bottom: 16px;
+}
+
+.sbnd-traits-divider {
+  height: 1px;
+  background: var(--scry-border);
+  margin: 8px 12px;
+}
+
+.sbnd-trait-feat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--sbnd-card-base);
+  border-bottom: 1px solid var(--scry-border);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sbnd-trait-feat-row:last-child { border-bottom: none; }
+.sbnd-trait-feat-row:hover { background: var(--sbnd-trait-row-hover); }
+
+.sbnd-item-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sbnd-item-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--scry-text);
+}
+
+.sbnd-trait-use-btn {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--scry-accent);
+  color: var(--sbnd-hp-pill-text);
+  border: none;
+  border-radius: 5px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.sbnd-trait-use-btn.hidden { display: none; }
+.sbnd-trait-use-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.sbnd-trait-block {
+  padding: 8px 12px;
+  background: var(--sbnd-card-base);
+  border-bottom: 1px solid var(--scry-border);
+}
+.sbnd-trait-block:last-child { border-bottom: none; }
+
+.sbnd-trait-block-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--scry-text-muted);
+  margin-bottom: 3px;
+}
+
+.sbnd-trait-text {
+  font-size: 12px;
+  color: var(--scry-text);
+  line-height: 1.5;
+}

@@ -1,0 +1,64 @@
+TableOS Scry — Mobile Player Companion
+Copyright (c) 2026 ArcaneLogix. All rights reserved.
+
+This software and its source code are the property of ArcaneLogix. They are
+made publicly readable for playtesting and evaluation purposes only. Publishing
+the source on GitHub does NOT place it in the public domain and does NOT grant
+an open-source license of any kind.
+
+GRANT OF PERMISSION
+
+You are permitted, at no cost, to:
+
+  1. Download and install this module into your own Foundry Virtual Tabletop
+     instance.
+  2. Use it for personal, non-commercial tabletop play.
+  3. Make local modifications for your own private use.
+  4. Report bugs, request features, and share screenshots or recordings of the
+     module in use.
+
+RESTRICTIONS
+
+You may NOT, without prior written permission from ArcaneLogix:
+
+  1. Redistribute, republish, mirror, or host this software or any part of it,
+     modified or unmodified, including on GitHub, Foundry package listings,
+     Patreon, Discord file shares, or any other channel.
+  2. Sell, rent, sublicense, or otherwise commercially exploit this software or
+     any part of it.
+  3. Create and distribute derivative works, forks, ports, or reskins.
+  4. Remove, obscure, or alter any copyright notice, author credit, license
+     text, or in-app version badge.
+  5. Incorporate any portion of this source code into another product, whether
+     free or paid, open source or closed.
+
+TERM
+
+Permission under this license is granted for the duration of the playtest and
+may be revoked by ArcaneLogix at any time. On revocation you must stop using and
+delete your copies of the software.
+
+THIRD-PARTY CONTENT
+
+This module contains no Wizards of the Coast content. It reads data from the
+user's own installed Foundry VTT system and content, which remain subject to
+their own licenses. "Dungeons & Dragons", "D&D Beyond", and "Foundry Virtual
+Tabletop" are trademarks of their respective owners and are used here only for
+descriptive purposes. This module is neither affiliated with nor endorsed by
+any of them.
+
+NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. YOU INSTALL AND USE IT AT YOUR OWN RISK, INCLUDING ANY RISK TO YOUR
+FOUNDRY VTT WORLD DATA. BACK UP YOUR WORLD BEFORE INSTALLING.
+
+CONTACT
+
+For permissions beyond the scope of this license, open an issue at
+https://github.com/ArnoldZoo/Scry/issues

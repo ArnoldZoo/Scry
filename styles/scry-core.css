@@ -1,0 +1,152 @@
+﻿/*
+Module: TableOS Scry — Mobile Player Companion
+Component: scry-core.css
+Purpose: Scry-CORE template — theme variable blocks (Cobalt, Atlas, Slate, Nomad, Cipher).
+
+Author: Loremaster-DudleyDoRight
+Coder: ArcaneLogix-ArnoldZoo
+Revision: 2.5.12
+Copyright (c) 2026 ArcaneLogix. All rights reserved.
+Licensed for personal tabletop play only - see LICENSE.
+No redistribution, derivative works, or resale without written permission.
+*/
+
+/* ============================================================
+   THEME: Cobalt (default)
+   Dark navy, cyan accent, clean and high-contrast
+   ============================================================ */
+.scry-overlay.theme-cobalt,
+.scry-overlay.theme-beyond-dark {  /* legacy alias */
+  --scry-bg:           #1a1a2e;
+  --scry-bg-card:      #16213e;
+  --scry-bg-card-alt:  #0f1f3d;
+  --scry-bg-surface:   #0d1b36;
+  --scry-border:       #2a3a5c;
+  --scry-accent:       #4fc3f7;
+  --scry-accent-dim:   #1976a8;
+  --scry-text:         #e8eaf6;
+  --scry-text-muted:   #8895b3;
+  --scry-text-label:   #7b90c4;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #e94560;
+  --scry-btn-bg:       #1c3a6e;
+  --scry-btn-hover:    #254d96;
+  --scry-btn-active:   #4fc3f7;
+  --scry-tab-active:   #4fc3f7;
+  --scry-gold:         #ffd54f;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   THEME: Atlas
+   Light blue-grey, deep navy accent, clean and readable
+   ============================================================ */
+.scry-overlay.theme-atlas,
+.scry-overlay.theme-beyond-light {  /* legacy alias */
+  --scry-bg:           #f0f2f8;
+  --scry-bg-card:      #ffffff;
+  --scry-bg-card-alt:  #e8ebf5;
+  --scry-bg-surface:   #dde2f0;
+  --scry-border:       #c5cce6;
+  --scry-accent:       #1976d2;
+  --scry-accent-dim:   #90caf9;
+  --scry-text:         #1a1a2e;
+  --scry-text-muted:   #5a6a8a;
+  --scry-text-label:   #4a5a88;
+  --scry-hp-color:     #388e3c;
+  --scry-hp-bloodied:  #f57c00;
+  --scry-hp-critical:  #d32f2f;
+  --scry-danger:       #c62828;
+  --scry-btn-bg:       #dde5f8;
+  --scry-btn-hover:    #c5d0f5;
+  --scry-btn-active:   #1976d2;
+  --scry-tab-active:   #1976d2;
+  --scry-gold:         #f9a825;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   THEME: Slate
+   Cool charcoal grey — precision, minimal, professional
+   ============================================================ */
+.scry-overlay.theme-slate {
+  --scry-bg:           #14171f;
+  --scry-bg-card:      #1c2030;
+  --scry-bg-card-alt:  #161b28;
+  --scry-bg-surface:   #0e1119;
+  --scry-border:       #2d3548;
+  --scry-accent:       #94a3b8;
+  --scry-accent-dim:   #334155;
+  --scry-accent-glow:  rgba(148,163,184,.12);
+  --scry-text:         #f1f5f9;
+  --scry-text-muted:   #64748b;
+  --scry-text-label:   #94a3b8;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #1e2a3a;
+  --scry-btn-hover:    #263548;
+  --scry-btn-active:   #94a3b8;
+  --scry-tab-active:   #94a3b8;
+  --scry-gold:         #f59e0b;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.6);
+}
+
+/* ============================================================
+   THEME: Nomad
+   Desert warm — sand, amber, open sky
+   ============================================================ */
+.scry-overlay.theme-nomad {
+  --scry-bg:           #1c1409;
+  --scry-bg-card:      #2a1e0e;
+  --scry-bg-card-alt:  #221808;
+  --scry-bg-surface:   #130e06;
+  --scry-border:       #6b4c1a;
+  --scry-accent:       #d97706;
+  --scry-accent-dim:   #7c3a00;
+  --scry-accent-glow:  rgba(217,119,6,.2);
+  --scry-text:         #fde68a;
+  --scry-text-muted:   #a37842;
+  --scry-text-label:   #c8a05a;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #3a2208;
+  --scry-btn-hover:    #4e2e0c;
+  --scry-btn-active:   #d97706;
+  --scry-tab-active:   #d97706;
+  --scry-gold:         #d97706;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.65);
+}
+
+/* ============================================================
+   THEME: Cipher
+   Electric violet — arcane, cryptic, vivid
+   ============================================================ */
+.scry-overlay.theme-cipher {
+  --scry-bg:           #0d0d14;
+  --scry-bg-card:      #12111f;
+  --scry-bg-card-alt:  #0f0e1a;
+  --scry-bg-surface:   #080810;
+  --scry-border:       #2e1f5e;
+  --scry-accent:       #7c3aed;
+  --scry-accent-dim:   #3b1870;
+  --scry-accent-glow:  rgba(124,58,237,.2);
+  --scry-text:         #ede9fe;
+  --scry-text-muted:   #6d5a8a;
+  --scry-text-label:   #9d7ab0;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #1e1440;
+  --scry-btn-hover:    #2a1c58;
+  --scry-btn-active:   #7c3aed;
+  --scry-tab-active:   #7c3aed;
+  --scry-gold:         #f59e0b;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.7);
+}

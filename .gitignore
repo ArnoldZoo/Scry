@@ -1,0 +1,24 @@
+# Deploy tooling — CONTAINS SERVER CREDENTIALS. Never commit this.
+deploy.bat
+deploy*.txt
+
+# Internal development docs — NOT for the public repo.
+# These stay on disk and are used every session; they are simply never published.
+RECAP_SCRY.md
+START_PROMPT.md
+docs/
+compression_counter.md
+
+# Build output
+/dist/
+/build/
+module.zip
+
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+*.swp
+*~
+*.bak

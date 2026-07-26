@@ -1,0 +1,1829 @@
+﻿/*
+Module: TableOS Scry — Mobile Player Companion
+Component: scry-foundry.css
+Purpose: Scry-FOUNDRY template — theme variables (Classic, Modern, Enhanced) + full layout CSS.
+
+Author: Loremaster-DudleyDoRight
+Coder: ArcaneLogix-ArnoldZoo
+Revision: 2.5.12
+Copyright (c) 2026 ArcaneLogix. All rights reserved.
+Licensed for personal tabletop play only - see LICENSE.
+No redistribution, derivative works, or resale without written permission.
+*/
+
+/* ============================================================
+   THEME: Classic  (Artist palette — light parchment / crimson)
+   ============================================================ */
+.scry-overlay.theme-classic {
+  --scry-bg:           #E9E3D3;
+  --scry-bg-card:      #D8D0BE;
+  --scry-bg-card-alt:  #cfc9b8;
+  --scry-bg-surface:   #E9E3D3;
+  --scry-border:       #8A6F4D;
+  --scry-accent:       #8B1E2D;
+  --scry-accent-dim:   #5c1520;
+  --scry-accent-glow:  rgba(139,30,45,.15);
+  --scry-text:         #3A2E24;
+  --scry-text-muted:   #6a5a48;
+  --scry-text-label:   #5a4a38;
+  --scry-hp-color:     #2e7d32;
+  --scry-hp-bloodied:  #e65100;
+  --scry-hp-critical:  #b71c1c;
+  --scry-danger:       #8B1E2D;
+  --scry-btn-bg:       #ccc5b4;
+  --scry-btn-hover:    #bfb8a7;
+  --scry-btn-active:   #8B1E2D;
+  --scry-tab-active:   #8B1E2D;
+  --scry-gold:         #8A6F4D;
+  --scry-shadow:       0 2px 6px rgba(58,46,36,.2);
+  /* Foundry template */
+  --sfnd-portrait-bg:  #D8D0BE;
+  --sfnd-nav-bg:       #CFC9B8;
+  --sfnd-header-bg:    #8B1E2D;
+  --sfnd-header-text:  #F5EDE0;
+  --sfnd-badge-bg:     #8A6F4D;
+  --sfnd-badge-text:   #F5EDE0;
+  --sfnd-nav-active:   #6a1822;
+  --sfnd-nav-border:   #8B1E2D;
+}
+
+/* ============================================================
+   THEME: Modern  (Artist palette — dark charcoal / warm gold)
+   ============================================================ */
+.scry-overlay.theme-modern {
+  --scry-bg:           #1B1922;
+  --scry-bg-card:      #2C313F;
+  --scry-bg-card-alt:  #252a36;
+  --scry-bg-surface:   #161420;
+  --scry-border:       #61574A;
+  --scry-accent:       #D0B07A;
+  --scry-accent-dim:   #7a6040;
+  --scry-accent-glow:  rgba(208,176,122,.15);
+  --scry-text:         #D7D0C5;
+  --scry-text-muted:   #7a7268;
+  --scry-text-label:   #9a8e80;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #f59e0b;
+  --scry-hp-critical:  #ef4444;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #363B4A;
+  --scry-btn-hover:    #40465a;
+  --scry-btn-active:   #D0B07A;
+  --scry-tab-active:   #D0B07A;
+  --scry-gold:         #D0B07A;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.7);
+  /* Foundry template */
+  --sfnd-portrait-bg:  #161420;
+  --sfnd-nav-bg:       #12101c;
+  --sfnd-header-bg:    #3d1515;
+  --sfnd-header-text:  #D7D0C5;
+  --sfnd-badge-bg:     #4a3a1a;
+  --sfnd-badge-text:   #D0B07A;
+  --sfnd-nav-active:   #2d1a0a;
+  --sfnd-nav-border:   #D0B07A;
+}
+
+/* ============================================================
+   THEME: Frost  (Artist palette — dark slate / ice blue)
+   ============================================================ */
+.scry-overlay.theme-frost {
+  --scry-bg:           #2B2F36;
+  --scry-bg-card:      #373C45;
+  --scry-bg-card-alt:  #32363e;
+  --scry-bg-surface:   #23272e;
+  --scry-border:       #6C7A8A;
+  --scry-accent:       #A6D9FF;
+  --scry-accent-dim:   #3a6a90;
+  --scry-accent-glow:  rgba(166,217,255,.15);
+  --scry-text:         #D7E6F2;
+  --scry-text-muted:   #7a8a9a;
+  --scry-text-label:   #8a9aaa;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #414852;
+  --scry-btn-hover:    #4a5260;
+  --scry-btn-active:   #A6D9FF;
+  --scry-tab-active:   #A6D9FF;
+  --scry-gold:         #f59e0b;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.6);
+  /* Foundry template */
+  --sfnd-portrait-bg:  #23272e;
+  --sfnd-nav-bg:       #1e2228;
+  --sfnd-header-bg:    #1a2a4a;
+  --sfnd-header-text:  #A6D9FF;
+  --sfnd-badge-bg:     #1a3058;
+  --sfnd-badge-text:   #A6D9FF;
+  --sfnd-nav-active:   #0d1830;
+  --sfnd-nav-border:   #A6D9FF;
+}
+
+/* ============================================================
+   FOUNDRY TEMPLATE LAYOUT
+   sfnd-layout flips the root flex-direction to row, creating
+   portrait panel | content | nav rail columns.
+   ============================================================ */
+#scry-overlay.sfnd-layout {
+  flex-direction: row;
+}
+
+/* ── Portrait Panel ─────────────────────────────────────────── */
+.sfnd-portrait-panel {
+  width: 88px;
+  min-width: 88px;
+  flex-shrink: 0;
+  background: var(--sfnd-portrait-bg, var(--scry-bg-surface));
+  border-right: 1px solid var(--scry-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 4px 8px;
+  gap: 5px;
+}
+
+.sfnd-portrait-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.sfnd-portrait-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border: 2px solid var(--scry-border);
+  display: block;
+}
+
+/* AC badge over portrait corner */
+.sfnd-ac-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 26px;
+  height: 26px;
+  background: var(--sfnd-badge-bg, var(--scry-btn-bg));
+  border: 1px solid var(--sfnd-nav-border, var(--scry-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.sfnd-ac-badge span {
+  font-size: .62rem;
+  font-weight: 700;
+  color: var(--sfnd-badge-text, var(--scry-accent));
+  line-height: 1;
+}
+
+/* Turn indicator layered over portrait */
+.sfnd-portrait-wrap .scry-turn-indicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.55);
+  font-size: .5rem;
+  font-weight: 700;
+  color: var(--scry-accent);
+  letter-spacing: .06em;
+  text-align: center;
+  pointer-events: none;
+}
+.sfnd-portrait-wrap .scry-turn-indicator.hidden { display: none; }
+
+/* ── Identity ──────────────────────────────────────────────── */
+.sfnd-identity {
+  width: 100%;
+  text-align: center;
+}
+.sfnd-char-name {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--scry-text);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.sfnd-char-class {
+  font-size: .6rem;
+  color: var(--scry-text-muted);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+/* ── Diamond stat badges ───────────────────────────────────── */
+.sfnd-badge-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 2px 0;
+}
+.sfnd-diamond-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.sfnd-diamond {
+  width: 22px;
+  height: 22px;
+  background: var(--sfnd-badge-bg, var(--scry-btn-bg));
+  border: 1px solid var(--sfnd-nav-border, var(--scry-accent));
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sfnd-diamond-inner {
+  transform: rotate(-45deg);
+  font-size: .5rem;
+  font-weight: 700;
+  color: var(--sfnd-badge-text, var(--scry-accent));
+  line-height: 1;
+  white-space: nowrap;
+}
+.sfnd-diamond-label {
+  font-size: .48rem;
+  color: var(--scry-text-muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── HP block ──────────────────────────────────────────────── */
+.sfnd-hp-block {
+  width: 100%;
+}
+.sfnd-hp-bar {
+  height: 5px;
+  background: var(--scry-bg-surface);
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+.sfnd-hp-fill {
+  height: 100%;
+  background: var(--scry-hp-color);
+  border-radius: 3px;
+  transition: width .3s;
+}
+.sfnd-hp-bar.bloodied .sfnd-hp-fill { background: var(--scry-hp-bloodied); }
+.sfnd-hp-bar.critical .sfnd-hp-fill { background: var(--scry-hp-critical); }
+.sfnd-hp-text {
+  font-size: .58rem;
+  color: var(--scry-text-muted);
+  text-align: center;
+  line-height: 1;
+}
+
+/* ── Concentration badge (small, over portrait) ────────────── */
+.sfnd-conc-badge {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: .42rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 1px 3px;
+  border-radius: 2px;
+  background: rgba(124,58,237,.75);
+  color: #ede9fe;
+  border: 1px solid rgba(167,139,250,.6);
+  pointer-events: none;
+  z-index: 1;
+}
+.sfnd-conc-badge.hidden { display: none; }
+
+/* ── Portrait panel action buttons ────────────────────────── */
+.sfnd-panel-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+.sfnd-pbtn {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  cursor: pointer;
+  background: var(--scry-btn-bg);
+  color: var(--scry-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.sfnd-pbtn:hover  { background: var(--scry-btn-hover); color: var(--scry-text); }
+.sfnd-pbtn:active { opacity: .8; }
+.sfnd-pbtn i      { font-size: .72rem; flex-shrink: 0; }
+
+/* Button-specific icon/border colors */
+.sfnd-pbtn-dmg    { color: #f87171; border-color: rgba(248,113,113,.4); }
+.sfnd-pbtn-dmg  i { color: #f87171; }
+.sfnd-pbtn-heal   { color: #4ade80; border-color: rgba(74,222,128,.4); }
+.sfnd-pbtn-heal i { color: #4ade80; }
+.sfnd-pbtn-tmp    { color: #a78bfa; border-color: rgba(167,139,250,.4); }
+.sfnd-pbtn-tmp  i { color: #a78bfa; }
+.sfnd-pbtn-status   { color: #60a5fa; border-color: rgba(96,165,250,.35); }
+.sfnd-pbtn-status i { color: #60a5fa; }
+.sfnd-pbtn-rest   { color: #34d399; border-color: rgba(52,211,153,.35); }
+.sfnd-pbtn-rest i { color: #34d399; }
+.sfnd-pbtn-insp   { color: #fbbf24; border-color: rgba(251,191,36,.35); }
+.sfnd-pbtn-insp i { color: #fbbf24; }
+.sfnd-pbtn-insp.active {
+  background: rgba(251,191,36,.15);
+  color: #fbbf24;
+  border-color: rgba(251,191,36,.6);
+}
+
+/* ── Timer badge ───────────────────────────────────────────── */
+.sfnd-portrait-panel .scry-turn-timer-badge {
+  font-size: .65rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--scry-timer-color, #22c55e);
+  width: 100%;
+}
+.sfnd-portrait-panel .scry-turn-timer-badge.hidden { display: none; }
+
+/* ── Table tools button ────────────────────────────────────── */
+.sfnd-tools-btn {
+  margin-top: auto;
+  width: 38px;
+  height: 28px;
+  background: var(--scry-btn-bg);
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  color: var(--scry-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+}
+.sfnd-tools-btn:hover { background: var(--scry-btn-hover); color: var(--scry-text); }
+
+/* ── Body container ────────────────────────────────────────── */
+.sfnd-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Content area ──────────────────────────────────────────── */
+.sfnd-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--scry-bg);
+  min-width: 0;
+}
+
+/* ── Nav Rail ──────────────────────────────────────────────── */
+.sfnd-nav-rail {
+  width: 46px;
+  min-width: 46px;
+  flex-shrink: 0;
+  background: var(--sfnd-nav-bg, var(--scry-bg-surface));
+  border-left: 1px solid var(--scry-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 0;
+  gap: 1px;
+}
+.sfnd-nav-btn {
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  color: var(--scry-text-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0;
+  transition: background .15s, color .15s;
+}
+.sfnd-nav-btn i { font-size: .85rem; line-height: 1; }
+.sfnd-nav-label { font-size: .42rem; letter-spacing: .04em; text-transform: uppercase; line-height: 1; }
+.sfnd-nav-btn:hover {
+  background: var(--scry-btn-hover);
+  color: var(--scry-text);
+}
+.sfnd-nav-btn.active {
+  background: var(--sfnd-nav-active, var(--scry-btn-bg));
+  color: var(--sfnd-badge-text, var(--scry-accent));
+  border-left-color: var(--sfnd-nav-border, var(--scry-accent));
+}
+
+/* ============================================================
+   FOUNDRY TEMPLATE — SHARED CONTENT COMPONENTS
+   ============================================================ */
+
+/* Section header strip */
+.sfnd-section-header {
+  background: var(--sfnd-header-bg, #3d1515);
+  color: var(--sfnd-header-text, #e8e0d0);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sfnd-section-count {
+  font-size: .58rem;
+  opacity: .7;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Item row */
+.sfnd-item-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: background .12s;
+}
+.sfnd-item-row:hover { background: var(--scry-bg-card); }
+.sfnd-item-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border: 1px solid var(--scry-border);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.sfnd-item-name {
+  flex: 1;
+  font-size: .73rem;
+  color: var(--scry-text);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sfnd-item-sys-name { color: var(--scry-text-muted); font-style: italic; }
+.sfnd-item-meta {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Badges */
+.sfnd-badge {
+  font-size: .58rem;
+  font-weight: 700;
+  padding: 2px 4px;
+  border-radius: 2px;
+  background: var(--sfnd-badge-bg, var(--scry-btn-bg));
+  color: var(--sfnd-badge-text, var(--scry-accent));
+  border: 1px solid rgba(255,255,255,.08);
+  white-space: nowrap;
+}
+.sfnd-badge-hit { background: var(--scry-btn-bg); color: var(--scry-accent); }
+.sfnd-badge-dmg { background: rgba(239,68,68,.12); color: #f87171; border-color: rgba(239,68,68,.3); }
+.sfnd-badge-dmg em { font-style: normal; opacity: .7; }
+
+/* Empty state */
+.sfnd-empty {
+  padding: 10px 8px;
+  font-size: .68rem;
+  color: var(--scry-text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Spells tab ─────────────────────────────────────────────── */
+.sfnd-slot-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.sfnd-slot-level {
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--scry-text-label);
+  width: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.sfnd-slot-pips {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+.sfnd-slot-pip {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--scry-accent);
+  flex-shrink: 0;
+}
+.sfnd-slot-pip.used  { background: transparent; opacity: .3; }
+.sfnd-slot-pip.avail { background: var(--scry-accent); }
+.sfnd-slot-count {
+  font-size: .58rem;
+  color: var(--scry-text-muted);
+  flex-shrink: 0;
+}
+.sfnd-spell-conc {
+  font-size: .55rem;
+  font-weight: 700;
+  color: #a78bfa;
+  background: rgba(124,58,237,.2);
+  border: 1px solid rgba(124,58,237,.4);
+  border-radius: 2px;
+  padding: 1px 3px;
+}
+.sfnd-spell-school { text-transform: uppercase; font-size: .52rem; }
+
+/* ── Character tab ──────────────────────────────────────────── */
+.sfnd-abilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 6px;
+}
+.sfnd-ability-card {
+  background: var(--scry-bg-card);
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  padding: 6px 4px 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  cursor: pointer;
+  transition: background .12s;
+}
+.sfnd-ability-card:hover { background: var(--scry-btn-hover); }
+.sfnd-ability-label {
+  font-size: .52rem;
+  font-weight: 700;
+  color: var(--sfnd-header-text, var(--scry-text-label));
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.sfnd-ability-mod {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--scry-text);
+  line-height: 1;
+}
+.sfnd-ability-score {
+  font-size: .58rem;
+  color: var(--scry-text-muted);
+}
+.sfnd-ability-save {
+  font-size: .48rem;
+  color: var(--scry-accent);
+  letter-spacing: .03em;
+}
+
+/* Saves / skills shared rows */
+.sfnd-saves-list,
+.sfnd-skills-list {
+  display: flex;
+  flex-direction: column;
+}
+.sfnd-save-row,
+.sfnd-skill-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: background .1s;
+}
+.sfnd-save-row:hover,
+.sfnd-skill-row:hover { background: var(--scry-bg-card); }
+.sfnd-prof-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--scry-text-muted);
+  flex-shrink: 0;
+}
+.sfnd-prof-dot.full { background: var(--scry-accent); border-color: var(--scry-accent); }
+.sfnd-prof-dot.half {
+  background: linear-gradient(135deg, var(--scry-accent) 50%, transparent 50%);
+  border-color: var(--scry-accent);
+}
+.sfnd-save-name,
+.sfnd-skill-name {
+  flex: 1;
+  font-size: .7rem;
+  color: var(--scry-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sfnd-save-val,
+.sfnd-skill-val {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--scry-accent);
+  min-width: 24px;
+  text-align: right;
+}
+.sfnd-skill-ability {
+  font-size: .52rem;
+  color: var(--scry-text-muted);
+  width: 22px;
+  flex-shrink: 0;
+}
+
+/* Character details block */
+.sfnd-details-block { padding: 4px 0; }
+.sfnd-detail-row {
+  display: flex;
+  gap: 8px;
+  padding: 3px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.sfnd-detail-label {
+  font-size: .62rem;
+  font-weight: 600;
+  color: var(--scry-text-label);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.sfnd-detail-val {
+  font-size: .62rem;
+  color: var(--scry-text-muted);
+  line-height: 1.3;
+}
+
+/* ── Gear tab ───────────────────────────────────────────────── */
+.sfnd-currency-row {
+  display: flex;
+  gap: 4px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  flex-wrap: wrap;
+}
+.sfnd-coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  background: var(--scry-btn-bg);
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+.sfnd-coin-val { font-size: .72rem; font-weight: 700; color: var(--scry-gold); }
+.sfnd-coin-lbl { font-size: .5rem; color: var(--scry-text-muted); letter-spacing: .04em; }
+
+.sfnd-enc-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.sfnd-enc-label { font-size: .6rem; color: var(--scry-text-muted); flex-shrink: 0; }
+.sfnd-enc-bar-wrap { flex: 1; }
+.sfnd-enc-bar {
+  height: 5px;
+  background: var(--scry-bg-surface);
+  border: 1px solid var(--scry-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sfnd-enc-fill { height: 100%; background: var(--scry-accent); border-radius: 3px; transition: width .3s; }
+.sfnd-enc-bar.enc-warn  .sfnd-enc-fill { background: #f59e0b; }
+.sfnd-enc-bar.enc-heavy .sfnd-enc-fill { background: #ef4444; }
+.sfnd-enc-val { font-size: .58rem; color: var(--scry-text-muted); flex-shrink: 0; white-space: nowrap; }
+
+.sfnd-gear-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: background .12s;
+}
+.sfnd-gear-row:hover { background: var(--scry-bg-card); }
+.sfnd-gear-name {
+  flex: 1;
+  font-size: .73rem;
+  color: var(--scry-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sfnd-gear-unequipped { color: var(--scry-text-muted); }
+.sfnd-gear-qty {
+  font-size: .62rem;
+  color: var(--scry-text-muted);
+  flex-shrink: 0;
+}
+.sfnd-gear-wt {
+  font-size: .58rem;
+  color: var(--scry-text-muted);
+  flex-shrink: 0;
+}
+
+/* ── Traits tab ─────────────────────────────────────────────── */
+.sfnd-trait-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: background .12s;
+}
+.sfnd-trait-row:hover { background: var(--scry-bg-card); }
+.sfnd-trait-text { flex: 1; min-width: 0; }
+.sfnd-trait-name {
+  font-size: .73rem;
+  font-weight: 600;
+  color: var(--scry-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sfnd-trait-use-btn {
+  flex-shrink: 0;
+  font-size: .6rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--sfnd-nav-border, var(--scry-accent));
+  background: var(--sfnd-badge-bg, var(--scry-btn-bg));
+  color: var(--sfnd-badge-text, var(--scry-accent));
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sfnd-trait-use-btn:disabled { opacity: .4; cursor: default; }
+.sfnd-trait-use-btn.hidden   { display: none; }
+
+/* ============================================================
+   FOUNDRY TEMPLATE — CORE CONTENT OVERRIDES
+   ============================================================ */
+
+/* Sharper card corners */
+.sfnd-layout .scry-card { border-radius: 4px; }
+
+/* Economy tab active — use theme accent */
+.sfnd-layout .scry-eco-tab.is-active {
+  border-color: var(--scry-tab-active);
+  background: color-mix(in srgb, var(--scry-tab-active) 12%, transparent);
+}
+.sfnd-layout .scry-eco-tab.is-active .scry-eco-tab-label { color: var(--scry-tab-active); }
+
+/* Category chip active */
+.sfnd-layout .scry-cat-chip.is-active {
+  background: var(--scry-tab-active);
+  color: var(--scry-bg);
+  border-color: var(--scry-tab-active);
+}
+
+/* Roll mode active */
+.sfnd-layout .scry-mode-btn.active {
+  background: var(--scry-tab-active);
+  color: var(--scry-bg);
+}
+
+/* Auto-toggle on */
+.sfnd-layout .scry-toggle.on {
+  background: var(--scry-tab-active);
+  color: var(--scry-bg);
+  border-color: var(--scry-tab-active);
+}
+
+/* ── Panel divider ─────────────────────────────────────────── */
+.sfnd-panel-divider {
+  width: 80%;
+  height: 1px;
+  background: var(--scry-border);
+  opacity: .5;
+  margin: 2px 0;
+}
+
+/* ── Combat strip (below INSP) ─────────────────────────────── */
+.sfnd-combat-strip {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.sfnd-combat-strip.hidden { display: none; }
+.sfnd-combat-label {
+  font-size: .45rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--scry-text-muted);
+  text-transform: uppercase;
+}
+.sfnd-combat-portrait {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3px;
+  border: 2px solid var(--scry-border);
+}
+.sfnd-combat-strip.sfnd-our-turn .sfnd-combat-portrait {
+  border-color: var(--scry-accent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--scry-accent) 50%, transparent);
+}
+.sfnd-combat-name {
+  font-size: .6rem;
+  font-weight: 600;
+  color: var(--scry-text);
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sfnd-combat-hp-wrap { width: 100%; }
+.sfnd-combat-hp-bar {
+  height: 4px;
+  background: var(--scry-bg-surface);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--scry-border);
+}
+.sfnd-combat-hp-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .3s, background .3s;
+}
+
+/* ── Portrait panel turn timer ─────────────────────────────── */
+.sfnd-panel-timer {
+  font-size: .8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--scry-timer-color, #22c55e);
+  text-align: center;
+  width: 100%;
+  padding: 1px 0;
+}
+.sfnd-panel-timer.hidden { display: none; }
+
+/* ── Version badge ─────────────────────────────────────────── */
+.sfnd-version-badge {
+  font-size: .44rem;
+  color: var(--scry-text-label);
+  opacity: .85;
+  text-align: center;
+  letter-spacing: .04em;
+  margin-top: auto;
+  padding-top: 4px;
+  width: 100%;
+}
+
+/* ── Traits tab divider between features and personality ───── */
+.sfnd-traits-divider {
+  width: 80%;
+  height: 1px;
+  background: var(--scry-border);
+  margin: 6px auto;
+  opacity: .6;
+}
+
+/* ── Section header ✦ embellishments ──────────────────────── */
+.sfnd-section-header::before,
+.sfnd-layout .scry-card-title::before {
+  content: "✦";
+  color: var(--scry-accent);
+  margin-right: .4em;
+  font-size: .8em;
+  opacity: .85;
+}
+
+/* ── Classic light-theme corrections ──────────────────────── */
+/* Classic is a light theme — some Core hardcoded darks need overriding */
+.sfnd-layout.theme-classic .scry-eco-tab {
+  background: var(--scry-btn-bg);
+  color: var(--scry-text);
+  border-color: var(--scry-border);
+}
+.sfnd-layout.theme-classic .scry-cat-chip {
+  background: var(--scry-btn-bg);
+  color: var(--scry-text);
+  border-color: var(--scry-border);
+}
+.sfnd-layout.theme-classic .scry-mode-btn {
+  background: var(--scry-btn-bg);
+  color: var(--scry-text);
+}
+.sfnd-layout.theme-classic .scry-toggle {
+  background: var(--scry-btn-bg);
+  color: var(--scry-text-muted);
+  border-color: var(--scry-border);
+}
+.sfnd-layout.theme-classic .scry-action-row {
+  border-bottom-color: rgba(58,46,36,.1);
+}
+.sfnd-layout.theme-classic .scry-action-row:hover {
+  background: rgba(58,46,36,.06);
+}
+
+/* ── Ability score card — shield badge style ───────────────── */
+.sfnd-layout .scry-ability-score {
+  background: var(--scry-bg-card);
+  border: 1px solid var(--scry-border);
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: box-shadow .15s;
+  position: relative;
+}
+.sfnd-layout .scry-ability-score:hover {
+  box-shadow: 0 0 8px color-mix(in srgb, var(--scry-accent) 30%, transparent);
+}
+
+/* Accent top strip */
+.sfnd-layout .scry-ability-score::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: var(--scry-accent);
+  width: 100%;
+}
+
+.sfnd-layout .scry-ability-label {
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--scry-accent);
+  letter-spacing: .08em;
+  padding-top: 4px;
+  display: block;
+  text-align: center;
+}
+.sfnd-layout .scry-ability-mod {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--scry-text);
+  line-height: 1.1;
+  display: block;
+  text-align: center;
+  padding: 2px 0;
+}
+
+/* Score in darker bottom box */
+.sfnd-layout .scry-ability-value {
+  font-size: .65rem;
+  font-weight: 600;
+  color: var(--scry-text-muted);
+  display: block;
+  text-align: center;
+  background: var(--scry-bg-surface);
+  border-top: 1px solid var(--scry-border);
+  padding: 2px 0 3px;
+  margin-top: 2px;
+}
+
+/* Classic light theme */
+.sfnd-layout.theme-classic .scry-ability-score {
+  box-shadow: 0 1px 3px rgba(58,46,36,.12);
+}
+
+/* ── Category chips ────────────────────────────────────────── */
+.sfnd-layout .scry-cat-chips {
+  padding: 6px 8px;
+  gap: 5px;
+}
+.sfnd-layout .scry-cat-chip {
+  font-size: .62rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--scry-border);
+  background: var(--scry-btn-bg);
+  color: var(--scry-text-muted);
+  transition: all .15s;
+}
+.sfnd-layout .scry-cat-chip:hover {
+  background: var(--scry-btn-hover);
+  color: var(--scry-text);
+}
+
+/* ── Traits tab personality blocks ────────────────────────── */
+.sfnd-trait-block {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.sfnd-trait-block-label {
+  font-size: .55rem;
+  font-weight: 700;
+  color: var(--scry-accent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.sfnd-trait-block-text {
+  font-size: .7rem;
+  color: var(--scry-text);
+  line-height: 1.4;
+}
+.sfnd-trait-bg {
+  font-weight: 600;
+  color: var(--scry-accent);
+}
+
+/* ============================================================
+   FOUNDRY-ENHANCED THEME GROUP
+   Nightfall · Twilight · Crystal · Vellum · Amber
+   All use the standard sfnd-* Foundry layout.
+   ============================================================ */
+
+/* ============================================================
+   THEME: Nightfall — deep purple-slate / ice blue
+   ============================================================ */
+.scry-overlay.theme-nightfall {
+  --scry-bg:           #2C2B36;
+  --scry-bg-card:      #37363F;
+  --scry-bg-card-alt:  #43424A;
+  --scry-bg-surface:   #201F28;
+  --scry-border:       #5E6270;
+  --scry-accent:       #A6D9FF;
+  --scry-accent-dim:   #3a6a90;
+  --scry-accent-glow:  rgba(166,217,255,.15);
+  --scry-text:         #D7E6F2;
+  --scry-text-muted:   #6e7280;
+  --scry-text-label:   #8090A0;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #43424A;
+  --scry-btn-hover:    #4e4d58;
+  --scry-btn-active:   #A6D9FF;
+  --scry-tab-active:   #A6D9FF;
+  --scry-gold:         #f59e0b;
+  --scry-shadow:       0 2px 12px rgba(0,0,0,.75);
+  --sfnd-portrait-bg:  #201F28;
+  --sfnd-nav-bg:       #1A1920;
+  --sfnd-header-bg:    #181528;
+  --sfnd-header-text:  #A6D9FF;
+  --sfnd-badge-bg:     #1e1a3a;
+  --sfnd-badge-text:   #A6D9FF;
+  --sfnd-nav-active:   #101020;
+  --sfnd-nav-border:   #A6D9FF;
+}
+
+/* ============================================================
+   THEME: Twilight — dark blue-grey / ice blue
+   ============================================================ */
+.scry-overlay.theme-twilight {
+  --scry-bg:           #2B2F36;
+  --scry-bg-card:      #373C45;
+  --scry-bg-card-alt:  #414852;
+  --scry-bg-surface:   #1E2228;
+  --scry-border:       #6C7A8A;
+  --scry-accent:       #A6D9FF;
+  --scry-accent-dim:   #3a6a90;
+  --scry-accent-glow:  rgba(166,217,255,.15);
+  --scry-text:         #D7E6F2;
+  --scry-text-muted:   #7A8A9A;
+  --scry-text-label:   #8A9AAA;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #414852;
+  --scry-btn-hover:    #4a5260;
+  --scry-btn-active:   #A6D9FF;
+  --scry-tab-active:   #A6D9FF;
+  --scry-gold:         #f59e0b;
+  --scry-shadow:       0 2px 8px rgba(0,0,0,.6);
+  --sfnd-portrait-bg:  #1E2228;
+  --sfnd-nav-bg:       #181C22;
+  --sfnd-header-bg:    #1A2035;
+  --sfnd-header-text:  #A6D9FF;
+  --sfnd-badge-bg:     #182040;
+  --sfnd-badge-text:   #A6D9FF;
+  --sfnd-nav-active:   #101520;
+  --sfnd-nav-border:   #A6D9FF;
+}
+
+/* Nightfall & Twilight: triquetra watermark in lower portrait panel */
+.theme-nightfall .sfnd-portrait-panel,
+.theme-twilight  .sfnd-portrait-panel { position: relative; overflow: hidden; }
+.theme-nightfall .sfnd-portrait-panel::after,
+.theme-twilight  .sfnd-portrait-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 52px; left: 50%;
+  transform: translateX(-50%);
+  width: 52px; height: 52px;
+  opacity: .1;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23A6D9FF' d='M256 74.06c32.76 39.37 52.457 90.004 52.457 145.29 0 21.33-2.937 41.966-8.42 61.534-28.84-5.284-58.69-5.445-88.098-.09-5.467-19.54-8.397-40.147-8.397-61.445 0-55.286 19.698-105.92 52.457-145.29zm-.582 220.687c13.13-.026 26.197 1.1 39.057 3.313-9.017 24.453-22.117 46.918-38.475 66.578-16.365-19.668-29.47-42.144-38.486-66.61 12.6-2.17 25.28-3.256 37.904-3.28zM199.8 301.82c10.063 28.133 25.12 53.896 44.108 76.224-41.252 42.28-98.866 68.52-162.68 68.52a229.29 229.29 0 0 1-38.437-3.243c17.722-48.045 51.722-90.41 99.595-118.05 18.446-10.65 37.758-18.414 57.416-23.45zm112.39.025c57.208 14.6 108.705 51.362 140.595 106.593a229.305 229.305 0 0 1 16.4 34.887 229.14 229.14 0 0 1-38.414 3.24c-63.812 0-121.426-26.242-162.678-68.52 18.98-22.322 34.037-48.076 44.1-76.2zm180.22 154.888-5.44-17.162a246.326 246.326 0 0 0-18.597-40.132c-34.176-59.19-89.39-98.733-150.77-114.67 5.76-20.833 8.854-42.767 8.854-65.42 0-60.5-21.98-115.908-58.365-158.695L256 47.435l-12.092 13.218c-36.386 42.787-58.365 98.195-58.365 158.696 0 22.616 3.085 44.517 8.83 65.32-20.89 5.424-41.4 13.704-60.988 25.013-52.404 30.254-89.403 77-108.264 129.91l-5.425 17.17 17.498 3.843a246.185 246.185 0 0 0 44.036 3.96c68.387 0 130.27-28.075 174.77-73.303 44.5 45.228 106.383 73.302 174.77 73.302 15.04 0 29.76-1.364 44.056-3.963z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* ============================================================
+   THEME: Crystal — near-white blue / strong blue accent
+   ============================================================ */
+.scry-overlay.theme-crystal {
+  --scry-bg:           #F2F7FF;
+  --scry-bg-card:      #EDF3FF;
+  --scry-bg-card-alt:  #E6ECFE;
+  --scry-bg-surface:   #D8E4F8;
+  --scry-border:       #8FAEEB;
+  --scry-accent:       #2563EB;
+  --scry-accent-dim:   #93C5FD;
+  --scry-accent-glow:  rgba(37,99,235,.1);
+  --scry-text:         #1A2330;
+  --scry-text-muted:   #4a6080;
+  --scry-text-label:   #5070A0;
+  --scry-hp-color:     #16a34a;
+  --scry-hp-bloodied:  #ea580c;
+  --scry-hp-critical:  #dc2626;
+  --scry-danger:       #dc2626;
+  --scry-btn-bg:       #D8E4F8;
+  --scry-btn-hover:    #C8D8F0;
+  --scry-btn-active:   #2563EB;
+  --scry-tab-active:   #2563EB;
+  --scry-gold:         #d97706;
+  --scry-shadow:       0 2px 6px rgba(0,0,0,.12);
+  --sfnd-portrait-bg:  #D8E8F8;
+  --sfnd-nav-bg:       #D0E0F0;
+  --sfnd-header-bg:    #9AB8D8;
+  --sfnd-header-text:  #0F1E30;
+  --sfnd-badge-bg:     #7BA0C8;
+  --sfnd-badge-text:   #FFFFFF;
+  --sfnd-nav-active:   #C5D8F8;
+  --sfnd-nav-border:   #2563EB;
+}
+/* Crystal: light-mode button and card adjustments */
+.theme-crystal .sfnd-pbtn {
+  background: var(--scry-bg-card);
+  border-color: var(--scry-border);
+  color: var(--scry-text);
+}
+.theme-crystal .sfnd-pbtn:hover  { background: var(--scry-btn-hover); }
+.theme-crystal .sfnd-diamond     { border-color: var(--scry-accent); }
+.theme-crystal .sfnd-diamond-inner { color: var(--scry-accent); font-weight: 700; }
+
+/* ============================================================
+   THEME: Vellum — warm parchment / blue accent
+   ============================================================ */
+.scry-overlay.theme-vellum {
+  --scry-bg:           #F7F2E8;
+  --scry-bg-card:      #F2E8D6;
+  --scry-bg-card-alt:  #E6DCC3;
+  --scry-bg-surface:   #DDD0B8;
+  --scry-border:       #8FAEEB;
+  --scry-accent:       #2563EB;
+  --scry-accent-dim:   #93C5FD;
+  --scry-accent-glow:  rgba(37,99,235,.1);
+  --scry-text:         #1A2330;
+  --scry-text-muted:   #5a5040;
+  --scry-text-label:   #7a6848;
+  --scry-hp-color:     #16a34a;
+  --scry-hp-bloodied:  #ea580c;
+  --scry-hp-critical:  #dc2626;
+  --scry-danger:       #8b1a1a;
+  --scry-btn-bg:       #E6DCC3;
+  --scry-btn-hover:    #D8CEB0;
+  --scry-btn-active:   #2563EB;
+  --scry-tab-active:   #2563EB;
+  --scry-gold:         #a06800;
+  --scry-shadow:       0 2px 6px rgba(0,0,0,.18);
+  --sfnd-portrait-bg:  #EFE5D0;
+  --sfnd-nav-bg:       #E8DCC8;
+  --sfnd-header-bg:    #C8A878;
+  --sfnd-header-text:  #1A1408;
+  --sfnd-badge-bg:     #B8906A;
+  --sfnd-badge-text:   #1A1408;
+  --sfnd-nav-active:   #D8CCB8;
+  --sfnd-nav-border:   #8FAEEB;
+}
+/* Vellum: parchment portrait panel warm gradient */
+.theme-vellum .sfnd-portrait-panel {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #F2E8D6 0%, #F7F0E0 30%, #F2E8D6 70%, #EAD8C0 100%);
+}
+/* Vellum: top ornamental rule — gradient shimmer with center highlight */
+.theme-vellum .sfnd-portrait-panel::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 8px; right: 8px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%, #8FAEEB 20%, #A6D9FF 45%,
+    #ffffff 50%, #A6D9FF 55%, #8FAEEB 80%, transparent 100%
+  );
+  opacity: .75;
+  pointer-events: none;
+}
+/* Vellum: triquetra emblem — warm gold, Celtic knot fits the manuscript theme */
+.theme-vellum .sfnd-portrait-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 52px; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 60px;
+  opacity: .22;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23A06800' d='M256 74.06c32.76 39.37 52.457 90.004 52.457 145.29 0 21.33-2.937 41.966-8.42 61.534-28.84-5.284-58.69-5.445-88.098-.09-5.467-19.54-8.397-40.147-8.397-61.445 0-55.286 19.698-105.92 52.457-145.29zm-.582 220.687c13.13-.026 26.197 1.1 39.057 3.313-9.017 24.453-22.117 46.918-38.475 66.578-16.365-19.668-29.47-42.144-38.486-66.61 12.6-2.17 25.28-3.256 37.904-3.28zM199.8 301.82c10.063 28.133 25.12 53.896 44.108 76.224-41.252 42.28-98.866 68.52-162.68 68.52a229.29 229.29 0 0 1-38.437-3.243c17.722-48.045 51.722-90.41 99.595-118.05 18.446-10.65 37.758-18.414 57.416-23.45zm112.39.025c57.208 14.6 108.705 51.362 140.595 106.593a229.305 229.305 0 0 1 16.4 34.887 229.14 229.14 0 0 1-38.414 3.24c-63.812 0-121.426-26.242-162.678-68.52 18.98-22.322 34.037-48.076 44.1-76.2zm180.22 154.888-5.44-17.162a246.326 246.326 0 0 0-18.597-40.132c-34.176-59.19-89.39-98.733-150.77-114.67 5.76-20.833 8.854-42.767 8.854-65.42 0-60.5-21.98-115.908-58.365-158.695L256 47.435l-12.092 13.218c-36.386 42.787-58.365 98.195-58.365 158.696 0 22.616 3.085 44.517 8.83 65.32-20.89 5.424-41.4 13.704-60.988 25.013-52.404 30.254-89.403 77-108.264 129.91l-5.425 17.17 17.498 3.843a246.185 246.185 0 0 0 44.036 3.96c68.387 0 130.27-28.075 174.77-73.303 44.5 45.228 106.383 73.302 174.77 73.302 15.04 0 29.76-1.364 44.056-3.963z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* Vellum: warm card backgrounds */
+.theme-vellum .scry-card {
+  background: var(--scry-bg-card);
+  border: 1px solid rgba(143,174,235,.35);
+  border-radius: 3px;
+}
+.theme-vellum .scry-card-title {
+  color: var(--scry-accent);
+  border-bottom: 1px solid rgba(143,174,235,.35);
+}
+.theme-vellum .sfnd-pbtn {
+  background: var(--scry-bg-card);
+  color: var(--scry-text);
+  border-color: var(--scry-border);
+}
+.theme-vellum .sfnd-pbtn:hover  { background: var(--scry-btn-hover); }
+.theme-vellum .sfnd-diamond     { border-color: var(--scry-accent); }
+.theme-vellum .sfnd-diamond-inner { color: var(--scry-accent); font-weight: 700; }
+.theme-vellum .sfnd-hp-fill {
+  background: linear-gradient(90deg, #1D4ED8, #2563EB);
+}
+
+/* ============================================================
+   THEME: Amber — dark charcoal / warm orange
+   ============================================================ */
+.scry-overlay.theme-amber {
+  --scry-bg:           #1B1922;
+  --scry-bg-card:      #2C313F;
+  --scry-bg-card-alt:  #363B4A;
+  --scry-bg-surface:   #14121C;
+  --scry-border:       #61574A;
+  --scry-accent:       #F28C28;
+  --scry-accent-dim:   #A05A10;
+  --scry-accent-glow:  rgba(242,140,40,.15);
+  --scry-text:         #D7D0C5;
+  --scry-text-muted:   #7A7060;
+  --scry-text-label:   #9A8870;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #ef4444;
+  --scry-btn-bg:       #363B4A;
+  --scry-btn-hover:    #414660;
+  --scry-btn-active:   #F28C28;
+  --scry-tab-active:   #F28C28;
+  --scry-gold:         #F28C28;
+  --scry-shadow:       0 2px 10px rgba(0,0,0,.7);
+  --sfnd-portrait-bg:  #14121C;
+  --sfnd-nav-bg:       #110F18;
+  --sfnd-header-bg:    #2A1A08;
+  --sfnd-header-text:  #F28C28;
+  --sfnd-badge-bg:     #3D2810;
+  --sfnd-badge-text:   #F28C28;
+  --sfnd-nav-active:   #1A1008;
+  --sfnd-nav-border:   #F28C28;
+}
+/* Amber: portrait panel with art deco decoration */
+.theme-amber .sfnd-portrait-panel { position: relative; overflow: hidden; }
+/* Art deco double-rule at top of portrait panel */
+.theme-amber .sfnd-portrait-panel::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 6px; right: 6px;
+  height: 7px;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(242,140,40,.6) 20%, rgba(242,140,40,.6) 80%, transparent 100%) 0 0 / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 0%, rgba(242,140,40,.3) 10%, rgba(242,140,40,.3) 90%, transparent 100%) 0 100% / 100% 1px no-repeat;
+  pointer-events: none;
+}
+/* Amber: no lower emblem — clean portrait panel */
+/* Amber: angular cards, orange accent overrides */
+.theme-amber .scry-card {
+  border-radius: 2px;
+  border: 1px solid var(--scry-border);
+  background: linear-gradient(160deg, #303040 0%, #2C313F 100%);
+}
+.theme-amber .scry-card-title {
+  color: var(--scry-accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .72rem;
+  border-bottom: 1px solid var(--scry-border);
+}
+.theme-amber .sfnd-pbtn           { border-radius: 2px; font-size: .7rem; }
+.theme-amber .sfnd-pbtn-insp      { color: #F28C28; border-color: rgba(242,140,40,.4); }
+.theme-amber .sfnd-pbtn-insp i    { color: #F28C28; }
+.theme-amber .sfnd-nav-btn.active { background: rgba(242,140,40,.12); color: #F28C28; }
+.theme-amber .sfnd-hp-fill        { background: linear-gradient(90deg, #c05a10, #F28C28); }
+
+/* ============================================================
+   FOUNDRY-ENHANCED: Portrait panel richness
+   Corner bracket ornaments, textures, deeper backgrounds.
+   These rules override the base theme blocks above.
+   ============================================================ */
+
+/* --- Shared mixin: 4-corner bracket helper via background layers ---
+   Applied per-theme with accent color baked in.
+   8 gradient layers = 4 corners × (H + V) bracket arms + 1 base layer.
+   ----------------------------------------------------------------- */
+
+/* Nightfall — deep purple corners, triquetra emblem boosted */
+.theme-nightfall .sfnd-portrait-panel {
+  border-right: 1px solid rgba(166,217,255,.18);
+  box-shadow: 2px 0 20px rgba(0,0,0,.5), inset 0 0 30px rgba(0,0,0,.25);
+  background:
+    linear-gradient(90deg,  rgba(166,217,255,.4), transparent)  8px 8px                  / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(166,217,255,.4), transparent)  8px 8px                  / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(166,217,255,.4), transparent)  calc(100% - 26px) 8px    / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(166,217,255,.4), transparent)  calc(100% - 9.5px) 8px   / 1.5px 18px no-repeat,
+    linear-gradient(90deg,  rgba(166,217,255,.4), transparent)  8px calc(100% - 9.5px)   / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(166,217,255,.4), transparent)  8px calc(100% - 26px)    / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(166,217,255,.4), transparent)  calc(100% - 26px) calc(100% - 9.5px) / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(166,217,255,.4), transparent)  calc(100% - 9.5px) calc(100% - 26px) / 1.5px 18px no-repeat,
+    linear-gradient(180deg, #1E1C28 0%, #26242E 50%, #1C1A24 100%);
+}
+.theme-nightfall .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .22; }
+
+/* Twilight — blue-grey corners */
+.theme-twilight .sfnd-portrait-panel {
+  border-right: 1px solid rgba(166,217,255,.15);
+  box-shadow: 2px 0 16px rgba(0,0,0,.4), inset 0 0 24px rgba(0,0,0,.2);
+  background:
+    linear-gradient(90deg,  rgba(166,217,255,.35), transparent) 8px 8px                  / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(166,217,255,.35), transparent) 8px 8px                  / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(166,217,255,.35), transparent) calc(100% - 26px) 8px    / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(166,217,255,.35), transparent) calc(100% - 9.5px) 8px   / 1.5px 18px no-repeat,
+    linear-gradient(90deg,  rgba(166,217,255,.35), transparent) 8px calc(100% - 9.5px)   / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(166,217,255,.35), transparent) 8px calc(100% - 26px)    / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(166,217,255,.35), transparent) calc(100% - 26px) calc(100% - 9.5px) / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(166,217,255,.35), transparent) calc(100% - 9.5px) calc(100% - 26px) / 1.5px 18px no-repeat,
+    linear-gradient(180deg, #1E2228 0%, #252B33 50%, #1C2028 100%);
+}
+.theme-twilight .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .22; }
+
+/* Crystal — clean blue corner brackets on light panel */
+.theme-crystal .sfnd-portrait-panel {
+  border-right: 1px solid rgba(37,99,235,.2);
+  box-shadow: 2px 0 12px rgba(37,99,235,.08);
+  background:
+    linear-gradient(90deg,  rgba(37,99,235,.35), transparent)  8px 8px                  / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(37,99,235,.35), transparent)  8px 8px                  / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(37,99,235,.35), transparent)  calc(100% - 26px) 8px    / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(37,99,235,.35), transparent)  calc(100% - 9.5px) 8px   / 1.5px 18px no-repeat,
+    linear-gradient(90deg,  rgba(37,99,235,.35), transparent)  8px calc(100% - 9.5px)   / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(37,99,235,.35), transparent)  8px calc(100% - 26px)    / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(37,99,235,.35), transparent)  calc(100% - 26px) calc(100% - 9.5px) / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(37,99,235,.35), transparent)  calc(100% - 9.5px) calc(100% - 26px) / 1.5px 18px no-repeat,
+    linear-gradient(180deg, #DDE8FC 0%, #E8F0FF 50%, #D8E4F8 100%);
+}
+
+/* Vellum — warm parchment corner brackets + paper texture overlay */
+.theme-vellum .sfnd-portrait-panel {
+  border-right: 1px solid rgba(143,174,235,.3);
+  box-shadow: 2px 0 10px rgba(0,0,0,.1);
+  background:
+    linear-gradient(90deg,  rgba(143,174,235,.6), transparent) 8px 8px                  / 20px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(143,174,235,.6), transparent) 8px 8px                  / 1.5px 20px no-repeat,
+    linear-gradient(270deg, rgba(143,174,235,.6), transparent) calc(100% - 28px) 8px    / 20px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(143,174,235,.6), transparent) calc(100% - 9.5px) 8px   / 1.5px 20px no-repeat,
+    linear-gradient(90deg,  rgba(143,174,235,.6), transparent) 8px calc(100% - 9.5px)   / 20px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(143,174,235,.6), transparent) 8px calc(100% - 28px)    / 1.5px 20px no-repeat,
+    linear-gradient(270deg, rgba(143,174,235,.6), transparent) calc(100% - 28px) calc(100% - 9.5px) / 20px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(143,174,235,.6), transparent) calc(100% - 9.5px) calc(100% - 28px) / 1.5px 20px no-repeat,
+    linear-gradient(180deg, #EEE4CE 0%, #F5EDD8 30%, #EFE5D0 70%, #E8D8BC 100%);
+}
+/* Vellum: paper grain texture on full overlay */
+.theme-vellum.scry-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+/* Vellum: bigger, more visible ornamental rule + compass emblem */
+.theme-vellum .sfnd-portrait-panel::before { height: 4px; opacity: .9; top: 4px; }
+.theme-vellum .sfnd-portrait-panel::after  { width: 56px; height: 56px; opacity: .28; }
+
+/* Amber — warm orange corner brackets + richer panel */
+.theme-amber .sfnd-portrait-panel {
+  border-right: 1px solid rgba(242,140,40,.2);
+  box-shadow: 2px 0 18px rgba(0,0,0,.5), inset 0 0 24px rgba(0,0,0,.3);
+  background:
+    linear-gradient(90deg,  rgba(242,140,40,.45), transparent) 8px 8px                  / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(242,140,40,.45), transparent) 8px 8px                  / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(242,140,40,.45), transparent) calc(100% - 26px) 8px    / 18px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(242,140,40,.45), transparent) calc(100% - 9.5px) 8px   / 1.5px 18px no-repeat,
+    linear-gradient(90deg,  rgba(242,140,40,.45), transparent) 8px calc(100% - 9.5px)   / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(242,140,40,.45), transparent) 8px calc(100% - 26px)    / 1.5px 18px no-repeat,
+    linear-gradient(270deg, rgba(242,140,40,.45), transparent) calc(100% - 26px) calc(100% - 9.5px) / 18px 1.5px no-repeat,
+    linear-gradient(0deg,   rgba(242,140,40,.45), transparent) calc(100% - 9.5px) calc(100% - 26px) / 1.5px 18px no-repeat,
+    linear-gradient(180deg, #181420 0%, #201C2C 50%, #141018 100%);
+}
+/* Amber: bigger art deco top rule + emblem */
+.theme-amber .sfnd-portrait-panel::before { height: 8px; opacity: .65; }
+.theme-amber .sfnd-portrait-panel::after  { width: 60px; height: 60px; opacity: .22; }
+
+/* ============================================================
+   FOUNDRY-ENHANCED: Full-screen frame treatment
+   Outer corner ornaments + inset border frame on the entire
+   overlay. This is what makes it feel like a premium sheet,
+   not just a flat app with a color palette swap.
+   ============================================================ */
+
+/* Inset border frame around the whole screen */
+.theme-nightfall.scry-overlay,
+.theme-twilight.scry-overlay  { box-shadow: inset 0 0 0 2px rgba(166,217,255,.22); }
+.theme-crystal.scry-overlay   { box-shadow: inset 0 0 0 2px rgba(37,99,235,.2); }
+.theme-vellum.scry-overlay    {
+  box-shadow:
+    inset 0 0 0 2px rgba(143,174,235,.55),
+    inset 0 0 0 5px rgba(247,242,232,.95),
+    inset 0 0 0 7px rgba(143,174,235,.25);
+}
+.theme-amber.scry-overlay     { box-shadow: inset 0 0 0 2px rgba(242,140,40,.25); }
+
+/* Subtle background depth on dark themes */
+.theme-nightfall.scry-overlay {
+  background-image: radial-gradient(ellipse 70% 50% at 12% 25%, rgba(166,217,255,.05) 0%, transparent 100%);
+}
+.theme-twilight.scry-overlay {
+  background-image: radial-gradient(ellipse 70% 50% at 12% 25%, rgba(166,217,255,.04) 0%, transparent 100%);
+}
+.theme-amber.scry-overlay {
+  background-image: radial-gradient(ellipse 70% 50% at 12% 25%, rgba(242,140,40,.05) 0%, transparent 100%);
+}
+
+/* ---------------------------------------------------------------
+   TEXTURE SYSTEM
+   SVG turbulence rendered into a fixed 256×256 tile, then tiled
+   as a repeating background. Fixed size = DPI-independent grain.
+   High-DPI phones won't shrink it to sub-pixel nothing.
+   --------------------------------------------------------------- */
+
+/* Parchment grain — warm, clearly visible paper texture */
+.theme-vellum.scry-overlay {
+  background-color: var(--scry-bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.28 0.42' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  background-repeat: repeat;
+}
+
+/* Dark grain — fine steel texture for Nightfall / Twilight */
+.theme-nightfall.scry-overlay {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% 25%, rgba(166,217,255,.05) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35 0.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  background-size: auto, 200px 200px;
+  background-repeat: no-repeat, repeat;
+}
+.theme-twilight.scry-overlay {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% 25%, rgba(166,217,255,.04) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35 0.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  background-size: auto, 200px 200px;
+  background-repeat: no-repeat, repeat;
+}
+
+/* Amber: warm dark grain */
+.theme-amber.scry-overlay {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% 25%, rgba(242,140,40,.05) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3 0.45' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E");
+  background-size: auto, 200px 200px;
+  background-repeat: no-repeat, repeat;
+}
+
+/* Crystal: very light grain — barely-there but gives depth on white */
+.theme-crystal.scry-overlay {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32 0.48' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  background-repeat: repeat;
+}
+
+/* Vellum portrait panel: additional coarser texture layer for depth */
+.theme-vellum .sfnd-portrait-panel {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.22 0.38' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, rgba(143,174,235,.8), transparent) 8px 8px / 20px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(143,174,235,.8), transparent) 8px 8px / 1.5px 20px no-repeat,
+    linear-gradient(270deg, rgba(143,174,235,.8), transparent) calc(100% - 28px) 8px / 20px 1.5px no-repeat,
+    linear-gradient(180deg, rgba(143,174,235,.8), transparent) calc(100% - 9.5px) 8px / 1.5px 20px no-repeat,
+    linear-gradient(90deg, rgba(143,174,235,.8), transparent) 8px calc(100% - 9.5px) / 20px 1.5px no-repeat,
+    linear-gradient(0deg, rgba(143,174,235,.8), transparent) 8px calc(100% - 28px) / 1.5px 20px no-repeat,
+    linear-gradient(270deg, rgba(143,174,235,.8), transparent) calc(100% - 28px) calc(100% - 9.5px) / 20px 1.5px no-repeat,
+    linear-gradient(0deg, rgba(143,174,235,.8), transparent) calc(100% - 9.5px) calc(100% - 28px) / 1.5px 20px no-repeat,
+    linear-gradient(180deg, #EEE4CE 0%, #F5EDD8 30%, #EFE5D0 70%, #E8D8BC 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 128px 128px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 100% 100%;
+}
+
+/* Nightfall/Twilight triquetra — slightly larger for prominence */
+.theme-nightfall .sfnd-portrait-panel::after,
+.theme-twilight  .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .2; }
+
+/* ============================================================
+   FOUNDRY TEMPLATE: Glass button system
+   Applies universally to all sfnd-layout themes.
+   CSS variables (--scry-accent, --scry-accent-glow) handle
+   the color difference per theme automatically.
+   ============================================================ */
+
+/* Action economy tiles — subtle glass base */
+.sfnd-layout .scry-eco-tab {
+  background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.08) 100%);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+/* Active tile: accent border + inner glow + colored fill */
+.sfnd-layout .scry-eco-tab.is-active {
+  background: linear-gradient(180deg, var(--scry-accent-glow) 0%, transparent 100%);
+  border-color: var(--scry-accent);
+  box-shadow: 0 0 16px var(--scry-accent-glow), inset 0 1px 0 rgba(255,255,255,.12);
+  color: var(--scry-accent);
+}
+/* Inactive tile: no accent, slight glass depth */
+.sfnd-layout .scry-eco-tab:not(.is-active) {
+  color: var(--scry-text-muted);
+}
+/* Tab economy label text inherits active color */
+.sfnd-layout .scry-eco-tab.is-active .scry-eco-label { color: var(--scry-accent); }
+
+/* Category chips (All / Attacks / Spells / Features / Items) */
+.sfnd-layout .scry-cat-chip {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 6px;
+  color: var(--scry-text-muted);
+  font-size: .72rem;
+  transition: background .12s, border-color .12s, box-shadow .12s;
+}
+.sfnd-layout .scry-cat-chip.is-active {
+  background: var(--scry-accent);
+  border-color: var(--scry-accent);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--scry-accent-glow);
+}
+
+/* Roll / Enter mode buttons */
+.sfnd-layout .scry-mode-btn {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  border-radius: 6px;
+  transition: background .12s, border-color .12s, box-shadow .12s;
+}
+.sfnd-layout .scry-mode-btn.active {
+  background: var(--scry-accent);
+  border-color: var(--scry-accent);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--scry-accent-glow);
+}
+.sfnd-layout .scry-mode-btn:not(.active) { color: var(--scry-text-muted); }
+
+/* Toggle buttons (Auto Dmg / Auto Bonus) */
+.sfnd-layout .scry-toggle {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  border-radius: 6px;
+  transition: background .12s, border-color .12s;
+}
+.sfnd-layout .scry-toggle.on {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  box-shadow: 0 0 8px var(--scry-accent-glow);
+}
+
+/* Diamond badges (INIT / MOVE / PROF) — accent border + glow */
+.sfnd-layout .sfnd-diamond {
+  box-shadow: 0 0 0 1px var(--scry-accent), 0 0 10px var(--scry-accent-glow);
+  color: var(--scry-accent);
+  font-weight: 800;
+}
+
+/* Portrait image — accent border ring */
+.sfnd-layout .sfnd-portrait-img {
+  border: 2px solid var(--scry-accent) !important;
+  box-shadow: 0 0 0 1px var(--scry-accent-glow), 0 0 16px var(--scry-accent-glow);
+}
+
+/* HP bar accent divider line */
+.sfnd-layout .sfnd-panel-divider {
+  background: linear-gradient(90deg,
+    transparent 0%, var(--scry-accent) 30%,
+    var(--scry-accent) 70%, transparent 100%);
+  height: 1px;
+  opacity: .4;
+  margin: 3px 8px;
+}
+
+/* Light theme overrides — glass uses dark tones not white */
+.theme-crystal .scry-eco-tab,
+.theme-vellum  .scry-eco-tab {
+  background: linear-gradient(180deg, rgba(0,0,0,.04) 0%, rgba(0,0,0,.07) 100%);
+  border-color: rgba(0,0,0,.1);
+}
+.theme-crystal .scry-cat-chip,
+.theme-vellum  .scry-cat-chip {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.1);
+  color: var(--scry-text-muted);
+}
+.theme-crystal .scry-mode-btn,
+.theme-vellum  .scry-mode-btn {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.12);
+}
+/* Active states on light themes: text stays white on solid accent */
+.theme-crystal .scry-cat-chip.is-active,
+.theme-vellum  .scry-cat-chip.is-active { color: #fff; }
+.theme-crystal .scry-mode-btn.active,
+.theme-vellum  .scry-mode-btn.active    { color: #fff; }
+
+/* ============================================================
+   REAL TEXTURE BACKGROUNDS
+   PNG files in /styles/ — blend mode handles color integration.
+   overlay = texture on dark bg  |  multiply = texture on light bg
+   ============================================================ */
+
+/* --- Full overlay --- */
+/* Nightfall: dark stone — cool purple-slate, rough rock texture */
+.theme-nightfall.scry-overlay {
+  background-color: #2C2B36;
+  background-image: url("tex-nightfall.png");
+  background-size: cover;
+  background-blend-mode: overlay;
+}
+/* Twilight: brushed steel — add blue shift gradient on top of metal */
+.theme-twilight.scry-overlay {
+  background-color: #2B2F36;
+  background-image:
+    linear-gradient(160deg, rgba(37,62,100,.55) 0%, rgba(20,30,50,.45) 100%),
+    url("tex-twilight.png");
+  background-size: auto, cover;
+  background-blend-mode: normal, luminosity;
+}
+/* Crystal: linen — soft-light is much gentler than multiply on white */
+.theme-crystal.scry-overlay {
+  background-color: #F2F7FF;
+  background-image: url("tex-crystal.png");
+  background-size: cover;
+  background-blend-mode: soft-light;
+}
+.theme-vellum.scry-overlay {
+  background-color: #F7F2E8;
+  background-image: url("tex-vellum.png");
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+.theme-amber.scry-overlay {
+  background-color: #1B1922;
+  background-image: url("tex-amber.png");
+  background-size: cover;
+  background-blend-mode: overlay;
+}
+
+/* --- Portrait panel --- */
+.theme-nightfall .sfnd-portrait-panel {
+  position: relative; isolation: isolate;
+  background-color: #1A1820;
+  background-image: url("tex-nightfall.png");
+  background-size: 300px;
+  background-blend-mode: overlay;
+  border-right: 1px solid rgba(166,217,255,.25);
+  box-shadow: 2px 0 24px rgba(0,0,0,.6), inset -2px 0 14px rgba(0,0,0,.3);
+}
+.theme-twilight .sfnd-portrait-panel {
+  position: relative; isolation: isolate;
+  background-color: #1a2030;
+  background-image:
+    linear-gradient(180deg, rgba(30,50,80,.6) 0%, rgba(15,25,45,.5) 100%),
+    url("tex-twilight.png");
+  background-size: auto, 300px;
+  background-blend-mode: normal, luminosity;
+  border-right: 1px solid rgba(166,217,255,.2);
+  box-shadow: 2px 0 20px rgba(0,0,0,.5);
+}
+.theme-crystal .sfnd-portrait-panel {
+  position: relative; isolation: isolate;
+  background-color: #D8E8F8;
+  background-image: url("tex-crystal.png");
+  background-size: 300px;
+  background-blend-mode: soft-light;
+  border-right: 1px solid rgba(37,99,235,.2);
+}
+.theme-vellum .sfnd-portrait-panel {
+  position: relative; isolation: isolate;
+  background-color: #EFE5D0;
+  background-image: url("tex-vellum.png");
+  background-size: 400px;
+  background-blend-mode: multiply;
+  border-right: 1px solid rgba(143,174,235,.35);
+  box-shadow: 2px 0 10px rgba(0,0,0,.12);
+}
+.theme-amber .sfnd-portrait-panel {
+  position: relative; isolation: isolate;
+  background-color: #100E16;
+  background-image: url("tex-amber.png");
+  background-size: 300px;
+  background-blend-mode: overlay;
+  border-right: 1px solid rgba(242,140,40,.25);
+  box-shadow: 2px 0 22px rgba(0,0,0,.6), inset -2px 0 12px rgba(0,0,0,.3);
+}
+
+/* --- Content area --- */
+.theme-nightfall .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-nightfall.png"); background-size: 600px; background-blend-mode: overlay; }
+.theme-twilight  .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-twilight.png");  background-size: 600px; background-blend-mode: luminosity; }
+.theme-crystal   .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-crystal.png");   background-size: cover;  background-blend-mode: soft-light; }
+.theme-vellum    .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-vellum.png");    background-size: 600px;  background-blend-mode: multiply; }
+.theme-amber     .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-amber.png");     background-size: 600px;  background-blend-mode: overlay; }
+
+/* ============================================================
+   CORNER FLOURISH — botanical SVG in portrait panel top-left.
+   fill="#000000" in SVG + CSS filter colorizes per theme.
+   isolation: isolate on parent creates stacking context so
+   z-index: -1 ::before sits above bg but below panel content.
+   ============================================================ */
+
+.theme-nightfall .sfnd-portrait-panel::before,
+.theme-twilight  .sfnd-portrait-panel::before,
+.theme-crystal   .sfnd-portrait-panel::before,
+.theme-amber     .sfnd-portrait-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 85px; height: 85px;
+  background: url("corner-flourish.svg") top left / contain no-repeat;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Ice blue — Nightfall */
+.theme-nightfall .sfnd-portrait-panel::before {
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(1.4);
+  opacity: .45;
+}
+/* Blue-steel — Twilight */
+.theme-twilight .sfnd-portrait-panel::before {
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(195deg) brightness(1.2);
+  opacity: .38;
+}
+/* Soft blue — Crystal */
+.theme-crystal .sfnd-portrait-panel::before {
+  filter: invert(0.5) sepia(1) saturate(2) hue-rotate(200deg);
+  opacity: .28;
+}
+/* Orange — Amber */
+.theme-amber .sfnd-portrait-panel::before {
+  filter: invert(1) sepia(1) saturate(4) hue-rotate(335deg) brightness(1.1);
+  opacity: .45;
+}
+
+/* Vellum: ::before used for top rule — add flourish via extra bg layer */
+.theme-vellum .sfnd-portrait-panel {
+  background-image:
+    url("corner-flourish.svg"),
+    url("tex-vellum.png");
+  background-size: 85px 85px, 400px;
+  background-position: top left, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: multiply, multiply;
+}

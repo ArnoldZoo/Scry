@@ -1,0 +1,611 @@
+﻿/*
+Module: TableOS Scry — Mobile Player Companion
+Component: scry-anvil.css
+Purpose: Scry-ANVIL template — theme variables and structural overrides (Forge, Brass, Parchment).
+
+Author: Loremaster-DudleyDoRight
+Coder: ArcaneLogix-ArnoldZoo
+Revision: 2.5.12
+Copyright (c) 2026 ArcaneLogix. All rights reserved.
+Licensed for personal tabletop play only - see LICENSE.
+No redistribution, derivative works, or resale without written permission.
+*/
+
+/* ============================================================
+   THEME: Forge — Variables
+   Dark iron & gold — metalwork, angular, premium dark fantasy
+   ============================================================ */
+.scry-overlay.theme-forge {
+  --scry-bg:           #0d0a06;
+  --scry-bg-card:      #1a1510;
+  --scry-bg-card-alt:  #141008;
+  --scry-bg-surface:   #0a0806;
+  --scry-border:       #4a3a1a;
+  --scry-accent:       #c8901a;
+  --scry-accent-dim:   #7a5010;
+  --scry-accent-glow:  rgba(200,144,26,.2);
+  --scry-text:         #f0e8d0;
+  --scry-text-muted:   #8a7a5a;
+  --scry-text-label:   #b09050;
+  --scry-hp-color:     #4caf50;
+  --scry-hp-bloodied:  #ff9800;
+  --scry-hp-critical:  #f44336;
+  --scry-danger:       #c0392b;
+  --scry-btn-bg:       #2a1e08;
+  --scry-btn-hover:    #3d2c0c;
+  --scry-btn-active:   #c8901a;
+  --scry-tab-active:   #c8901a;
+  --scry-gold:         #c8901a;
+  --scry-shadow:       0 2px 12px rgba(0,0,0,.85);
+}
+
+/* ============================================================
+   FORGE — Structural Design Overrides
+   Angular metalwork aesthetic, gold accents, premium dark feel
+   ============================================================ */
+
+/* Cards: angular metal plates with gold edge shimmer */
+.theme-forge .scry-card {
+  border-radius: 3px;
+  border: 1px solid var(--scry-border);
+  background: linear-gradient(160deg, #221a0e 0%, #1a1410 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(200,144,26,.12),
+    0 3px 16px rgba(0,0,0,.75);
+  position: relative;
+}
+.theme-forge .scry-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,144,26,.55), transparent);
+  pointer-events: none;
+}
+
+/* Section titles: forged nameplate */
+.theme-forge .scry-card-title {
+  color: var(--scry-accent);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .72rem;
+  font-weight: 700;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--scry-border);
+  margin-bottom: .6rem;
+}
+
+/* Header: warm dark iron with gold baseline */
+.theme-forge .scry-header {
+  background: linear-gradient(180deg, #1c1610 0%, #0d0a06 100%);
+  border-bottom: 1px solid var(--scry-accent);
+}
+.theme-forge .scry-ac-badge {
+  background: linear-gradient(135deg, #2a1e08, #1a1208);
+  border: 1px solid var(--scry-accent);
+  color: var(--scry-accent);
+  font-weight: 900;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(200,144,26,.3);
+}
+.theme-forge .scry-char-name {
+  color: var(--scry-accent);
+  font-weight: 700;
+}
+.theme-forge .scry-stats-bar {
+  background: rgba(200,144,26,.03);
+  border-bottom: 1px solid var(--scry-border);
+}
+.theme-forge .scry-stat {
+  border: 1px solid var(--scry-border);
+  background: rgba(200,144,26,.04);
+  border-radius: 2px;
+}
+.theme-forge .scry-stat label {
+  color: var(--scry-accent);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* HP bar: amber/gold fill */
+.theme-forge .scry-hp-fill {
+  background: linear-gradient(90deg, #b07818, #e0a820);
+}
+.theme-forge .scry-hp-bar.bloodied .scry-hp-fill {
+  background: linear-gradient(90deg, #a04010, #d06020);
+}
+.theme-forge .scry-hp-bar.critical .scry-hp-fill {
+  background: linear-gradient(90deg, #801818, #b02020);
+}
+
+/* Tab bar */
+.theme-forge .scry-tab-bar {
+  background: linear-gradient(0deg, #0d0a06 0%, #1a1510 100%);
+  border-top: 1px solid var(--scry-border);
+}
+.theme-forge .scry-tab-btn { border-radius: 0; }
+.theme-forge .scry-tab-btn.active {
+  color: var(--scry-accent);
+  border-top: 2px solid var(--scry-accent);
+  background: rgba(200,144,26,.06);
+}
+
+/* Ability score boxes: gold-framed panels */
+.theme-forge .scry-ability-score {
+  border-radius: 3px;
+  border: 1px solid var(--scry-accent);
+  background: linear-gradient(180deg, rgba(200,144,26,.08) 0%, transparent 70%);
+  box-shadow: 0 0 10px rgba(200,144,26,.1), inset 0 1px 0 rgba(200,144,26,.18);
+}
+.theme-forge .scry-ability-mod {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--scry-accent);
+  line-height: 1;
+}
+.theme-forge .scry-ability-value {
+  font-size: .72rem;
+  color: var(--scry-text-muted);
+}
+.theme-forge .scry-ability-label {
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--scry-text-label);
+}
+
+/* Proficiency + save icons */
+.theme-forge .scry-prof-icon { color: var(--scry-accent); }
+.theme-forge .scry-save-bonus,
+.theme-forge .scry-skill-bonus {
+  color: var(--scry-accent);
+  font-weight: 700;
+}
+.theme-forge .scry-save-row {
+  font-size: .82rem;
+  padding: .3rem .4rem;
+  border-radius: 2px;
+}
+.theme-forge .scry-save-row:hover { background: rgba(200,144,26,.06); }
+
+/* Skills: 2-column layout via CSS columns — no HTML changes needed */
+.theme-forge .scry-skills-section {
+  display: block;
+  columns: 2;
+  column-gap: .5rem;
+}
+.theme-forge .scry-skills-section .scry-card-title {
+  column-span: all;
+  display: block;
+}
+.theme-forge .scry-skill-row {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  font-size: .78rem;
+  padding: .25rem .35rem;
+  border-radius: 2px;
+}
+.theme-forge .scry-skill-row:hover { background: rgba(200,144,26,.07); }
+
+/* Inspiration */
+.theme-forge .scry-inspiration-toggle.active {
+  background: rgba(200,144,26,.15);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+}
+
+/* Mode bar */
+.theme-forge .scry-mode-bar { border-bottom: 1px solid var(--scry-border); }
+.theme-forge .scry-mode-btn.active {
+  background: rgba(200,144,26,.12);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+.theme-forge .scry-toggle.on {
+  background: rgba(200,144,26,.15);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+}
+
+/* Buttons: angular, uppercase */
+.theme-forge .scry-btn-sm,
+.theme-forge .scry-btn-action {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .7rem;
+  font-weight: 700;
+}
+.theme-forge .scry-btn-action {
+  border: 1px solid var(--scry-accent);
+  color: var(--scry-accent);
+}
+.theme-forge .scry-btn-action:hover { background: rgba(200,144,26,.15); }
+.theme-forge .scry-modal-btn-primary {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* Action economy tabs */
+.theme-forge .scry-eco-tab.is-active {
+  border-top: 2px solid var(--scry-accent);
+  background: rgba(200,144,26,.08);
+  color: var(--scry-accent);
+}
+.theme-forge .scry-ae-pip.available { background: var(--scry-accent); }
+.theme-forge .scry-ae-pip.used {
+  background: rgba(200,144,26,.18);
+  border-color: var(--scry-accent);
+}
+
+/* Movement pips */
+.theme-forge .scry-move-sq:not(.is-used) {
+  background: rgba(200,144,26,.25);
+  border-color: rgba(200,144,26,.5);
+}
+.theme-forge .scry-move-sq.is-used { background: rgba(200,144,26,.08); }
+
+/* Category chips */
+.theme-forge .scry-cat-chip.is-active {
+  background: rgba(200,144,26,.12);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+.theme-forge .scry-cat-badge { border-radius: 2px; }
+
+/* Action rows */
+.theme-forge .scry-action-row {
+  border-bottom: 1px solid rgba(74,58,26,.4);
+  border-radius: 2px;
+}
+.theme-forge .scry-action-row:last-child { border-bottom: none; }
+.theme-forge .scry-action-name { font-weight: 600; }
+
+/* Spell rows */
+.theme-forge .scry-spell-row.prepared {
+  border-left: 2px solid var(--scry-accent);
+}
+.theme-forge .scry-prep-toggle { color: var(--scry-accent); }
+.theme-forge .scry-slot-pip.available {
+  background: var(--scry-accent);
+  box-shadow: 0 0 4px rgba(200,144,26,.4);
+}
+.theme-forge .scry-slot-pip.used {
+  background: transparent;
+  border-color: var(--scry-border);
+}
+
+/* Gear rows */
+.theme-forge .scry-gear-row {
+  border-bottom: 1px solid rgba(74,58,26,.35);
+  border-radius: 2px;
+}
+.theme-forge .scry-gear-row:last-child { border-bottom: none; }
+.theme-forge .scry-equip-toggle.equipped {
+  background: rgba(200,144,26,.18);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+
+/* Scrollbars */
+.theme-forge ::-webkit-scrollbar { width: 4px; height: 4px; }
+.theme-forge ::-webkit-scrollbar-track { background: var(--scry-bg); }
+.theme-forge ::-webkit-scrollbar-thumb { background: var(--scry-border); border-radius: 2px; }
+.theme-forge ::-webkit-scrollbar-thumb:hover { background: var(--scry-accent); }
+
+/* ============================================================
+   THEME: Brass
+   Warm light ivory & gold — forge workshop in daylight
+   ============================================================ */
+.scry-overlay.theme-brass {
+  --scry-bg:           #f5f0e4;
+  --scry-bg-card:      #ede5d0;
+  --scry-bg-card-alt:  #e6dcc4;
+  --scry-bg-surface:   #ddd4bc;
+  --scry-border:       #b8900a;
+  --scry-accent:       #9a7400;
+  --scry-accent-dim:   #d4b050;
+  --scry-accent-glow:  rgba(154,116,0,.13);
+  --scry-text:         #1c1408;
+  --scry-text-muted:   #6b5020;
+  --scry-text-label:   #8a6828;
+  --scry-hp-color:     #388e3c;
+  --scry-hp-bloodied:  #f57c00;
+  --scry-hp-critical:  #d32f2f;
+  --scry-danger:       #c0392b;
+  --scry-btn-bg:       #e4d4a0;
+  --scry-btn-hover:    #d8c488;
+  --scry-btn-active:   #b8900a;
+  --scry-tab-active:   #b8900a;
+  --scry-gold:         #b8900a;
+  --scry-shadow:       0 2px 6px rgba(0,0,0,.18);
+}
+
+/* ============================================================
+   THEME: Parchment
+   Aged paper & brown-gold ink — old manuscript meets metalwork
+   ============================================================ */
+.scry-overlay.theme-parchment {
+  --scry-bg:           #e8dcc0;
+  --scry-bg-card:      #f0e6cc;
+  --scry-bg-card-alt:  #e8dbb8;
+  --scry-bg-surface:   #ddd0b0;
+  --scry-border:       #8b6510;
+  --scry-accent:       #a06800;
+  --scry-accent-dim:   #c8a040;
+  --scry-accent-glow:  rgba(160,104,0,.15);
+  --scry-text:         #1a1008;
+  --scry-text-muted:   #5a3c10;
+  --scry-text-label:   #7a5418;
+  --scry-hp-color:     #388e3c;
+  --scry-hp-bloodied:  #f57c00;
+  --scry-hp-critical:  #d32f2f;
+  --scry-danger:       #8b1a1a;
+  --scry-btn-bg:       #d8c098;
+  --scry-btn-hover:    #ccb080;
+  --scry-btn-active:   #a06800;
+  --scry-tab-active:   #a06800;
+  --scry-gold:         #b87818;
+  --scry-shadow:       0 2px 6px rgba(0,0,0,.2);
+}
+
+/* ============================================================
+   FORGE FAMILY — Brass & Parchment
+   Share Forge's angular metalwork design language.
+   CSS variables handle all color differences — only structural
+   rules that differ from the dark Forge base are listed here.
+   ============================================================ */
+
+/* Cards: light backgrounds, subtle drop shadow */
+.theme-brass .scry-card,
+.theme-parchment .scry-card {
+  border-radius: 3px;
+  border: 1px solid var(--scry-border);
+  background: var(--scry-bg-card);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.14);
+  position: relative;
+}
+.theme-brass .scry-card::after,
+.theme-parchment .scry-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.12), transparent);
+  pointer-events: none;
+}
+
+/* Section titles */
+.theme-brass .scry-card-title,
+.theme-parchment .scry-card-title {
+  color: var(--scry-accent);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .72rem;
+  font-weight: 700;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--scry-border);
+  margin-bottom: .6rem;
+}
+
+/* Header */
+.theme-brass .scry-header,
+.theme-parchment .scry-header {
+  background: var(--scry-bg);
+  border-bottom: 1px solid var(--scry-accent);
+}
+.theme-brass .scry-ac-badge,
+.theme-parchment .scry-ac-badge {
+  background: var(--scry-bg-card);
+  border: 1px solid var(--scry-accent);
+  color: var(--scry-accent);
+  font-weight: 900;
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--scry-accent-glow);
+}
+.theme-brass .scry-char-name,
+.theme-parchment .scry-char-name { color: var(--scry-accent); font-weight: 700; }
+.theme-brass .scry-stat,
+.theme-parchment .scry-stat {
+  border: 1px solid var(--scry-border);
+  border-radius: 2px;
+}
+.theme-brass .scry-stat label,
+.theme-parchment .scry-stat label {
+  color: var(--scry-accent);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* HP bar */
+.theme-brass .scry-hp-fill,
+.theme-parchment .scry-hp-fill {
+  background: linear-gradient(90deg, var(--scry-accent), var(--scry-accent-dim));
+}
+
+/* Tab bar */
+.theme-brass .scry-tab-bar,
+.theme-parchment .scry-tab-bar {
+  background: var(--scry-bg);
+  border-top: 1px solid var(--scry-border);
+}
+.theme-brass .scry-tab-btn,
+.theme-parchment .scry-tab-btn { border-radius: 0; }
+.theme-brass .scry-tab-btn.active,
+.theme-parchment .scry-tab-btn.active {
+  color: var(--scry-accent);
+  border-top: 2px solid var(--scry-accent);
+  background: var(--scry-accent-glow);
+}
+
+/* Ability score boxes */
+.theme-brass .scry-ability-score,
+.theme-parchment .scry-ability-score {
+  border-radius: 3px;
+  border: 1px solid var(--scry-accent);
+  background: var(--scry-bg-card);
+  box-shadow: 0 0 8px var(--scry-accent-glow);
+}
+.theme-brass .scry-ability-mod,
+.theme-parchment .scry-ability-mod {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--scry-accent);
+  line-height: 1;
+}
+.theme-brass .scry-ability-value,
+.theme-parchment .scry-ability-value { font-size: .72rem; color: var(--scry-text-muted); }
+.theme-brass .scry-ability-label,
+.theme-parchment .scry-ability-label {
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--scry-text-label);
+}
+
+/* Prof icons, bonuses */
+.theme-brass .scry-prof-icon,
+.theme-parchment .scry-prof-icon { color: var(--scry-accent); }
+.theme-brass .scry-save-bonus, .theme-parchment .scry-save-bonus,
+.theme-brass .scry-skill-bonus, .theme-parchment .scry-skill-bonus {
+  color: var(--scry-accent);
+  font-weight: 700;
+}
+.theme-brass .scry-save-row,
+.theme-parchment .scry-save-row { font-size: .82rem; padding: .3rem .4rem; border-radius: 2px; }
+.theme-brass .scry-save-row:hover,
+.theme-parchment .scry-save-row:hover { background: var(--scry-accent-glow); }
+
+/* Skills: 2-column */
+.theme-brass .scry-skills-section,
+.theme-parchment .scry-skills-section { display: block; columns: 2; column-gap: .5rem; }
+.theme-brass .scry-skills-section .scry-card-title,
+.theme-parchment .scry-skills-section .scry-card-title { column-span: all; display: block; }
+.theme-brass .scry-skill-row,
+.theme-parchment .scry-skill-row {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  font-size: .78rem;
+  padding: .25rem .35rem;
+  border-radius: 2px;
+}
+.theme-brass .scry-skill-row:hover,
+.theme-parchment .scry-skill-row:hover { background: var(--scry-accent-glow); }
+
+/* Inspiration, mode bar, toggles */
+.theme-brass .scry-inspiration-toggle.active,
+.theme-parchment .scry-inspiration-toggle.active {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+}
+.theme-brass .scry-mode-bar,
+.theme-parchment .scry-mode-bar { border-bottom: 1px solid var(--scry-border); }
+.theme-brass .scry-mode-btn.active,
+.theme-parchment .scry-mode-btn.active {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+.theme-brass .scry-toggle.on,
+.theme-parchment .scry-toggle.on {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+}
+
+/* Buttons: angular, uppercase */
+.theme-brass .scry-btn-sm,   .theme-parchment .scry-btn-sm,
+.theme-brass .scry-btn-action, .theme-parchment .scry-btn-action {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .7rem;
+  font-weight: 700;
+}
+.theme-brass .scry-btn-action,
+.theme-parchment .scry-btn-action { border: 1px solid var(--scry-accent); color: var(--scry-accent); }
+.theme-brass .scry-btn-action:hover,
+.theme-parchment .scry-btn-action:hover { background: var(--scry-accent-glow); }
+.theme-brass .scry-modal-btn-primary,
+.theme-parchment .scry-modal-btn-primary {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* Economy tabs + pips */
+.theme-brass .scry-eco-tab.is-active,
+.theme-parchment .scry-eco-tab.is-active {
+  border-top: 2px solid var(--scry-accent);
+  background: var(--scry-accent-glow);
+  color: var(--scry-accent);
+}
+.theme-brass .scry-ae-pip.available,
+.theme-parchment .scry-ae-pip.available { background: var(--scry-accent); }
+.theme-brass .scry-ae-pip.used, .theme-parchment .scry-ae-pip.used {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+}
+.theme-brass .scry-move-sq:not(.is-used),
+.theme-parchment .scry-move-sq:not(.is-used) {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+}
+
+/* Category chips + action rows */
+.theme-brass .scry-cat-chip.is-active,
+.theme-parchment .scry-cat-chip.is-active {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+.theme-brass .scry-cat-badge,
+.theme-parchment .scry-cat-badge { border-radius: 2px; }
+.theme-brass .scry-action-row,
+.theme-parchment .scry-action-row { border-bottom: 1px solid rgba(0,0,0,.07); border-radius: 2px; }
+.theme-brass .scry-action-row:last-child,
+.theme-parchment .scry-action-row:last-child { border-bottom: none; }
+.theme-brass .scry-action-name,
+.theme-parchment .scry-action-name { font-weight: 600; }
+
+/* Spell rows */
+.theme-brass .scry-spell-row.prepared,
+.theme-parchment .scry-spell-row.prepared { border-left: 2px solid var(--scry-accent); }
+.theme-brass .scry-prep-toggle,
+.theme-parchment .scry-prep-toggle { color: var(--scry-accent); }
+.theme-brass .scry-slot-pip.available,
+.theme-parchment .scry-slot-pip.available { background: var(--scry-accent); }
+.theme-brass .scry-slot-pip.used,
+.theme-parchment .scry-slot-pip.used { background: transparent; border-color: var(--scry-border); }
+
+/* Gear rows */
+.theme-brass .scry-gear-row,
+.theme-parchment .scry-gear-row { border-bottom: 1px solid rgba(0,0,0,.07); border-radius: 2px; }
+.theme-brass .scry-gear-row:last-child,
+.theme-parchment .scry-gear-row:last-child { border-bottom: none; }
+.theme-brass .scry-equip-toggle.equipped,
+.theme-parchment .scry-equip-toggle.equipped {
+  background: var(--scry-accent-glow);
+  border-color: var(--scry-accent);
+  color: var(--scry-accent);
+  border-radius: 2px;
+}
+
+/* Scrollbars */
+.theme-brass ::-webkit-scrollbar,
+.theme-parchment ::-webkit-scrollbar { width: 4px; height: 4px; }
+.theme-brass ::-webkit-scrollbar-track,
+.theme-parchment ::-webkit-scrollbar-track { background: var(--scry-bg); }
+.theme-brass ::-webkit-scrollbar-thumb,
+.theme-parchment ::-webkit-scrollbar-thumb { background: var(--scry-border); border-radius: 2px; }
+.theme-brass ::-webkit-scrollbar-thumb:hover,
+.theme-parchment ::-webkit-scrollbar-thumb:hover { background: var(--scry-accent); }
