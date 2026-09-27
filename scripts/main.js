@@ -6,7 +6,7 @@ Purpose: Entry point. Detects personal device users and boots the Scry overlay.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.17
 */
 
 import { ScrySettings }    from "./settings-manager.js";
@@ -88,8 +88,7 @@ function _resolveActor(user) {
 
   // Fall back to the user's assigned character, then any owned character
   if (user.character) return user.character;
-  const owned = game.actors.filter(a => a.isOwner);
-  return owned[0] ?? null;
+  return game.actors.find(a => a.isOwner) ?? null;
 }
 
 function _waitForActor(user, deviceType) {

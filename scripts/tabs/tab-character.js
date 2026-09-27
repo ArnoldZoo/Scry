@@ -6,15 +6,13 @@ Purpose: Character tab: ability scores, skills, saves, inspiration, features, tr
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 const PROF_ICONS = { 0: "○", 0.5: "◑", 1: "●", 2: "◈" };
 
 export class TabCharacter {
-  constructor() {
-    this._rollMode = "roll"; // "roll" | "enter"
-  }
+  _rollMode = "roll"; // "roll" | "enter"
 
   render(data) {
     return `
@@ -56,7 +54,7 @@ export class TabCharacter {
     element.querySelectorAll(".scry-ability-score[data-ability]").forEach(el => {
       el.addEventListener("click", async () => {
         const ability = el.dataset.ability;
-        const mod     = parseInt(el.dataset.mod ?? "0");
+        const mod     = Number.parseInt(el.dataset.mod ?? "0", 10);
         const label   = el.dataset.label ?? ability;
         if (this._rollMode === "roll") {
           await this._doRollAbility(ability, actor);
@@ -72,7 +70,7 @@ export class TabCharacter {
     element.querySelectorAll(".scry-save-row[data-ability]").forEach(el => {
       el.addEventListener("click", async () => {
         const ability   = el.dataset.ability;
-        const saveBonus = parseInt(el.dataset.saveBonus ?? "0");
+        const saveBonus = Number.parseInt(el.dataset.saveBonus ?? "0", 10);
         const label     = el.dataset.label ?? ability;
         if (this._rollMode === "roll") {
           await this._doRollSave(ability, actor);
@@ -88,7 +86,7 @@ export class TabCharacter {
     element.querySelectorAll(".scry-skill-row[data-skill]").forEach(el => {
       el.addEventListener("click", async () => {
         const skill      = el.dataset.skill;
-        const skillTotal = parseInt(el.dataset.skillTotal ?? "0");
+        const skillTotal = Number.parseInt(el.dataset.skillTotal ?? "0", 10);
         const label      = el.dataset.label ?? skill;
         if (this._rollMode === "roll") {
           await this._doRollSkill(skill, actor);

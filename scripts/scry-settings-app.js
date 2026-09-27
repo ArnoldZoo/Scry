@@ -6,7 +6,7 @@ Purpose: GM settings dialog: assign device types to users.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.17
 */
 
 import { ScrySettings } from "./settings-manager.js";
@@ -97,5 +97,7 @@ export class ScrySettingsApp extends FormApplication {
     this.close();
   }
 
-  async _updateObject() {}
+  async _updateObject() {
+    // Nothing to do. The Save button writes the settings; the form never submits.
+  }
 }

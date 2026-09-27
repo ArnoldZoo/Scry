@@ -79,7 +79,10 @@ test("a TableOS timer that can't be read leaves the timer blank", () => {
 
 test("a Foundry or Beyond view has no container and never draws", () => {
   const none = new TurnIndicator(null);
-  none.onUpdateCombat(combat({ name: "A" }));
-  none._syncTimer();
-  none.onDeleteCombat();
+  assert.doesNotThrow(() => {
+    none.onUpdateCombat(combat({ name: "A" }));
+    none._syncTimer();
+    none.onDeleteCombat();
+  });
+  assert.equal(document.getElementById("scry-turn-timer"), null);
 });

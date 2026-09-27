@@ -6,7 +6,7 @@ Purpose: System abstraction layer: reads actor data for D&D 5e (PF2e stub for v1
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.17
 */
 
 const SYSTEM_READERS = {
@@ -28,6 +28,27 @@ export function readActorData(actor) {
   }
 }
 
+// dnd5e 5.x keeps damage types and weapon properties in Sets; older data used
+// arrays or {key: true} objects.
+function _listLabel(raw, fallback) {
+  if (raw instanceof Set) return [...raw].join(", ");
+  if (Array.isArray(raw)) return raw.join(", ");
+  return fallback;
+}
+
+function _propertyKeys(raw) {
+  if (raw instanceof Set) return [...raw];
+  if (!raw) return [];
+  return Object.entries(raw).filter(([, v]) => v === true).map(([k]) => k);
+}
+
+// dnd5e v5: abl.save is the total save modifier; older data has save.value or neither.
+function _saveBonus(abl, profBonus) {
+  if (typeof abl.save === "number") return abl.save;
+  if (typeof abl.save?.value === "number") return abl.save.value;
+  return Math.floor(((abl.value ?? 10) - 10) / 2) + (abl.proficient ? profBonus : 0);
+}
+
 function _getActType(item) {
   const acts = item.system.activities;
   if (acts) {
@@ -37,7 +58,7 @@ function _getActType(item) {
       list = acts.contents;
     } else if (typeof acts.values === "function") {
       list = [...acts.values()];
-    } else if (acts && typeof acts === "object") {
+    } else if (typeof acts === "object") {
       list = Object.values(acts).filter(v => v && typeof v === "object");
     }
     if (list?.length) {
@@ -103,10 +124,8 @@ function _readDnd5eData(actor) {
       value:         abl.value ?? 10,
       mod:           abl.mod   ?? 0,
       saveProf:      !!(abl.proficient),
-      // dnd5e v5: abl.save is the total save modifier (number); abl.saveBonus is extras (often 0, blocks ??)
-      saveBonus:     typeof abl.save === "number" ? abl.save
-                   : typeof abl.save?.value === "number" ? abl.save.value
-                   : Math.floor(((abl.value ?? 10) - 10) / 2) + (abl.proficient ? profBonus : 0),
+      // abl.saveBonus is only the extras (often 0), so it can't stand in for the total.
+      saveBonus:     _saveBonus(abl, profBonus),
     };
   });
 
@@ -157,9 +176,7 @@ function _readDnd5eData(actor) {
     if (!["action","bonus","reaction"].includes(actType)) return;
 
     const rawTypes = i.system.damage?.base?.types;
-    const dmgType  = rawTypes instanceof Set ? [...rawTypes].join(", ")
-                   : Array.isArray(rawTypes)  ? rawTypes.join(", ")
-                   : (i.system.damage?.parts?.[0]?.[1] ?? "");
+    const dmgType  = _listLabel(rawTypes, i.system.damage?.parts?.[0]?.[1] ?? "");
     const baseDmg  = i.system.damage?.base?.formula ?? (i.system.damage?.parts?.[0]?.[0] ?? "");
     const toHitLbl = i.labels?.modifier ?? i.labels?.toHit ?? "";
 
@@ -181,15 +198,8 @@ function _readDnd5eData(actor) {
   const weapons = items.filter(i => i.type === "weapon").map(i => {
     const dmgParts = i.system.damage?.parts ?? [];
     const baseDmg  = i.system.damage?.base?.formula ?? (dmgParts[0]?.[0] ?? "");
-    // dnd5e v5+: damage.base.types and item.properties are Sets, not arrays/objects
-    const rawTypes = i.system.damage?.base?.types;
-    const dmgType  = rawTypes instanceof Set ? [...rawTypes].join(", ")
-                   : Array.isArray(rawTypes)  ? rawTypes.join(", ")
-                   : (dmgParts[0]?.[1] ?? "");
-    const rawProps = i.system.properties;
-    const props    = rawProps instanceof Set  ? [...rawProps]
-                   : rawProps                 ? Object.entries(rawProps).filter(([,v]) => v === true).map(([k]) => k)
-                   : [];
+    const dmgType  = _listLabel(i.system.damage?.base?.types, dmgParts[0]?.[1] ?? "");
+    const props    = _propertyKeys(i.system.properties);
     return {
       id:          i.id,
       name:        i.name,
@@ -214,7 +224,7 @@ function _readDnd5eData(actor) {
   const spellSlots = Object.entries(sys.spells ?? {})
     .filter(([key]) => /^spell[1-9]$/.test(key))
     .map(([key, slot]) => ({
-      level: parseInt(key.replace("spell","")),
+      level: Number.parseInt(key.replace("spell", ""), 10),
       value: slot.value ?? 0,
       max:   slot.max   ?? 0,
     }))

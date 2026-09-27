@@ -6,7 +6,7 @@ Purpose: Main overlay: persistent header, 5-tab shell, tab switching, actor refr
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 import { readActorData }  from "./system-reader.js";
@@ -83,6 +83,18 @@ const BEYOND_TAB_HANDLERS = {
   traits:    () => new BeyondTabTraits(),
 };
 
+// Each template family has its own tab handlers, handler cache, content element and tab buttons.
+const FAMILIES = {
+  core:    { handlers: TAB_HANDLERS,         store: "_tabHandlers",     content: "scry-tab-content", tabBtn: ".scry-tab-btn" },
+  foundry: { handlers: FOUNDRY_TAB_HANDLERS, store: "_foundryHandlers", content: "sfnd-content",     tabBtn: ".sfnd-nav-btn" },
+  beyond:  { handlers: BEYOND_TAB_HANDLERS,  store: "_beyondHandlers",  content: "sbnd-content",     tabBtn: ".sbnd-tab-btn" },
+};
+
+function hpClass(pct) {
+  if (pct <= 25) return "critical";
+  return pct <= 50 ? "bloodied" : "";
+}
+
 export class ScryView {
   constructor(actor, deviceType) {
     this.actor      = actor;
@@ -105,6 +117,15 @@ export class ScryView {
     this._shownCombatStart  = null;
   }
 
+  _family() {
+    if (this._isFoundry) return FAMILIES.foundry;
+    return this._isBeyond ? FAMILIES.beyond : FAMILIES.core;
+  }
+
+  _handlerStore() {
+    return this[this._family().store];
+  }
+
   // --- lifecycle ---
 
   render() {
@@ -119,11 +140,10 @@ export class ScryView {
     const theme = ScrySettings.getEffectiveTheme();
     this._isFoundry = FOUNDRY_THEMES.has(theme);
     this._isBeyond  = BEYOND_THEMES.has(theme);
-    const html = this._isFoundry
-      ? FoundryShell.buildHTML(data, theme, this.deviceType, this.activeTab)
-      : this._isBeyond
-        ? BeyondShell.buildHTML(data, theme, this.deviceType, this.activeTab)
-        : this._buildOverlayHTML(data, theme);
+    let html;
+    if (this._isFoundry)     html = FoundryShell.buildHTML(data, theme, this.deviceType, this.activeTab);
+    else if (this._isBeyond) html = BeyondShell.buildHTML(data, theme, this.deviceType, this.activeTab);
+    else                     html = this._buildOverlayHTML(data, theme);
     document.body.insertAdjacentHTML("beforeend", html);
     this._element = document.getElementById("scry-overlay");
 
@@ -174,14 +194,11 @@ export class ScryView {
   }
 
   switchTab(tabId) {
-    const handlers = this._isFoundry ? FOUNDRY_TAB_HANDLERS
-      : this._isBeyond ? BEYOND_TAB_HANDLERS : TAB_HANDLERS;
-    if (!handlers[tabId]) return;
+    const family = this._family();
+    if (!family.handlers[tabId]) return;
     this.activeTab = tabId;
 
-    const btnSel = this._isFoundry ? ".sfnd-nav-btn"
-      : this._isBeyond ? ".sbnd-tab-btn" : ".scry-tab-btn";
-    this._element?.querySelectorAll(btnSel).forEach(btn => {
+    this._element?.querySelectorAll(family.tabBtn).forEach(btn => {
       btn.classList.toggle("active", btn.dataset.tab === tabId);
     });
 
@@ -198,7 +215,7 @@ export class ScryView {
 
   _buildOverlayHTML(data, theme) {
     const isTablet  = this.deviceType === "tablet";
-    const navHtml   = isTablet ? this._buildSidebar() : this._buildTabBar();
+    const navHtml   = this._buildTabBar();
     return `
 <div id="scry-overlay" class="scry-overlay theme-${theme} device-${this.deviceType}">
   ${this._buildHeader(data)}
@@ -212,7 +229,7 @@ export class ScryView {
 
   _buildHeader(data) {
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const barClass = hpClass(hpPct);
     const concHtml = data.concentration
       ? `<span class="scry-conc-indicator" title="Concentrating">CON</span>` : "";
 
@@ -232,7 +249,7 @@ export class ScryView {
           <div class="scry-ac-badge">${data.ac}</div>
           ${concHtml}
           <div class="scry-hp-block">
-            <div class="scry-hp-bar ${hpClass}">
+            <div class="scry-hp-bar ${barClass}">
               <div class="scry-hp-fill" style="width:${hpPct}%"></div>
             </div>
             <div class="scry-hp-text">${data.hpCurrent} / ${data.hpMax}${data.hpTemp > 0 ? ` (+${data.hpTemp})` : ""}</div>
@@ -266,15 +283,6 @@ export class ScryView {
   }
 
   _buildTabBar() {
-    return TABS.map(t =>
-      `<button class="scry-tab-btn ${t.id === this.activeTab ? "active" : ""}" data-tab="${t.id}">
-        <span class="scry-tab-icon">${t.icon}</span>
-        <span class="scry-tab-label">${t.label}</span>
-      </button>`
-    ).join("");
-  }
-
-  _buildSidebar() {
     return TABS.map(t =>
       `<button class="scry-tab-btn ${t.id === this.activeTab ? "active" : ""}" data-tab="${t.id}">
         <span class="scry-tab-icon">${t.icon}</span>
@@ -403,9 +411,7 @@ export class ScryView {
   }
 
   _activateTabBar() {
-    const sel = this._isFoundry ? ".sfnd-nav-btn[data-tab]"
-      : this._isBeyond ? ".sbnd-tab-btn[data-tab]" : ".scry-tab-btn[data-tab]";
-    this._element?.querySelectorAll(sel).forEach(btn => {
+    this._element?.querySelectorAll(`${this._family().tabBtn}[data-tab]`).forEach(btn => {
       btn.addEventListener("click", () => {
         if (btn.dataset.tab === "table") {
           if (this._tabletopView?.active) {
@@ -419,10 +425,8 @@ export class ScryView {
           }
         } else {
           if (btn.dataset.tab === "actions") {
-            const handlerStore = this._isFoundry ? this._foundryHandlers
-              : this._isBeyond ? this._beyondHandlers : this._tabHandlers;
-            const h = handlerStore["actions"];
-            if (h && h._activeEco === "status") {
+            const h = this._handlerStore()["actions"];
+            if (h?._activeEco === "status") {
               h._activeEco = "action";
               h._activeCat = "all";
               if (!this._isFoundry && !this._isBeyond) {
@@ -439,15 +443,12 @@ export class ScryView {
   // --- tab rendering ---
 
   _renderTab(tabId, data) {
-    const contentId = this._isFoundry ? "sfnd-content"
-      : this._isBeyond ? "sbnd-content" : "scry-tab-content";
-    const contentEl = document.getElementById(contentId);
+    const family    = this._family();
+    const contentEl = document.getElementById(family.content);
     if (!contentEl) return;
 
-    const handlers     = this._isFoundry ? FOUNDRY_TAB_HANDLERS
-      : this._isBeyond ? BEYOND_TAB_HANDLERS : TAB_HANDLERS;
-    const handlerStore = this._isFoundry ? this._foundryHandlers
-      : this._isBeyond ? this._beyondHandlers : this._tabHandlers;
+    const handlers     = family.handlers;
+    const handlerStore = this._handlerStore();
 
     if (!handlerStore[tabId]) {
       handlerStore[tabId] = handlers[tabId]?.();
@@ -574,16 +575,12 @@ export class ScryView {
       if (combatant && combat.current?.combatantId === combatant.id) {
         this._movementUsed = 0;
         this._refreshMovement();
-        const handlerStore = this._isFoundry ? this._foundryHandlers
-          : this._isBeyond ? this._beyondHandlers : this._tabHandlers;
-        const actionsHandler = handlerStore["actions"];
+        const actionsHandler = this._handlerStore()["actions"];
         if (actionsHandler?._ecoUsed) {
           actionsHandler._ecoUsed = { action: 0, bonus: 0, reaction: 0 };
           if (this.activeTab === "actions") {
             const data = readActorData(this.actor);
-            const contentId = this._isFoundry ? "sfnd-content"
-              : this._isBeyond ? "sbnd-content" : "scry-tab-content";
-            const contentEl = document.getElementById(contentId);
+            const contentEl = document.getElementById(this._family().content);
             if (data && contentEl) actionsHandler.refresh(contentEl, data);
           }
         }
@@ -606,12 +603,8 @@ export class ScryView {
       this._activateSlideDown(this._element);
     }
 
-    const handlerStore = this._isFoundry ? this._foundryHandlers
-      : this._isBeyond ? this._beyondHandlers : this._tabHandlers;
-    const handler      = handlerStore[this.activeTab];
-    const contentId    = this._isFoundry ? "sfnd-content"
-      : this._isBeyond ? "sbnd-content" : "scry-tab-content";
-    const contentEl    = document.getElementById(contentId);
+    const handler      = this._handlerStore()[this.activeTab];
+    const contentEl    = document.getElementById(this._family().content);
     if (handler?.refresh && contentEl) {
       handler.refresh(contentEl, data);
     }
@@ -628,7 +621,7 @@ export class ScryView {
     }
 
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const barClass = hpClass(hpPct);
 
     const fillEl = this._element?.querySelector(".scry-hp-fill");
     if (fillEl) fillEl.style.width = `${hpPct}%`;
@@ -636,12 +629,13 @@ export class ScryView {
     const barEl = this._element?.querySelector(".scry-hp-bar");
     if (barEl) {
       barEl.classList.remove("critical","bloodied");
-      if (hpClass) barEl.classList.add(hpClass);
+      if (barClass) barEl.classList.add(barClass);
     }
 
     const textEl = this._element?.querySelector(".scry-hp-text");
     if (textEl) {
-      textEl.textContent = `${data.hpCurrent} / ${data.hpMax}${data.hpTemp > 0 ? ` (+${data.hpTemp})` : ""}`;
+      const temp = data.hpTemp > 0 ? ` (+${data.hpTemp})` : "";
+      textEl.textContent = `${data.hpCurrent} / ${data.hpMax}${temp}`;
     }
 
     const concEl = this._element?.querySelector(".scry-conc-indicator");
@@ -740,17 +734,18 @@ export class ScryView {
       const page   = pages[pageIdx];
       const html   = page?.text?.content ?? "";
       const imgSrc = page?.src ?? null;
-      const body   = html
-        ? `<div class="scry-jr-content">${html}</div>`
-        : imgSrc
-          ? `<img class="scry-jr-img" src="${imgSrc}" alt=""><div class="scry-jr-content"></div>`
-          : `<p class="scry-jr-empty">No content.</p>`;
+      let body = `<p class="scry-jr-empty">No content.</p>`;
+      if (html)        body = `<div class="scry-jr-content">${html}</div>`;
+      else if (imgSrc) body = `<img class="scry-jr-img" src="${imgSrc}" alt=""><div class="scry-jr-content"></div>`;
 
+      const prevOff   = pageIdx === 0 ? "disabled" : "";
+      const nextOff   = pageIdx >= pageCount - 1 ? "disabled" : "";
+      const pageLabel = page?.name ?? `Page ${pageIdx + 1}`;
       const pageNav = pageCount > 1 ? `
         <div class="scry-jr-page-nav">
-          <button class="scry-jr-prev" ${pageIdx === 0 ? "disabled" : ""}><i class="fas fa-chevron-left"></i></button>
-          <span class="scry-jr-page-label">${page?.name ?? `Page ${pageIdx + 1}`} · ${pageIdx + 1}/${pageCount}</span>
-          <button class="scry-jr-next" ${pageIdx >= pageCount - 1 ? "disabled" : ""}><i class="fas fa-chevron-right"></i></button>
+          <button class="scry-jr-prev" ${prevOff}><i class="fas fa-chevron-left"></i></button>
+          <span class="scry-jr-page-label">${pageLabel} · ${pageIdx + 1}/${pageCount}</span>
+          <button class="scry-jr-next" ${nextOff}><i class="fas fa-chevron-right"></i></button>
         </div>` : "";
 
       reader.innerHTML = `
@@ -817,7 +812,7 @@ export class ScryView {
     const hotbarIds = Object.values(game.user?.hotbar ?? {});
     const hotbar = hotbarIds.map(id => game.macros?.get(id)).filter(Boolean);
     const owned  = (game.macros?.contents ?? []).filter(m =>
-      m.isOwner && !hotbar.find(h => h.id === m.id)
+      m.isOwner && !hotbar.some(h => h.id === m.id)
     );
     const all = [...hotbar, ...owned];
     if (!all.length) { ui.notifications?.info("No macros available."); return; }
@@ -901,7 +896,10 @@ export class ScryView {
       row.addEventListener("click", async () => {
         const themeId      = row.dataset.theme;
         const currentTheme = ScrySettings.getEffectiveTheme();
-        const getFamily    = t => FOUNDRY_THEMES.has(t) ? "foundry" : BEYOND_THEMES.has(t) ? "beyond" : "core";
+        const getFamily    = t => {
+          if (FOUNDRY_THEMES.has(t)) return "foundry";
+          return BEYOND_THEMES.has(t) ? "beyond" : "core";
+        };
         const wasFamily    = getFamily(currentTheme);
         const willBeFamily = getFamily(themeId);
         await ScrySettings.setClientTheme(themeId);
@@ -1060,7 +1058,7 @@ export class ScryView {
       if (!disp) return;
       if (!expr) { disp.textContent = "–"; return; }
       const result = this._evalExpr(expr);
-      const pretty = expr.replace(/-/g, " − ").replace(/\+/g, " + ");
+      const pretty = expr.replaceAll("-", " − ").replaceAll("+", " + ");
       disp.textContent = result !== null ? `${pretty} = ${result}` : pretty;
     };
 
@@ -1076,8 +1074,8 @@ export class ScryView {
           }
         } else if (k === "B") {
           expr += modStr;
-        } else {
-          if (expr.length < 10) expr += k;
+        } else if (expr.length < 10) {
+          expr += k;
         }
         updateDisp();
       });
@@ -1134,8 +1132,8 @@ export class ScryView {
     allBtns.forEach(b => b.style.setProperty("display","none","important"));
 
     // Restore top-right Close only (first Close in DOM = header)
-    const allClose = allBtns.filter(b => b.textContent.trim() === "Close");
-    if (allClose[0]) allClose[0].style.removeProperty("display");
+    const firstClose = allBtns.find(b => b.textContent.trim() === "Close");
+    if (firstClose) firstClose.style.removeProperty("display");
 
     // Walk the text nodes. The labels sit at different depths in TableOS's markup.
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -1319,12 +1317,9 @@ export class ScryView {
     let pips = "";
     for (let i = 0; i < totalSq; i++) {
       let cls = "scry-move-sq";
-      if (i < usedSq) {
-        cls += " is-used";
-      } else {
-        if (remSq <= Math.round(totalSq * 0.25)) cls += " is-danger";
-        else if (remSq <= Math.round(totalSq * 0.50)) cls += " is-warn";
-      }
+      if (i < usedSq) cls += " is-used";
+      else if (remSq <= Math.round(totalSq * 0.25)) cls += " is-danger";
+      else if (remSq <= Math.round(totalSq * 0.50)) cls += " is-warn";
       pips += `<span class="${cls}"></span>`;
     }
     return `
@@ -1366,7 +1361,8 @@ export class ScryView {
     const el = document.createElement("div");
     el.id        = "scry-top-banner";
     el.className = `scry-top-banner scry-top-banner--${type}`;
-    el.innerHTML = `<span class="scry-tb-title">${title}</span>${sub ? `<span class="scry-tb-sub">${sub}</span>` : ""}`;
+    const subHtml = sub ? `<span class="scry-tb-sub">${sub}</span>` : "";
+    el.innerHTML = `<span class="scry-tb-title">${title}</span>${subHtml}`;
     document.body.appendChild(el);
     el.addEventListener("click", () => el.remove());
     setTimeout(() => el?.isConnected && el.remove(), 3500);
@@ -1526,7 +1522,7 @@ export class ScryView {
     if (this._initObserver) return;
 
     const processNode = (el) => {
-      if (!el || el.nodeType !== Node.ELEMENT_NODE) return;
+      if (el?.nodeType !== Node.ELEMENT_NODE) return;
       const text = el.textContent ?? "";
       const lc   = text.toLowerCase();
 
@@ -1634,7 +1630,9 @@ export class ScryView {
         hpWrap.style.display = "";
         const hp  = actor?.system?.attributes?.hp;
         const pct = hp?.max > 0 ? Math.max(0, Math.min(100, Math.round((hp.value / hp.max) * 100))) : 100;
-        const col = pct > 50 ? "#4caf50" : pct > 25 ? "#ff9800" : "#f44336";
+        let col = "#f44336";
+        if (pct > 50)      col = "#4caf50";
+        else if (pct > 25) col = "#ff9800";
         const fill = hpWrap.querySelector(".sfnd-combat-hp-fill");
         if (fill) { fill.style.width = `${pct}%`; fill.style.background = col; }
       }

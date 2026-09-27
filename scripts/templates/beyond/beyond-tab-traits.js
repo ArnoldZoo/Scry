@@ -8,11 +8,11 @@ Purpose: Scry-BEYOND Traits tab: features, feats, proficiencies, personality.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 export class BeyondTabTraits {
-  constructor() { this._actor = null; }
+  _actor = null;
 
   render(data) {
     return `<div class="sbnd-traits-wrap">

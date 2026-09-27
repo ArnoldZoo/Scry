@@ -6,7 +6,7 @@ Purpose: Spells tab: spell slots, spell list, inline prep toggle, cast buttons.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 const LEVEL_LABELS = ["Cantrip","1st","2nd","3rd","4th","5th","6th","7th","8th","9th"];
@@ -21,11 +21,9 @@ const _isSelfTarget = (item) => {
 };
 
 export class TabSpells {
-  constructor() {
-    this._rollMode  = "roll";   // "roll" | "enter"
-    this._autoDmg   = true;
-    this._autoBonus = true;
-  }
+  _rollMode  = "roll";   // "roll" | "enter"
+  _autoDmg   = true;
+  _autoBonus = true;
 
   render(data) {
     return `
@@ -89,7 +87,7 @@ export class TabSpells {
 
       // Spell row tap shows the spell description
       const row = e.target.closest(".scry-spell-row[data-item-id]");
-      if (row) { this._showDescription(row.dataset.itemId, actor); return; }
+      if (row) this._showDescription(row.dataset.itemId, actor);
     });
   }
 
@@ -196,7 +194,7 @@ export class TabSpells {
             }
             const manualDmg = this._autoDmg
               ? null
-              : (parseInt(backdrop.querySelector("#scry-enter-damage")?.value ?? "") || 0);
+              : (Number.parseInt(backdrop.querySelector("#scry-enter-damage")?.value ?? "", 10) || 0);
             closeModal();
             try {
               await this._doEnterSpellAttack(item, actor, dieValue, manualDmg);
@@ -223,7 +221,7 @@ export class TabSpells {
           label: "Cast",
           className: "scry-modal-btn-primary",
           callback: async ({ backdrop, closeModal }) => {
-            const manualDmg = parseInt(backdrop.querySelector("#scry-enter-damage")?.value ?? "") || 0;
+            const manualDmg = Number.parseInt(backdrop.querySelector("#scry-enter-damage")?.value ?? "", 10) || 0;
             closeModal();
             try {
               await this._doEnterSaveDmg(item, actor, manualDmg);
@@ -516,11 +514,12 @@ export class TabSpells {
 
     const byLevel = {};
     for (const spell of spells) {
-      (byLevel[spell.level] = byLevel[spell.level] ?? []).push(spell);
+      byLevel[spell.level] ??= [];
+      byLevel[spell.level].push(spell);
     }
 
     const sections = Object.entries(byLevel).map(([level, list]) => {
-      const lvl = parseInt(level);
+      const lvl = Number.parseInt(level, 10);
       const slot = slots.find(s => s.level === lvl);
       const slotInfo = slot ? ` (${slot.value}/${slot.max})` : "";
       const spellRows = list.map(sp => this._buildSpellRow(sp, noPrep)).join("");
@@ -535,10 +534,12 @@ export class TabSpells {
   }
 
   _buildSpellRow(spell, noPrep) {
+    const prepTitle  = spell.prepared ? "Prepared" : "Unprepared";
+    const prepMark   = spell.prepared ? "★" : "○";
     const prepToggle = (!noPrep && spell.level > 0)
       ? `<button class="scry-prep-toggle" data-item-id="${spell.id}"
-                 title="${spell.prepared ? "Prepared" : "Unprepared"}">
-           ${spell.prepared ? "★" : "○"}
+                 title="${prepTitle}">
+           ${prepMark}
          </button>`
       : "";
     const concIcon = spell.concentration
@@ -559,7 +560,7 @@ export class TabSpells {
   // --- Slot / prep helpers ---
 
   _toggleSlot(pip, actor) {
-    const level = parseInt(pip.dataset.level);
+    const level = Number.parseInt(pip.dataset.level, 10);
     const isUsed = pip.classList.contains("used");
     const spellKey = `spell${level}`;
     const current = actor.system.spells?.[spellKey]?.value ?? 0;

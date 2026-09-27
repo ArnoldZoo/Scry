@@ -6,7 +6,7 @@ Purpose: Persistent corner widget: active combatant portrait, name, timer, round
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.17
 */
 
 export class TurnIndicator {
@@ -30,7 +30,7 @@ export class TurnIndicator {
   }
 
   _updateFromCombat(combat) {
-    if (!combat || !combat.started || !this._container) {
+    if (!combat?.started || !this._container) {
       this._clear();
       return;
     }
@@ -56,7 +56,9 @@ export class TurnIndicator {
       const hp = actor.system?.attributes?.hp;
       if (hp?.max > 0) {
         const pct   = Math.max(0, Math.min(100, Math.round((hp.value / hp.max) * 100)));
-        const color = pct > 50 ? "#22c55e" : pct > 25 ? "#f59e0b" : "#ef4444";
+        let color = "#ef4444";
+        if (pct > 50)      color = "#22c55e";
+        else if (pct > 25) color = "#f59e0b";
         hpBarHtml = `<div class="scry-ti-hp-bar">
           <div class="scry-ti-hp-fill" style="width:${pct}%;background:${color};"></div>
         </div>`;

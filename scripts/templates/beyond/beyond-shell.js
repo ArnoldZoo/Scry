@@ -6,7 +6,7 @@ Purpose: Scry-BEYOND template shell: D&D Beyond-inspired header, HP pill, bottom
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.17
 */
 
 export const BEYOND_THEMES = new Set([
@@ -22,11 +22,16 @@ export const BEYOND_TABS = [
   { id: "table",     label: "Table",     fa: "fa-dice-d20" },
 ];
 
+function hpClassFor(pct) {
+  if (pct <= 25) return "critical";
+  return pct <= 50 ? "bloodied" : "";
+}
+
 export class BeyondShell {
 
   static buildHTML(data, theme, deviceType, activeTab = "actions") {
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const hpClass = hpClassFor(hpPct);
     const activeLabel = BEYOND_TABS.find(t => t.id === activeTab)?.label ?? "";
 
     const tabsHtml = BEYOND_TABS.map(t =>
@@ -73,7 +78,7 @@ export class BeyondShell {
 
   static refreshPanel(el, data) {
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const hpClass = hpClassFor(hpPct);
 
     const pill = el.querySelector(".sbnd-hp-pill");
     if (pill) {

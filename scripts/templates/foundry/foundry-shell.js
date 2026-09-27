@@ -6,7 +6,7 @@ Purpose: Scry-FOUNDRY template shell: portrait panel, diamond stat badges, nav r
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 export const FOUNDRY_THEMES = new Set([
@@ -23,11 +23,16 @@ export const FOUNDRY_TABS = [
   { id: "table",     label: "Table",     fa: "fa-dice-d20" },
 ];
 
+function hpClassFor(pct) {
+  if (pct <= 25) return "critical";
+  return pct <= 50 ? "bloodied" : "";
+}
+
 export class FoundryShell {
 
   static buildHTML(data, theme, deviceType, activeTab = "actions") {
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const hpClass = hpClassFor(hpPct);
 
     const navHtml = FOUNDRY_TABS.map(t =>
       `<button class="sfnd-nav-btn${t.id === activeTab ? " active" : ""}" data-tab="${t.id}" title="${t.label}">
@@ -80,7 +85,7 @@ export class FoundryShell {
       </div>
     </div>
     <div class="sfnd-panel-timer hidden" id="sfnd-panel-timer"></div>
-    <div class="sfnd-version-badge">v2.5.16 · FND 1.2.02</div>
+    <div class="sfnd-version-badge">v2.5.17 · FND 1.2.02</div>
     <button class="sfnd-tools-btn" title="Table Tools"><i class="fas fa-bars"></i></button>
   </aside>
   <div class="sfnd-body">
@@ -92,7 +97,7 @@ export class FoundryShell {
 
   static refreshPanel(el, data) {
     const hpPct   = Math.round((data.hpCurrent / data.hpMax) * 100);
-    const hpClass = hpPct <= 25 ? "critical" : hpPct <= 50 ? "bloodied" : "";
+    const hpClass = hpClassFor(hpPct);
 
     const fillEl = el.querySelector(".sfnd-hp-fill");
     if (fillEl) fillEl.style.width = `${hpPct}%`;
@@ -105,7 +110,8 @@ export class FoundryShell {
 
     const textEl = el.querySelector(".sfnd-hp-text");
     if (textEl) {
-      textEl.textContent = `${data.hpCurrent} / ${data.hpMax}${data.hpTemp > 0 ? ` (+${data.hpTemp})` : ""}`;
+      const temp = data.hpTemp > 0 ? ` (+${data.hpTemp})` : "";
+      textEl.textContent = `${data.hpCurrent} / ${data.hpMax}${temp}`;
     }
 
     const concBadge = el.querySelector(".sfnd-conc-badge");

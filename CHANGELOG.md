@@ -2,6 +2,15 @@
 
 Newest first. Built from the commit history; each entry says what changed and what was tested.
 
+## 2.5.17 - 2026-09-26
+
+SonarQube fixes. First scan: 1 bug, 171 code smells. Now 0 bugs and A on security, reliability and maintainability.
+
+- Ping with no ping API pans to the tapped spot. A failed pan was never caught, because the pan is async; it is handled now.
+- Code tidied for the scan (nested ternaries, class fields, unused variable, duplicate tab-bar builder). No change at the table.
+
+Testing: 177 automated tests pass, 94.8% coverage in SonarQube. Not deployed.
+
 ## 2.5.16 - 2026-09-26
 
 Cleanup ahead of the first SonarQube scan.

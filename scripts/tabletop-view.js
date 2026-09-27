@@ -7,7 +7,7 @@ Purpose: Canvas toggle: enter/exit Tabletop View, touch tap targeting/movement,
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 const TV_OVERRIDE_ID = "scry-tv-override";
@@ -275,7 +275,7 @@ export class TabletopView {
 
     const rect = (x1, y1, x2, y2, hw) => {
       const dx = x2 - x1, dy = y2 - y1;
-      const d  = Math.sqrt(dx * dx + dy * dy) || 1;
+      const d  = Math.hypot(dx, dy) || 1;
       const nx = -dy / d * hw, ny = dx / d * hw;
       return [x1+nx, y1+ny, x2+nx, y2+ny, x2-nx, y2-ny, x1-nx, y1-ny];
     };
@@ -629,18 +629,22 @@ export class TabletopView {
 
   _handlePingTap(world) {
     if (!world) return;
-    // Try all known API paths across Foundry versions
+    // animatePan returns a promise, so a failed pan is caught with .catch, not try.
+    const panHere = () => canvas.animatePan({ x: world.x, y: world.y, duration: 300 })
+      ?.catch?.(err => console.debug("TableOS Scry | ping fallback pan failed", err));
+    // Try all known API paths across Foundry versions. With no ping API, pan to
+    // the spot so the player still sees where they tapped.
     try {
       if (typeof canvas.ping === "function") {
         canvas.ping({ x: world.x, y: world.y }, { scene: canvas.scene?.id });
       } else if (typeof canvas.controls?.ping === "function") {
         canvas.controls.ping({ x: world.x, y: world.y });
       } else {
-        // Fallback: pan canvas to the tapped location as visual confirmation
-        canvas.animatePan({ x: world.x, y: world.y, duration: 300 });
+        panHere();
       }
-    } catch (_) {
-      try { canvas.animatePan({ x: world.x, y: world.y, duration: 300 }); } catch (err) { console.debug("TableOS Scry | ping fallback pan failed", err); }
+    } catch (err) {
+      console.debug("TableOS Scry | ping failed", err);
+      panHere();
     }
     this._setMode("none");
   }
@@ -866,7 +870,9 @@ export class TabletopView {
                   ?? "icons/svg/mystery-man.svg";
     const name  = combatant.name ?? "Unknown";
     const isPC  = actor?.hasPlayerOwner && !isMyPC;
-    const label = isMyPC ? "YOUR TURN" : isPC ? "THEIR TURN" : "NOW ACTING";
+    let label = "NOW ACTING";
+    if (isMyPC)    label = "YOUR TURN";
+    else if (isPC) label = "THEIR TURN";
 
     const ann = document.createElement("div");
     ann.id = "scry-tv-announcement";

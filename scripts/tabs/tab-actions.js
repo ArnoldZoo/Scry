@@ -6,7 +6,7 @@ Purpose: Actions tab: economy tabs, category chips, attacks/spells/features/item
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 // D&D system actions that exist outside the actor's item list
@@ -40,17 +40,15 @@ const _isSelfTarget = (item) => {
 };
 
 export class TabActions {
-  constructor() {
-    this._rollMode  = "roll";
-    this._autoDmg   = true;
-    this._autoBonus = true;
-    this._activeEco = "action";
-    this._activeCat = "attack";
-    this._condGroup = "a-f";
-    this._ecoByActor = new Map();  // actorId -> {action, bonus, reaction}
-    this._lastData   = null;
-    this._lastActor  = null;
-  }
+  _rollMode   = "roll";
+  _autoDmg    = true;
+  _autoBonus  = true;
+  _activeEco  = "action";
+  _activeCat  = "attack";
+  _condGroup  = "a-f";
+  _ecoByActor = new Map();  // actorId -> {action, bonus, reaction}
+  _lastData   = null;
+  _lastActor  = null;
 
   _eco(actorId) {
     if (!actorId) return { action: 0, bonus: 0, reaction: 0 };
@@ -138,7 +136,7 @@ export class TabActions {
       pip.addEventListener("click", (e) => {
         e.stopPropagation();
         const eco = pip.dataset.eco;
-        const idx = parseInt(pip.dataset.idx);
+        const idx = Number.parseInt(pip.dataset.idx, 10);
         // Tap used pip = undo back to that slot; tap available pip = mark all up to it
         const s = this._eco(actor?.id); s[eco] = (idx < s[eco]) ? idx : idx + 1;
         this._rebuildContent(element, actor);
@@ -537,7 +535,7 @@ export class TabActions {
     }
 
     const sections = Object.keys(groups).sort((a,b) => a-b).map(lvl => {
-      const level = parseInt(lvl);
+      const level = Number.parseInt(lvl, 10);
       const slot  = slotMap[level];
       const pips  = slot ? Array.from({ length: slot.max }, (_, i) =>
         `<span class="scry-slot-pip ${i < slot.value ? "available" : "used"}"></span>`
@@ -770,7 +768,11 @@ export class TabActions {
       (_a, _u, dc) => { dc.configure = false; }
     );
     let rollHookId = Hooks.once("dnd5e.preRollAttack",
-      (rc, dc) => { if (dc) dc.configure = false; rc.advantage = false; rc.disadvantage = false; }
+      (rc, dc) => {
+        if (dc) dc.configure = false;
+        rc.advantage = false;
+        rc.disadvantage = false;
+      }
     );
     let dmgHookId  = this._autoDmg
       ? Hooks.once("dnd5e.preRollDamage", (rc, dc) => { if (dc) dc.configure = false; })

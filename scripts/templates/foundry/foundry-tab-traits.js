@@ -11,7 +11,7 @@ Revision: FND 1.2.01
 */
 
 export class FoundryTabTraits {
-  constructor() { this._actor = null; }
+  _actor = null;
 
   render(data) {
     return `<div class="sfnd-traits-wrap">

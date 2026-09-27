@@ -282,7 +282,7 @@ test("expression evaluator accepts digits, + and - only", () => {
 test("an initiative failure is logged, not thrown", async () => {
   open();
   actor.rollInitiative = async () => { throw new Error("no combat"); };
-  await view._applyInitiative(10);
+  await assert.doesNotReject(view._applyInitiative(10));
 });
 
 // --- hooks ---
@@ -312,9 +312,13 @@ test("Foundry and Beyond panels refresh on actor update", () => {
   open("modern");
   actor.system.attributes.hp.value = 5;
   Hooks.callAll("updateActor", actor, {});
+  assert.match($(".sfnd-hp-text").textContent, /^5 \/ 40/);
+  assert.ok($(".sfnd-hp-bar").classList.contains("critical"));
   view.destroy();
   open("beyond-dark");
+  actor.system.attributes.hp.value = 5;
   Hooks.callAll("updateActor", actor, {});
+  assert.match($(".sbnd-hp-pill").textContent, /5/);
 });
 
 test("combat start shows the banner once per combat", () => {

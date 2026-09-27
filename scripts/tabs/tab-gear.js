@@ -6,7 +6,7 @@ Purpose: Gear tab: currency, encumbrance, inventory, containers.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.16
+Revision: 2.5.17
 */
 
 export class TabGear {
@@ -32,7 +32,7 @@ export class TabGear {
       // Qty +/-
       const qty = e.target.closest(".scry-qty-btn");
       if (qty?.dataset.itemId) {
-        this._changeQty(qty.dataset.itemId, parseInt(qty.dataset.delta), actor);
+        this._changeQty(qty.dataset.itemId, Number.parseInt(qty.dataset.delta, 10), actor);
         return;
       }
 
@@ -63,7 +63,7 @@ export class TabGear {
 
       // Gear row tap shows the item description
       const row = e.target.closest(".scry-gear-row[data-item-id]");
-      if (row) { this._showDescription(row.dataset.itemId, actor); return; }
+      if (row) this._showDescription(row.dataset.itemId, actor);
     });
   }
 
@@ -103,7 +103,9 @@ export class TabGear {
 
   _buildEncumbrance(enc) {
     const pct  = Math.min(100, enc.pct ?? 0);
-    const warnClass = pct >= 100 ? "over" : pct >= 66 ? "heavy" : "";
+    let warnClass = "";
+    if (pct >= 100)     warnClass = "over";
+    else if (pct >= 66) warnClass = "heavy";
     return `
       <section class="scry-card scry-encumbrance-section">
         <div class="scry-enc-row">
@@ -168,9 +170,11 @@ export class TabGear {
 
   _buildGearRow(item, nested = false) {
     const equippable = item.equipped !== undefined && !item.isContainer;
+    const eqClass  = item.equipped ? "equipped" : "";
+    const eqLabel  = item.equipped ? "Eq" : "—";
     const equipBtn = equippable
-      ? `<button class="scry-equip-toggle scry-btn-sm ${item.equipped ? "equipped" : ""}"
-                data-item-id="${item.id}">${item.equipped ? "Eq" : "—"}</button>`
+      ? `<button class="scry-equip-toggle scry-btn-sm ${eqClass}"
+                data-item-id="${item.id}">${eqLabel}</button>`
       : "";
     const qty = item.quantity ?? 1;
     const qtyHtml = `
@@ -181,9 +185,11 @@ export class TabGear {
       </div>`;
 
     // Container move button, only when containers exist and this item isn't one
+    const inClass      = nested ? "in-container" : "";
+    const moveTitle    = nested ? "Remove from container" : "Move to container";
     const containerBtn = !item.isContainer && this._containers.length > 0
-      ? `<button class="scry-container-btn scry-btn-sm ${nested ? "in-container" : ""}"
-               data-item-id="${item.id}" title="${nested ? "Remove from container" : "Move to container"}">📦</button>`
+      ? `<button class="scry-container-btn scry-btn-sm ${inClass}"
+               data-item-id="${item.id}" title="${moveTitle}">📦</button>`
       : "";
 
     return `
@@ -204,8 +210,6 @@ export class TabGear {
 
     const containers = actor.items.filter(i => i.type === "backpack" || i.type === "container");
     if (!containers.length) return;
-
-    const currentContainer = item.system.container;
 
     if (isNested) {
       // Already in a container, so just take it out
