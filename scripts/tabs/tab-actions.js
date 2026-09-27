@@ -6,7 +6,7 @@ Purpose: Actions tab: economy tabs, category chips, attacks/spells/features/item
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 // D&D system actions that exist outside the actor's item list
@@ -295,7 +295,7 @@ export class TabActions {
         return sid && knownIds.has(sid);
       }).map(e => e.id);
       if (removeIds.length) {
-        try { await actor.deleteEmbeddedDocuments("ActiveEffect", removeIds); } catch(e) {}
+        try { await actor.deleteEmbeddedDocuments("ActiveEffect", removeIds); } catch (err) { console.debug("TableOS Scry | Clear All conditions failed", err); }
       }
     });
 
@@ -323,7 +323,7 @@ export class TabActions {
   _wireCombatButtons(element, actor) {
     element.querySelector(".scry-btn-target")?.addEventListener("click", () => this._toggleTargeting());
     element.querySelector(".scry-btn-hold")?.addEventListener("click", () => {
-      try { globalThis.TABLE_OS?.holdAction?.(); } catch(_) {}
+      try { globalThis.TABLE_OS?.holdAction?.(); } catch (err) { console.debug("TableOS Scry | TableOS hold failed", err); }
     });
     element.querySelector(".scry-btn-endturn")?.addEventListener("click", () => {
       if (game.combat?.combatant?.actor?.isOwner) game.combat.nextTurn();
@@ -727,13 +727,13 @@ export class TabActions {
           label: "Apply",
           className: "scry-modal-btn-primary",
           callback: async ({ closeModal }) => {
-            const dieValue = parseInt(document.getElementById("scry-enter-attack")?.value);
-            if (isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
+            const dieValue = Number.parseInt(document.getElementById("scry-enter-attack")?.value, 10);
+            if (Number.isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
               ui.notifications?.warn("Enter a d20 result between 1 and 20.");
               return;
             }
             const manualDmg = this._autoDmg
-              ? null : (parseInt(document.getElementById("scry-enter-damage")?.value) || 0);
+              ? null : (Number.parseInt(document.getElementById("scry-enter-damage")?.value, 10) || 0);
             closeModal();
             await this._doEnterAttack(item, actor, dieValue, manualDmg);
             this._markPipUsed();
@@ -846,8 +846,8 @@ export class TabActions {
   }
 
   _parseBonus(str) {
-    const n = parseInt(String(str).replace(/\s/g, ""), 10);
-    return isNaN(n) ? 0 : n;
+    const n = Number.parseInt(String(str).replace(/\s/g, ""), 10);
+    return Number.isNaN(n) ? 0 : n;
   }
 
   _toggleTargeting() { this._goToTargeting(true); }

@@ -7,7 +7,7 @@ Purpose: Canvas toggle: enter/exit Tabletop View, touch tap targeting/movement,
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 const TV_OVERRIDE_ID = "scry-tv-override";
@@ -128,7 +128,7 @@ export class TabletopView {
     }
     // Enhanced movement needs TableOS installed
     if (globalThis.TableOSTokenMover && globalThis.TABLE_OS) {
-      try { this._tokenMover = new globalThis.TableOSTokenMover(() => null); } catch (_) {}
+      try { this._tokenMover = new globalThis.TableOSTokenMover(() => null); } catch (err) { console.debug("TableOS Scry | TableOS token mover setup failed", err); }
     }
   }
 
@@ -245,7 +245,7 @@ export class TabletopView {
     try {
       const mode = CONST?.GRID_SNAPPING_MODES?.CENTER ?? 12;
       snapped = canvas.grid?.getSnappedPoint?.({ x: world.x, y: world.y }, { mode });
-    } catch (_) {}
+    } catch { /* Older grid API. The rounding below covers it. */ }
     if (!snapped || !Number.isFinite(snapped?.x)) {
       snapped = {
         x: Math.round(world.x / size) * size,
@@ -265,7 +265,7 @@ export class TabletopView {
       const cy = (token.y ?? 0) + (token.h ?? token.height ?? gs) / 2;
       this._walkIconPixi = this._drawWalkFigure(cx, cy, gs);
       canvas.controls.addChild(this._walkIconPixi);
-    } catch (_) {}
+    } catch (err) { console.debug("TableOS Scry | walk icon failed", err); }
   }
 
   _drawWalkFigure(cx, cy, gridSize) {
@@ -310,7 +310,7 @@ export class TabletopView {
 
     for (const [id, sprite] of this._reticuleSprites) {
       if (!currentIds.has(id)) {
-        try { sprite.parent?.removeChild(sprite); sprite.destroy(); } catch(_) {}
+        try { sprite.parent?.removeChild(sprite); sprite.destroy(); } catch { /* Already gone with the scene. */ }
         this._reticuleSprites.delete(id);
       }
     }
@@ -337,7 +337,7 @@ export class TabletopView {
 
   _clearReticules() {
     for (const [, sprite] of this._reticuleSprites) {
-      try { sprite.parent?.removeChild(sprite); sprite.destroy(); } catch(_) {}
+      try { sprite.parent?.removeChild(sprite); sprite.destroy(); } catch { /* Already gone with the scene. */ }
     }
     this._reticuleSprites.clear();
   }
@@ -347,7 +347,7 @@ export class TabletopView {
       try {
         this._walkIconPixi.parent?.removeChild(this._walkIconPixi);
         this._walkIconPixi.destroy();
-      } catch (_) {}
+      } catch { /* Already gone with the scene. */ }
       this._walkIconPixi = null;
     }
   }
@@ -358,13 +358,13 @@ export class TabletopView {
     try {
       if (typeof canvas.canvasCoordinatesFromClient === "function") {
         let pt;
-        try { pt = canvas.canvasCoordinatesFromClient({ x: clientX, y: clientY }); } catch (_) {}
+        try { pt = canvas.canvasCoordinatesFromClient({ x: clientX, y: clientY }); } catch { /* Try the other argument shape next. */ }
         if (!pt || !Number.isFinite(pt?.x)) {
-          try { pt = canvas.canvasCoordinatesFromClient({ clientX, clientY }); } catch (_) {}
+          try { pt = canvas.canvasCoordinatesFromClient({ clientX, clientY }); } catch { /* Fall back to the stage transform. */ }
         }
         if (pt && Number.isFinite(pt.x) && Number.isFinite(pt.y)) return { x: pt.x, y: pt.y };
       }
-    } catch (_) {}
+    } catch (err) { console.debug("TableOS Scry | canvasCoordinatesFromClient failed", err); }
 
     try {
       const el = canvas.app?.canvas ?? canvas.app?.view ?? canvas.app?.renderer?.view
@@ -384,7 +384,7 @@ export class TabletopView {
           if (Number.isFinite(wx) && Number.isFinite(wy)) return { x: wx, y: wy };
         }
       }
-    } catch (_) {}
+    } catch (err) { console.debug("TableOS Scry | stage transform failed", err); }
 
     console.warn("Scry | clientToWorld failed");
     return null;
@@ -413,12 +413,12 @@ export class TabletopView {
       const ownToken = canvas.tokens?.placeables?.find(t => t.actor?.id === this._scry.actor?.id);
       this._addWalkIcon(ownToken);
       if (this._tokenMover && ownToken) {
-        try { this._tokenMover.selectToken(ownToken); } catch (_) {}
+        try { this._tokenMover.selectToken(ownToken); } catch (err) { console.debug("TableOS Scry | TableOS selectToken failed", err); }
       }
     } else {
       this._removeWalkIcon();
       if (this._tokenMover) {
-        try { this._tokenMover.cancel(); } catch (_) {}
+        try { this._tokenMover.cancel(); } catch (err) { console.debug("TableOS Scry | TableOS mover cancel failed", err); }
       }
     }
 
@@ -640,7 +640,7 @@ export class TabletopView {
         canvas.animatePan({ x: world.x, y: world.y, duration: 300 });
       }
     } catch (_) {
-      try { canvas.animatePan({ x: world.x, y: world.y, duration: 300 }); } catch (_2) {}
+      try { canvas.animatePan({ x: world.x, y: world.y, duration: 300 }); } catch (err) { console.debug("TableOS Scry | ping fallback pan failed", err); }
     }
     this._setMode("none");
   }
@@ -767,7 +767,7 @@ export class TabletopView {
 
     const zoomRow = document.createElement("div");
     zoomRow.style.cssText = "display:flex;gap:5px;";
-    const zoom = (f) => { const s = canvas.stage?.scale?.x ?? 1; canvas.animatePan({ scale: Math.clamped(s * f, 0.1, 3) }); };
+    const zoom = (f) => { const s = canvas.stage?.scale?.x ?? 1; canvas.animatePan({ scale: Math.clamp(s * f, 0.1, 3) }); };
     zoomRow.appendChild(mkBtn("＋", () => zoom(1.4)));
     zoomRow.appendChild(mkBtn("－", () => zoom(0.7)));
     const fitBtn = mkBtn("⊞", () => {

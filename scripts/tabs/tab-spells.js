@@ -6,7 +6,7 @@ Purpose: Spells tab: spell slots, spell list, inline prep toggle, cast buttons.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 const LEVEL_LABELS = ["Cantrip","1st","2nd","3rd","4th","5th","6th","7th","8th","9th"];
@@ -189,8 +189,8 @@ export class TabSpells {
           label: "Cast",
           className: "scry-modal-btn-primary",
           callback: async ({ backdrop, closeModal }) => {
-            const dieValue = parseInt(backdrop.querySelector("#scry-enter-attack")?.value ?? "");
-            if (isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
+            const dieValue = Number.parseInt(backdrop.querySelector("#scry-enter-attack")?.value ?? "", 10);
+            if (Number.isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
               ui.notifications?.warn("Enter a d20 result (1-20).");
               return;
             }
@@ -470,8 +470,8 @@ export class TabSpells {
   }
 
   _parseBonus(str) {
-    const n = parseInt(String(str).replace(/\s/g, ""), 10);
-    return isNaN(n) ? 0 : n;
+    const n = Number.parseInt(String(str).replace(/\s/g, ""), 10);
+    return Number.isNaN(n) ? 0 : n;
   }
 
   // --- HTML builders ---

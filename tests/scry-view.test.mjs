@@ -272,6 +272,11 @@ test("expression evaluator accepts digits, + and - only", () => {
   assert.equal(view._evalExpr(""), null);
   assert.equal(view._evalExpr("abc"), null);
   assert.equal(view._evalExpr("5+"), null);
+  assert.equal(view._evalExpr("5-+3"), 2, "sign pair after an operator");
+  assert.equal(view._evalExpr("-4+10"), 6);
+  assert.equal(view._evalExpr("5--3"), null, "the pad's old eval rejected --");
+  assert.equal(view._evalExpr("5++3"), null);
+  assert.equal(view._evalExpr("07+2"), 9, "leading zero; the old strict-mode eval returned null here");
 });
 
 test("an initiative failure is logged, not thrown", async () => {

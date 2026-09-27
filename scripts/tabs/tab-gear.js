@@ -6,7 +6,7 @@ Purpose: Gear tab: currency, encumbrance, inventory, containers.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 export class TabGear {
@@ -244,8 +244,8 @@ export class TabGear {
           label: "Set",
           className: "scry-modal-btn-primary",
           callback: ({ backdrop, closeModal }) => {
-            const val = parseInt(backdrop.querySelector("#scry-currency-input")?.value ?? "");
-            if (!isNaN(val)) {
+            const val = Number.parseInt(backdrop.querySelector("#scry-currency-input")?.value ?? "", 10);
+            if (!Number.isNaN(val)) {
               closeModal();
               actor.update({ [`system.currency.${coin}`]: Math.max(0, val) });
             }

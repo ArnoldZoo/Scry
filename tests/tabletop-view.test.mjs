@@ -285,7 +285,7 @@ test("End Turn shows only on my turn and ends it", () => {
 });
 
 test("nav panel pans, zooms, centres on me and fits all tokens", () => {
-  Math.clamped ??= (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+  Math.clamp ??= (v, lo, hi) => Math.min(Math.max(v, lo), hi);
   canvas.tokens.placeables.push(makeToken({ id: "t2", x: 1000, y: 800 }));
   enter();
   click($(".scry-tv-nav"));

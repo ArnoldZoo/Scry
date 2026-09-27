@@ -2,6 +2,18 @@
 
 Newest first. Built from the commit history; each entry says what changed and what was tested.
 
+## 2.5.16 - 2026-09-26
+
+Cleanup ahead of the first SonarQube scan.
+
+- The initiative pad now adds up its numbers with a small parser instead of running the typed text as code. Same answers, except a number typed with a leading zero: "0 7 + 2" used to enter 7 and now enters 9.
+- Failures that were silently ignored now log at debug level, or say why the fallback is safe.
+- The nav panel's zoom uses Math.clamp; Foundry deprecated Math.clamped.
+- Removed tab-home.js. Nothing had loaded it since 2.0.00.
+- Automated tests added (npm test). They are not part of the module download.
+
+Testing: 177 automated tests pass, 99.6% line coverage. Not deployed.
+
 ## 2.5.15 - 2026-09-26
 
 Comment pass on scripts and stylesheets.

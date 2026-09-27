@@ -6,7 +6,7 @@ Purpose: Main overlay: persistent header, 5-tab shell, tab switching, actor refr
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 import { readActorData }  from "./system-reader.js";
@@ -506,7 +506,7 @@ export class ScryView {
         const result = this._detectCritFromMessage(msg);
         if      (result === "success") this._showScryBanner("CRITICAL SUCCESS", name, "crit");
         else if (result === "fail")    this._showScryBanner("EPIC FAIL",        name, "fail");
-      } catch (_) {}
+      } catch (err) { console.debug("TableOS Scry | crit banner from chat failed", err); }
     });
 
     // Critical roll notifications, midi-qol path. Fires on the attacker's client only.
@@ -516,7 +516,7 @@ export class ScryView {
         const result = this._detectCritFromRoll(roll);
         if      (result === "success") this._showScryBanner("CRITICAL SUCCESS", "", "crit");
         else if (result === "fail")    this._showScryBanner("EPIC FAIL",        "", "fail");
-      } catch (_) {}
+      } catch (err) { console.debug("TableOS Scry | crit banner from midi-qol failed", err); }
     });
 
     // Enter mode crits. TableOS fires this when the player types a die value by hand.
@@ -1069,8 +1069,8 @@ export class ScryView {
         e.stopPropagation();
         const k = btn.dataset.k;
         if (k === "E") {
-          const result = this._evalExpr(expr) ?? parseInt(expr);
-          if (!isNaN(result) && result !== null) {
+          const result = this._evalExpr(expr) ?? Number.parseInt(expr, 10);
+          if (!Number.isNaN(result) && result !== null) {
             this._applyInitiative(Math.round(result));
             backdrop.remove();
           }
@@ -1086,12 +1086,17 @@ export class ScryView {
     backdrop.addEventListener("click", e => { if (e.target === backdrop) backdrop.remove(); });
   }
 
+  // Sums what the initiative pad builds: digits, + and -. A term may carry a
+  // sign pair ("5-+3"); "++" and "--" are rejected, as the pad's old eval did.
   _evalExpr(str) {
     if (!str) return null;
-    const safe = str.replace(/[^0-9+\-]/g, "");
-    if (!safe) return null;
-    try { return Function('"use strict";return(' + safe + ')')(); }
-    catch(_) { return null; }
+    const safe = str.replace(/[^0-9+-]/g, "");
+    const terms = safe.match(/(?:\+-|-\+|[+-])?\d+/g);
+    if (!terms || terms.join("") !== safe) return null;
+    return terms.reduce((sum, t) => {
+      const n = Number.parseInt(t.replace(/[+-]/g, ""), 10);
+      return sum + (t.includes("-") ? -n : n);
+    }, 0);
   }
 
   async _applyInitiative(value) {
@@ -1193,8 +1198,8 @@ export class ScryView {
           label: "Apply",
           className: "scry-modal-btn-primary",
           callback: ({ backdrop, closeModal }) => {
-            const val = parseInt(backdrop.querySelector("#scry-modal-hp-input")?.value ?? "");
-            if (isNaN(val) || val < 0) return;
+            const val = Number.parseInt(backdrop.querySelector("#scry-modal-hp-input")?.value ?? "", 10);
+            if (Number.isNaN(val) || val < 0) return;
             if (action === "damage") this.actor.applyDamage([{ value: val, type: "untyped" }]);
             else if (action === "heal") this.actor.applyDamage([{ value: val, type: "healing" }]);
             else if (action === "temp") this.actor.update({ "system.attributes.hp.temp": val });
@@ -1335,7 +1340,7 @@ export class ScryView {
     el.querySelectorAll(".scry-hd-spend[data-class]").forEach(btn => {
       btn.addEventListener("click", async () => {
         const cls = this.actor.items.find(i => i.type === "class" && i.name === btn.dataset.class);
-        if (cls) try { await this.actor.rollHitDie(cls.system.hitDice); } catch(_) {}
+        if (cls) try { await this.actor.rollHitDie(cls.system.hitDice); } catch (err) { console.debug("TableOS Scry | slide-down hit die roll failed", err); }
       });
     });
   }
@@ -1468,7 +1473,7 @@ export class ScryView {
           }
         });
 
-        // Belt-and-suspenders: after render, ensure dialog is on top and touch-scrollable
+        // The window can render under the overlay or ignore touch scroll. Fix both once it's up.
         setTimeout(() => {
           const dlg = settingsApp.element
                    ?? document.querySelector(".settings-config")
@@ -1496,7 +1501,7 @@ export class ScryView {
             Object.values(ui.windows ?? {}).forEach(w => {
               if (w.constructor?.name?.toLowerCase().includes("settings")) w.close?.();
             });
-          } catch(_) {}
+          } catch (err) { console.debug("TableOS Scry | closing Game Settings failed", err); }
           overlay?.classList.remove("hidden");
         });
         break;
@@ -1505,7 +1510,7 @@ export class ScryView {
         game.combat?.previousTurn();
         break;
       case "hold":
-        try { globalThis.TABLE_OS?.holdAction?.(); } catch(_) {}
+        try { globalThis.TABLE_OS?.holdAction?.(); } catch (err) { console.debug("TableOS Scry | TableOS hold failed", err); }
         break;
       case "endturn":
         if (game.combat?.combatant?.actor?.isOwner) game.combat.nextTurn();

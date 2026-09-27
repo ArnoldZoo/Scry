@@ -9,7 +9,7 @@ const scripts = readdirSync(new URL("../scripts/", import.meta.url), { recursive
   .map(f => f.replaceAll("\\", "/"))
   .filter(f => f.endsWith(".js"));
 
-test("all 24 scripts are found", () => assert.equal(scripts.length, 24));
+test("all 23 scripts are found", () => assert.equal(scripts.length, 23));
 
 for (const file of scripts) {
   test(`${file} imports`, async () => {

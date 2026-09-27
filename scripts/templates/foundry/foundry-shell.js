@@ -6,7 +6,7 @@ Purpose: Scry-FOUNDRY template shell: portrait panel, diamond stat badges, nav r
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 export const FOUNDRY_THEMES = new Set([
@@ -80,7 +80,7 @@ export class FoundryShell {
       </div>
     </div>
     <div class="sfnd-panel-timer hidden" id="sfnd-panel-timer"></div>
-    <div class="sfnd-version-badge">v2.5.15 · FND 1.2.02</div>
+    <div class="sfnd-version-badge">v2.5.16 · FND 1.2.02</div>
     <button class="sfnd-tools-btn" title="Table Tools"><i class="fas fa-bars"></i></button>
   </aside>
   <div class="sfnd-body">

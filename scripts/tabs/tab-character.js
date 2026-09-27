@@ -6,7 +6,7 @@ Purpose: Character tab: ability scores, skills, saves, inspiration, features, tr
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 const PROF_ICONS = { 0: "○", 0.5: "◑", 1: "●", 2: "◈" };
@@ -192,8 +192,8 @@ export class TabCharacter {
           label: "Apply",
           className: "scry-modal-btn-primary",
           callback: async ({ backdrop, closeModal }) => {
-            const dieValue = parseInt(backdrop.querySelector("#scry-enter-d20")?.value ?? "");
-            if (isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
+            const dieValue = Number.parseInt(backdrop.querySelector("#scry-enter-d20")?.value ?? "", 10);
+            if (Number.isNaN(dieValue) || dieValue < 1 || dieValue > 20) {
               ui.notifications?.warn("Enter a d20 result (1-20).");
               return;
             }

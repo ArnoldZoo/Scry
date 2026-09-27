@@ -8,7 +8,7 @@ Purpose: Scry-BEYOND Traits tab: features, feats, proficiencies, personality.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.15
+Revision: 2.5.16
 */
 
 export class BeyondTabTraits {
@@ -41,7 +41,7 @@ export class BeyondTabTraits {
         useBtn.disabled    = remaining <= 0;
         useBtn.addEventListener("click", async e => {
           e.stopPropagation();
-          try { await item.use({}, { configure: false }, {}); } catch (_) {}
+          try { await item.use({}, { configure: false }, {}); } catch (err) { console.debug("TableOS Scry | Beyond trait use failed", err); }
         });
       }
 
@@ -77,7 +77,7 @@ export class BeyondTabTraits {
       callback: async ({closeModal}) => {
         closeModal();
         if (curUses <= 0) return;
-        try { await item.use({}, { configure: false }, {}); } catch (_) {}
+        try { await item.use({}, { configure: false }, {}); } catch (err) { console.debug("TableOS Scry | Beyond trait use failed", err); }
       }
     }] : [];
 

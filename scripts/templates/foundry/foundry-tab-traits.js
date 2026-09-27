@@ -39,7 +39,7 @@ export class FoundryTabTraits {
         useBtn.disabled = remaining <= 0;
         useBtn.addEventListener("click", async e => {
           e.stopPropagation();
-          try { await item.use({}, { configure: false }, {}); } catch (_) {}
+          try { await item.use({}, { configure: false }, {}); } catch (err) { console.debug("TableOS Scry | Foundry trait use failed", err); }
         });
       }
       row.addEventListener("click", e => {
