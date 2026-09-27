@@ -9,7 +9,7 @@ SonarQube fixes. First scan: 1 bug, 171 code smells. Now 0 bugs and A on securit
 - Ping with no ping API pans to the tapped spot. A failed pan was never caught, because the pan is async; it is handled now.
 - Code tidied for the scan (nested ternaries, class fields, unused variable, duplicate tab-bar builder). No change at the table.
 
-Testing: 177 automated tests pass, 94.8% coverage in SonarQube. Not deployed.
+Testing: 177 automated tests pass, 94.8% coverage in SonarQube. Tested on the live server with the 2.5.17 deploy (FND 1.2.03).
 
 ## 2.5.16 - 2026-09-26
 
@@ -21,7 +21,7 @@ Cleanup ahead of the first SonarQube scan.
 - Removed tab-home.js. Nothing had loaded it since 2.0.00.
 - Automated tests added (npm test). They are not part of the module download.
 
-Testing: 177 automated tests pass, 99.6% line coverage. Not deployed.
+Testing: 177 automated tests pass, 99.6% line coverage. Tested on the live server with the 2.5.17 deploy (FND 1.2.03).
 
 ## 2.5.15 - 2026-09-26
 
@@ -29,7 +29,7 @@ Comment pass on scripts and stylesheets.
 
 - Code comments cleaned up to say why, not what. No code changes.
 
-Testing: all scripts pass a syntax check. Not deployed.
+Testing: all scripts pass a syntax check. Tested on the live server with the 2.5.17 deploy (FND 1.2.03).
 
 ## 2.5.14 - 2026-09-26
 
@@ -40,7 +40,7 @@ Release licence, credits and copyright headers.
 - module.json gets the changelog link, dnd5e verified 5.2.4, and a plain description.
 - Copyright line at the top of every script and stylesheet. No code changes.
 
-Testing: header and text changes only; all scripts pass a syntax check. Not deployed.
+Testing: header and text changes only; all scripts pass a syntax check. Tested on the live server with the 2.5.17 deploy (FND 1.2.03).
 
 ## 2.5.13 - 2026-09-26
 
