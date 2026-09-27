@@ -1,5 +1,9 @@
 # TableOS Scry - Mobile Player Companion
 
+![Quality gate](assets/badges/alert_status.svg) ![Reliability](assets/badges/reliability_rating.svg) ![Security](assets/badges/security_rating.svg) ![Maintainability](assets/badges/sqale_rating.svg) ![Coverage](assets/badges/coverage.svg) ![Bugs](assets/badges/bugs.svg) ![Vulnerabilities](assets/badges/vulnerabilities.svg)
+
+Code checked with SonarQube (local Community Build) and 177 automated tests. The badges are a snapshot from the last scan.
+
 Scry is a Foundry VTT module for **in-person games**. Everybody's sitting at a real table, the map is on a TV or a projector, and nobody wants to hunch over a laptop to roll an attack. Each player logs into Foundry on a phone or tablet, and Scry replaces the Foundry UI with a full-screen, touch-sized character sheet. The GM keeps running Foundry normally on the big screen.
 
 ## What it does
