@@ -1,16 +1,17 @@
 {
   "id": "table-os-scry",
   "title": "TableOS Scry - Mobile Player Companion",
-  "description": "Personal device companion for TableOS. Gives players a phone and tablet optimized character interface during in-person Foundry VTT sessions.",
-  "version": "2.5.13",
+  "description": "Full-screen touch character sheet for players on phones and tablets at an in-person Foundry table. Roll, cast, track HP and target tokens without the desktop UI.",
+  "version": "2.5.14",
   "authors": [
-    { "name": "Loremaster-DudleyDoRight" },
-    { "name": "ArcaneLogix - ArnoldZoo" }
+    { "name": "Loremaster", "url": "https://arcanelogix.com" },
+    { "name": "ArcaneLogix", "url": "https://arcanelogix.com" }
   ],
   "url": "https://github.com/ArnoldZoo/Scry",
   "readme": "https://github.com/ArnoldZoo/Scry#readme",
   "bugs": "https://github.com/ArnoldZoo/Scry/issues",
   "license": "https://github.com/ArnoldZoo/Scry/blob/master/LICENSE",
+  "changelog": "https://github.com/ArnoldZoo/Scry/blob/master/CHANGELOG.md",
   "manifest": "https://github.com/ArnoldZoo/Scry/releases/latest/download/module.json",
   "download": "https://github.com/ArnoldZoo/Scry/releases/latest/download/module.zip",
   "compatibility": {
@@ -32,14 +33,14 @@
       {
         "id": "dnd5e",
         "type": "system",
-        "compatibility": { "minimum": "3.0.0" }
+        "compatibility": { "minimum": "3.0.0", "verified": "5.2.4" }
       }
     ],
     "optional": [
       {
         "id": "table-os",
         "type": "module",
-        "reason": "Enables precise user-type detection. Scry works standalone but integrates with TableOS when present."
+        "reason": "Keeps IR-table users off Scry, and shows the TableOS turn timer and manual-roll crit banners on the phone. Scry runs without it."
       }
     ]
   }

@@ -1,14 +1,12 @@
-﻿/*
+﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
+/*
 Module: TableOS Scry — Mobile Player Companion
 Component: tabs/tab-character.js
 Purpose: Character tab — ability scores, skills, saves, inspiration, features, traits.
 
-Author: Loremaster-DudleyDoRight
-Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.12
-Copyright (c) 2026 ArcaneLogix. All rights reserved.
-Licensed for personal tabletop play only - see LICENSE.
-No redistribution, derivative works, or resale without written permission.
+Author: Loremaster
+Coder: ArcaneLogix
+Revision: 2.5.14
 */
 
 const PROF_ICONS = { 0: "○", 0.5: "◑", 1: "●", 2: "◈" };

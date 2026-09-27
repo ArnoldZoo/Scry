@@ -1,14 +1,12 @@
-﻿/*
+﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
+/*
 Module: TableOS Scry — Mobile Player Companion
 Component: main.js
 Purpose: Entry point. Detects personal device users and boots the Scry overlay.
 
-Author: Loremaster-DudleyDoRight
-Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.13
-Copyright (c) 2026 ArcaneLogix. All rights reserved.
-Licensed for personal tabletop play only - see LICENSE.
-No redistribution, derivative works, or resale without written permission.
+Author: Loremaster
+Coder: ArcaneLogix
+Revision: 2.5.14
 */
 
 import { ScrySettings }    from "./settings-manager.js";

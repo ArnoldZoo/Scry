@@ -1,11 +1,16 @@
-# Deploy tooling — CONTAINS SERVER CREDENTIALS. Never commit this.
-deploy.bat
+# Deploy tooling. deploy.local.bat holds the server password. Never commit these.
+deploy*.bat
 deploy*.txt
+deploy_run.py
+fetch_server_file.txt
+winscp.log
 
 # Internal development docs — NOT for the public repo.
 # These stay on disk and are used every session; they are simply never published.
-RECAP_SCRY.md
-START_PROMPT.md
+RECAP*
+START_PROMPT*.md
+CLAUDE.md
+.claude/
 docs/
 compression_counter.md
 
@@ -22,3 +27,9 @@ desktop.ini
 *.swp
 *~
 *.bak
+* - Copy*.js
+
+# Test and scan output
+node_modules/
+coverage/
+.scannerwork/

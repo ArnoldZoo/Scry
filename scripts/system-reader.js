@@ -1,14 +1,12 @@
-﻿/*
+﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
+/*
 Module: TableOS Scry — Mobile Player Companion
 Component: system-reader.js
 Purpose: System abstraction layer — reads actor data for D&D 5e (PF2e stub for v14).
 
-Author: Loremaster-DudleyDoRight
-Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.12
-Copyright (c) 2026 ArcaneLogix. All rights reserved.
-Licensed for personal tabletop play only - see LICENSE.
-No redistribution, derivative works, or resale without written permission.
+Author: Loremaster
+Coder: ArcaneLogix
+Revision: 2.5.14
 */
 
 const SYSTEM_READERS = {

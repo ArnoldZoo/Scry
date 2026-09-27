@@ -1,14 +1,12 @@
-﻿/*
+﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
+/*
 Module: TableOS Scry — Mobile Player Companion
 Component: settings-manager.js
 Purpose: Setting registration, user-type detection, device type resolution.
 
-Author: Loremaster-DudleyDoRight
-Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.12
-Copyright (c) 2026 ArcaneLogix. All rights reserved.
-Licensed for personal tabletop play only - see LICENSE.
-No redistribution, derivative works, or resale without written permission.
+Author: Loremaster
+Coder: ArcaneLogix
+Revision: 2.5.14
 */
 
 const MODULE_ID = "table-os-scry";

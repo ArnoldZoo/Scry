@@ -1,15 +1,13 @@
-﻿/*
+﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
+/*
 Module: TableOS Scry — Mobile Player Companion
 Component: templates/foundry/foundry-tab-traits.js
 Purpose: Scry-FOUNDRY Traits tab — class features, racial traits, feats, proficiencies,
          languages up top; background & personality at the bottom.
 
-Author: Loremaster-DudleyDoRight
-Coder: ArcaneLogix-ArnoldZoo
+Author: Loremaster
+Coder: ArcaneLogix
 Revision: FND 1.2.01
-Copyright (c) 2026 ArcaneLogix. All rights reserved.
-Licensed for personal tabletop play only - see LICENSE.
-No redistribution, derivative works, or resale without written permission.
 */
 
 export class FoundryTabTraits {
