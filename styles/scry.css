@@ -1,15 +1,15 @@
 ﻿/* Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE. */
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry.css
-Purpose: Base and shared styles — layout, components, modals, theme picker, tabletop.
+Purpose: Base and shared styles: layout, components, modals, theme picker, tabletop.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
-/* Template CSS — loaded via @import so only scry.css needs to be in module.json */
+/* Template CSS: loaded via @import so only scry.css needs to be in module.json */
 @import url("scry-core.css");
 @import url("scry-anvil.css");
 @import url("scry-foundry.css");
@@ -1028,7 +1028,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   TABLETOP VIEW — slim bottom bar
+   TABLETOP VIEW: slim bottom bar
    ============================================================ */
 #scry-tabletop-bar {
   position: fixed;
@@ -1076,7 +1076,7 @@ Revision: 2.5.14
 .scry-tv-back { max-width: 54px; }
 
 /* ============================================================
-   TOKEN PICKER — target selection list
+   TOKEN PICKER: target selection list
    ============================================================ */
 #scry-token-picker {
   position: fixed;
@@ -1253,7 +1253,7 @@ Revision: 2.5.14
 }
 .scry-move-pips { display: flex; flex-wrap: wrap; gap: 2px; align-items: center; }
 
-/* Action economy rows in Actions tab — TableOS-style green pips */
+/* Action economy rows in Actions tab: TableOS-style green pips */
 .scry-ae-row {
   display: flex;
   align-items: center;
@@ -1365,7 +1365,7 @@ Revision: 2.5.14
 }
 .scry-tv-info-strip .hidden { display: none; }
 
-/* End Turn float row — sits above the info strip, left-aligned */
+/* End Turn float row: sits above the info strip, left-aligned */
 .scry-tv-end-turn-row {
   display: flex;
   justify-content: flex-start;
@@ -1459,7 +1459,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   COMBAT ROW (Actions tab — Prev Turn / Hold / End Turn)
+   COMBAT ROW (Actions tab: Prev Turn / Hold / End Turn)
    ============================================================ */
 .scry-combat-row {
   display: flex;
@@ -1560,7 +1560,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   TURN INDICATOR — HP BAR
+   TURN INDICATOR: HP BAR
    ============================================================ */
 .scry-ti-portrait-wrap {
   display: flex;
@@ -1584,7 +1584,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — ECONOMY TABS (v3)
+   ACTIONS TAB: ECONOMY TABS (v3)
    ============================================================ */
 .scry-eco-tab-row {
   display: flex;
@@ -1654,7 +1654,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — CATEGORY CHIPS
+   ACTIONS TAB: CATEGORY CHIPS
    ============================================================ */
 .scry-cat-chips {
   display: flex;
@@ -1690,7 +1690,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — FLAT ITEM LIST
+   ACTIONS TAB: FLAT ITEM LIST
    ============================================================ */
 .scry-action-list { padding: .4rem .6rem; }
 
@@ -1740,7 +1740,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — STATUS PANEL
+   ACTIONS TAB: STATUS PANEL
    ============================================================ */
 .scry-status-panel { display: flex; flex-direction: column; gap: .45rem; }
 
@@ -1762,7 +1762,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   SCRY TOP BANNER  (combat start, critical hits — compact horizontal strip)
+   SCRY TOP BANNER  (combat start, critical hits: compact horizontal strip)
    ============================================================ */
 #scry-top-banner {
   position: fixed;
@@ -1804,7 +1804,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   TV CANVAS — NPC TURN ANNOUNCEMENT
+   TV CANVAS: NPC TURN ANNOUNCEMENT
    ============================================================ */
 #scry-tv-announcement {
   position: fixed;
@@ -1876,7 +1876,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   TURN INDICATOR — HP BAR
+   TURN INDICATOR: HP BAR
    ============================================================ */
 .scry-ti-portrait-wrap {
   display: flex;
@@ -1900,7 +1900,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — ECONOMY NAV BUTTONS
+   ACTIONS TAB: ECONOMY NAV BUTTONS
    ============================================================ */
 .scry-ae-nav-row {
   display: flex;
@@ -1948,7 +1948,7 @@ Revision: 2.5.14
   justify-content: center;
 }
 
-/* pips inside nav buttons — reuse .scry-ae-pip (same look as .scry-action-pip) */
+/* pips inside nav buttons: reuse .scry-ae-pip (same look as .scry-action-pip) */
 .scry-ae-pip {
   width: 16px;
   height: 16px;
@@ -1971,7 +1971,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   TV CANVAS — NPC TURN ANNOUNCEMENT
+   TV CANVAS: NPC TURN ANNOUNCEMENT
    ============================================================ */
 #scry-tv-announcement {
   position: fixed;
@@ -2043,7 +2043,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   ACTIONS TAB — SPELL LEVEL GROUP HEADERS
+   ACTIONS TAB: SPELL LEVEL GROUP HEADERS
    ============================================================ */
 .scry-action-spell-header {
   display: flex;
@@ -2066,7 +2066,7 @@ Revision: 2.5.14
 .scry-action-spell-header .scry-slot-pips { flex: 1; }
 
 /* ============================================================
-   HEADER — STATUS / REST BUTTONS  (match standard .scry-hp-btn)
+   HEADER: STATUS / REST BUTTONS  (match standard .scry-hp-btn)
    ============================================================ */
 .scry-btn-status, .scry-btn-rest {
   background: var(--scry-btn-bg);
@@ -2077,7 +2077,7 @@ Revision: 2.5.14
 .scry-btn-status.is-open { border-color: var(--scry-accent); color: var(--scry-accent); }
 
 /* ============================================================
-   STATUS PANEL — HIT DICE + REST ROWS
+   STATUS PANEL: HIT DICE + REST ROWS
    ============================================================ */
 .scry-status-divider {
   height: 1px;
@@ -2103,7 +2103,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   STATUS PANEL — CONDITION GRID (TableOS-style)
+   STATUS PANEL: CONDITION GRID (TableOS-style)
    ============================================================ */
 .scry-status-cond-header {
   display: flex;
@@ -2391,7 +2391,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME PICKER — white background list layout
+   THEME PICKER: white background list layout
    ============================================================ */
 #scry-theme-picker {
   position: absolute;
@@ -2501,7 +2501,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   JOURNAL PICKER — vertical list with starring
+   JOURNAL PICKER: vertical list with starring
    ============================================================ */
 #scry-journal-picker {
   position: absolute;
@@ -2584,7 +2584,7 @@ Revision: 2.5.14
 .scry-jp-arrow { color: #aaaaaa; font-size: .75rem; flex-shrink: 0; }
 
 /* ============================================================
-   JOURNAL EDIT — Return to Scry bar
+   JOURNAL EDIT: Return to Scry bar
    ============================================================ */
 #scry-jr-return-bar {
   position: fixed;
@@ -2641,7 +2641,7 @@ Revision: 2.5.14
 #scry-settings-return-btn:hover { background: rgba(79,195,247,.28); }
 
 /* ============================================================
-   THEME PICKER — GROUP HEADERS (Core / Foundry / Anvil)
+   THEME PICKER: GROUP HEADERS (Core / Foundry / Anvil)
    ============================================================ */
 .scry-tp-group-header {
   padding: 6px 12px 3px;
@@ -2657,7 +2657,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   JOURNAL READER — full-screen overlay inside Scry
+   JOURNAL READER: full-screen overlay inside Scry
    ============================================================ */
 #scry-journal-reader {
   position: fixed;

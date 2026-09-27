@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: templates/beyond/beyond-tab-character.js
-Purpose: Scry-BEYOND Character tab — D&D Beyond-style ability grid, save pills, skills.
+Purpose: Scry-BEYOND Character tab: D&D Beyond-style ability grid, save pills, skills.
          Overrides render() for Beyond card aesthetic; inherits activate() from TabCharacter.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 import { TabCharacter } from "../../tabs/tab-character.js";

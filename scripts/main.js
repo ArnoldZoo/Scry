@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: main.js
 Purpose: Entry point. Detects personal device users and boots the Scry overlay.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 import { ScrySettings }    from "./settings-manager.js";
@@ -43,7 +43,7 @@ Hooks.once("ready", async () => {
         console.warn("TableOS Scry | noCanvas was on for GM — reset. Reloading.");
         location.reload();
       }
-    } catch { /* setting inaccessible — ignore */ }
+    } catch { /* setting inaccessible, ignore */ }
     return;
   }
 
@@ -117,7 +117,7 @@ function _hideFoundryCanvas() {
   const s = document.createElement("style");
   s.id = "scry-no-canvas";
   s.textContent =
-    // Never hide #board — WebGL can't recover from display:none or visibility:hidden.
+    // Never hide #board. WebGL can't recover from display:none or visibility:hidden.
     // The Scry overlay (z-index 9000) sits on top. Block canvas pointer events so taps hit the overlay.
     "#board{ pointer-events:none !important }" +
     "#interface,#players,#hotbar,#navigation,#controls,#sidebar,#pause{ display:none !important }";
@@ -165,7 +165,7 @@ function _startNotificationSuppressor() {
 }
 
 function _suppressSizeWarning() {
-  // Also patch the notification functions once ui.notifications exists (belt + suspenders)
+  // Also patch the notification functions once ui.notifications exists, in case the observer misses one.
   if (ui.notifications._scrySuppressed) return;
   ["warn","error"].forEach(fn => {
     const orig = ui.notifications[fn].bind(ui.notifications);

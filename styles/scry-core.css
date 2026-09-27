@@ -1,12 +1,12 @@
 ﻿/* Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE. */
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry-core.css
-Purpose: Scry-CORE template — theme variable blocks (Cobalt, Atlas, Slate, Nomad, Cipher).
+Purpose: Scry-CORE template: theme variable blocks (Cobalt, Atlas, Slate, Nomad, Cipher).
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 /* ============================================================
@@ -67,7 +67,7 @@ Revision: 2.5.14
 
 /* ============================================================
    THEME: Slate
-   Cool charcoal grey — precision, minimal, professional
+   Cool charcoal grey: precision, minimal, professional
    ============================================================ */
 .scry-overlay.theme-slate {
   --scry-bg:           #14171f;
@@ -95,7 +95,7 @@ Revision: 2.5.14
 
 /* ============================================================
    THEME: Nomad
-   Desert warm — sand, amber, open sky
+   Desert warm: sand, amber, open sky
    ============================================================ */
 .scry-overlay.theme-nomad {
   --scry-bg:           #1c1409;
@@ -123,7 +123,7 @@ Revision: 2.5.14
 
 /* ============================================================
    THEME: Cipher
-   Electric violet — arcane, cryptic, vivid
+   Electric violet: arcane, cryptic, vivid
    ============================================================ */
 .scry-overlay.theme-cipher {
   --scry-bg:           #0d0d14;

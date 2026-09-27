@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: templates/beyond/beyond-shell.js
-Purpose: Scry-BEYOND template shell — D&D Beyond-inspired header, HP pill, bottom tab bar.
+Purpose: Scry-BEYOND template shell: D&D Beyond-inspired header, HP pill, bottom tab bar.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export const BEYOND_THEMES = new Set([

@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: templates/foundry/foundry-shell.js
-Purpose: Scry-FOUNDRY template shell — portrait panel, diamond stat badges, nav rail.
+Purpose: Scry-FOUNDRY template shell: portrait panel, diamond stat badges, nav rail.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export const FOUNDRY_THEMES = new Set([
@@ -80,7 +80,7 @@ export class FoundryShell {
       </div>
     </div>
     <div class="sfnd-panel-timer hidden" id="sfnd-panel-timer"></div>
-    <div class="sfnd-version-badge">v2.5.14 · FND 1.2.02</div>
+    <div class="sfnd-version-badge">v2.5.15 · FND 1.2.02</div>
     <button class="sfnd-tools-btn" title="Table Tools"><i class="fas fa-bars"></i></button>
   </aside>
   <div class="sfnd-body">

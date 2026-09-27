@@ -1,14 +1,14 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: templates/beyond/beyond-tab-traits.js
-Purpose: Scry-BEYOND Traits tab — features, feats, proficiencies, personality.
+Purpose: Scry-BEYOND Traits tab: features, feats, proficiencies, personality.
          Tapping any feature opens a description modal (like spells).
          Features with limited uses also get a Use button in the modal.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export class BeyondTabTraits {

@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabs/tab-home.js
-Purpose: Home tab — action economy, conditions, hit dice, exhaustion, rests.
+Purpose: Home tab: action economy, conditions, hit dice, exhaustion, rests.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export class TabHome {
@@ -155,7 +155,7 @@ export class TabHome {
   }
 
   _toggleAction(pip, actor) {
-    // Visual feedback only — actual tracking is per-combat in the actor
+    // Visual only. The real tracking is per-combat on the actor.
     pip.classList.toggle("used");
     pip.classList.toggle("available");
   }

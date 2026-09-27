@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabs/tab-character.js
-Purpose: Character tab — ability scores, skills, saves, inspiration, features, traits.
+Purpose: Character tab: ability scores, skills, saves, inspiration, features, traits.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 const PROF_ICONS = { 0: "○", 0.5: "◑", 1: "●", 2: "◈" };
@@ -115,7 +115,7 @@ export class TabCharacter {
       });
     });
 
-    // Long-press for feature description — Scry modal
+    // Long-press shows the feature description in a Scry modal
     element.querySelectorAll(".scry-feature-item[data-item-id]").forEach(item => {
       this._addLongPress(item, () => {
         const feat = actor.items.get(item.dataset.itemId);
@@ -136,7 +136,7 @@ export class TabCharacter {
     }
   }
 
-  // -- Roll mode ---------------------------------------------------------------
+  // --- Roll mode ---
   // dnd5e 5.x changed roll methods from (id, options) to ({ id-key, ...options })
 
   async _doRollAbility(abilityKey, actor) {
@@ -172,7 +172,7 @@ export class TabCharacter {
     game.scry?.view?.enterTableView();
   }
 
-  // -- Enter mode (Scry modal + direct Roll → chat) ----------------------------
+  // --- Enter mode (Scry modal, typed result straight to chat) ---
 
   _showEnterDialog(title, modifier, onApply) {
     const modStr = `${modifier >= 0 ? "+" : ""}${modifier}`;
@@ -227,7 +227,7 @@ export class TabCharacter {
     });
   }
 
-  // -- HTML builders ------------------------------------------------------------
+  // --- HTML builders ---
 
   _buildRollModeBar() {
     return `

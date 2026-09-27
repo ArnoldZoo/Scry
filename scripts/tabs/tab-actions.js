@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabs/tab-actions.js
-Purpose: Actions tab — economy tabs, category chips, attacks/spells/features/items/utility.
+Purpose: Actions tab: economy tabs, category chips, attacks/spells/features/items/utility.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 // D&D system actions that exist outside the actor's item list
@@ -76,7 +76,7 @@ export class TabActions {
     if (this._lastActor) this._rebuildContent(element, this._lastActor);
   }
 
-  // -- Core rebuild -------------------------------------------------------------
+  // --- Core rebuild ---
 
   _buildAll(data) {
     if (this._activeEco === "status") {
@@ -109,7 +109,7 @@ export class TabActions {
     this._wireCombatButtons(element, actor);
   }
 
-  // -- Pip tracking -------------------------------------------------------------
+  // --- Pip tracking ---
 
   _markPipUsed() {
     const eco = this._activeEco;
@@ -119,7 +119,7 @@ export class TabActions {
     if (ecoState[eco] < max) ecoState[eco]++;
   }
 
-  // -- Wiring -------------------------------------------------------------------
+  // --- Wiring ---
 
   _wireEconomyTabs(element, actor) {
     element.querySelectorAll(".scry-eco-tab[data-eco]").forEach(tab => {
@@ -207,8 +207,8 @@ export class TabActions {
     });
 
     // Use buttons (features, consumables, equipped items)
-    // enterTableView fires AFTER item.use() resolves — dialogs (beast picker, activity picker) appear
-    // over the Scry overlay so the user can interact with them, then canvas shows on completion
+    // enterTableView runs after item.use() resolves, so its dialogs (beast picker, activity picker) show
+    // over the Scry overlay where the player can use them. The canvas comes up when they're done.
     element.querySelectorAll(".scry-item-use[data-item-id]").forEach(btn => {
       btn.addEventListener("click", async () => {
         const item = actor.items.get(btn.dataset.itemId);
@@ -222,7 +222,7 @@ export class TabActions {
       });
     });
 
-    // Ref buttons (system utility actions) — Scry-styled info modal, then mark pip
+    // Ref buttons (system utility actions): Scry info modal, then mark the pip
     const eco = this._activeEco;
     const sysActions = SYSTEM_UTIL[eco] ?? [];
     element.querySelectorAll(".scry-sys-ref[data-sys-id]").forEach(btn => {
@@ -276,7 +276,7 @@ export class TabActions {
       });
     });
 
-    // Condition toggle buttons — read actual actor state, not CSS class
+    // Condition toggles read the actor's real state, not the button's CSS class
     element.querySelectorAll(".scry-cond-btn[data-status-id]").forEach(btn => {
       btn.addEventListener("click", async () => {
         const id = btn.dataset.statusId;
@@ -286,7 +286,7 @@ export class TabActions {
       });
     });
 
-    // Clear All — removes all active status effects known to CONFIG
+    // Clear All removes every active status effect listed in CONFIG
     element.querySelector(".scry-cond-clear-all")?.addEventListener("click", async () => {
       const knownIds = new Set((CONFIG?.statusEffects ?? []).map(e => e.id));
       const effs = actor.effects?.contents ?? [...(actor.effects?.values?.() ?? [])];
@@ -333,7 +333,7 @@ export class TabActions {
     });
   }
 
-  // -- Data classification ------------------------------------------------------
+  // --- Data classification ---
 
   _classify(item) {
     if (item.type === "weapon") return "attack";
@@ -395,7 +395,7 @@ export class TabActions {
     }));
 
     // All equipped items (equipment, consumables, wondrous items, etc.)
-    // shown in action economy regardless of activation type — lets players see/reference everything
+    // show in the action economy whatever their activation type, so players can find everything
     if (eco === "action") {
       const knownIds = new Set(ecoActorItems.map(i => i.id));
       (data.equipment ?? []).filter(e => e.equipped && !knownIds.has(e.id)).forEach(e => {
@@ -411,7 +411,7 @@ export class TabActions {
     return [...ecoActorItems, ...ecoSpells, ...sysItems];
   }
 
-  // -- HTML builders ------------------------------------------------------------
+  // --- HTML builders ---
 
   _buildEconomySection(data) {
     const a = data.actions ?? { action:1, actionMax:1, bonus:1, bonusMax:1, reaction:1, reactionMax:1 };
@@ -560,7 +560,6 @@ export class TabActions {
     const color = CAT_COLORS[cat] ?? "#6b7280";
     const label = CAT_LABELS[cat] ?? cat;
 
-    // Build detail string
     let detail = "";
     if (cat === "spell") {
       const lvl = item.level === 0 ? "Cantrip" : `Lvl ${item.level}`;
@@ -575,7 +574,6 @@ export class TabActions {
       detail = item.desc.slice(0, 55) + (item.desc.length > 55 ? "…" : "");
     }
 
-    // Build action button
     let actionBtn;
     if (item._source === "system") {
       actionBtn = `<button class="scry-btn-action scry-sys-ref" data-sys-id="${item.id}">Ref</button>`;
@@ -669,7 +667,7 @@ export class TabActions {
       </section>`;
   }
 
-  // -- Roll mode attack ----------------------------------------------------------
+  // --- Roll mode attack ---
 
   async _doRollAttack(item) {
     let atkHookId = Hooks.once("dnd5e.preRollAttack",
@@ -695,7 +693,7 @@ export class TabActions {
     }
   }
 
-  // -- Enter mode attack ---------------------------------------------------------
+  // --- Enter mode attack ---
 
   _openEnterDialog(item, actor, element) {
     const toHitStr = item.labels?.modifier ?? item.labels?.toHit ?? "";

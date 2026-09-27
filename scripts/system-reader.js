@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: system-reader.js
-Purpose: System abstraction layer — reads actor data for D&D 5e (PF2e stub for v14).
+Purpose: System abstraction layer: reads actor data for D&D 5e (PF2e stub for v14).
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 const SYSTEM_READERS = {
@@ -44,7 +44,7 @@ function _getActType(item) {
       for (const a of list) {
         if (!a || typeof a !== "object") continue;
         const t = (a.activation?.type ?? a.activation?.value ?? "").toLowerCase();
-        if (t && t !== "none") return t; // include "special" — callers handle it
+        if (t && t !== "none") return t; // includes "special"; callers handle it
       }
     }
   }

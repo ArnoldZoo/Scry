@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabs/tab-spells.js
-Purpose: Spells tab — spell slots, spell list, inline prep toggle, cast buttons.
+Purpose: Spells tab: spell slots, spell list, inline prep toggle, cast buttons.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 const LEVEL_LABELS = ["Cantrip","1st","2nd","3rd","4th","5th","6th","7th","8th","9th"];
@@ -38,7 +38,7 @@ export class TabSpells {
   }
 
   activate(element, actor) {
-    // Mode bar buttons live in .scry-mode-bar which is never replaced by refresh() — wire directly.
+    // The mode bar is never replaced by refresh(), so wire its buttons directly.
     element.querySelectorAll(".scry-mode-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         this._rollMode = btn.dataset.mode;
@@ -66,7 +66,7 @@ export class TabSpells {
       const pip = e.target.closest(".scry-slot-pip[data-level]");
       if (pip) { this._toggleSlot(pip, actor); return; }
 
-      // Prep toggle — must come before row so it captures the click first
+      // Prep toggle must be checked before the row, or the row takes the click
       const prep = e.target.closest(".scry-prep-toggle[data-item-id]");
       if (prep) { await this._togglePrep(prep.dataset.itemId, actor); return; }
 
@@ -87,7 +87,7 @@ export class TabSpells {
         return;
       }
 
-      // Spell row tap — show spell description
+      // Spell row tap shows the spell description
       const row = e.target.closest(".scry-spell-row[data-item-id]");
       if (row) { this._showDescription(row.dataset.itemId, actor); return; }
     });
@@ -101,7 +101,7 @@ export class TabSpells {
     if (listEl) listEl.outerHTML = this._buildSpellList(data.spells, data.noPrep, data.spellSlots);
   }
 
-  // -- Roll mode cast ------------------------------------------------------------
+  // --- Roll mode cast ---
 
   async _doRollSpell(item) {
     const needsTemplate = this._spellNeedsTemplate(item);
@@ -147,7 +147,7 @@ export class TabSpells {
     }
   }
 
-  // -- Enter mode cast -----------------------------------------------------------
+  // --- Enter mode cast ---
 
   _openEnterDialog(item, actor) {
     const isAttackSpell = ["rsak", "msak"].includes(item.system.actionType);
@@ -159,7 +159,7 @@ export class TabSpells {
       // Save spell, manual damage: enter the damage total only.
       this._openSaveDmgDialog(item, actor);
     } else {
-      // Utility, healing, or save spell with Auto Dmg ON — just cast fast-forwarded.
+      // Utility, healing, or save spell with Auto Dmg on: just cast fast-forwarded.
       this._doRollSpell(item);
     }
   }
@@ -312,7 +312,7 @@ export class TabSpells {
     }
   }
 
-  // -- AoE template placement (touch-friendly) ------------------------------------
+  // --- AoE template placement (touch-friendly) ---
 
   async _placeTemplateTouch(item) {
     this._fitBattleArea();
@@ -331,7 +331,7 @@ export class TabSpells {
       }));
     };
 
-    // CSS pointer-events:none on canvasEl kills ALL real input (touch, pointer, mouse)
+    // pointer-events:none on canvasEl blocks all real input (touch, pointer, mouse)
     // while the D-pad is visible. dispatchEvent() bypasses this so synthetic arrow
     // events still reach PIXI. Applied in the createChatMessage hook (after dialog closes).
     const savedPE = canvasEl?.style.pointerEvents ?? "";
@@ -410,7 +410,7 @@ export class TabSpells {
     });
 
     // Show panel only after dialog closes (createChatMessage fires right before template placement).
-    // Also lock canvas input at this point — dialog is gone so we no longer need real touches there.
+    // Lock canvas input here too. The dialog is gone, so real touches aren't needed there.
     let chatHookId = Hooks.on("createChatMessage", () => {
       if (chatHookId != null) { Hooks.off("createChatMessage", chatHookId); chatHookId = null; }
       setTimeout(() => {
@@ -474,7 +474,7 @@ export class TabSpells {
     return isNaN(n) ? 0 : n;
   }
 
-  // -- HTML builders -------------------------------------------------------------
+  // --- HTML builders ---
 
   _buildModeBar() {
     return `
@@ -556,7 +556,7 @@ export class TabSpells {
       </div>`;
   }
 
-  // -- Slot / prep helpers -------------------------------------------------------
+  // --- Slot / prep helpers ---
 
   _toggleSlot(pip, actor) {
     const level = parseInt(pip.dataset.level);
@@ -586,7 +586,7 @@ export class TabSpells {
     await item.update({ "system.prepared": !current });
   }
 
-  // -- Description popup ---------------------------------------------------------
+  // --- Description popup ---
 
   _showDescription(itemId, actor) {
     const item = actor.items.get(itemId);

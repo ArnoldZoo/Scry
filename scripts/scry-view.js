@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry-view.js
-Purpose: Main overlay — persistent header, 5-tab shell, tab switching, actor refresh.
+Purpose: Main overlay: persistent header, 5-tab shell, tab switching, actor refresh.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 import { readActorData }  from "./system-reader.js";
@@ -128,7 +128,7 @@ export class ScryView {
     this._element = document.getElementById("scry-overlay");
 
     this._tabletopView = new TabletopView(this);
-    // Foundry and Beyond templates handle combat display differently — don't inject into portrait wrap
+    // Foundry and Beyond templates show combat their own way. Don't inject into the portrait wrap.
     this._turnIndicator = new TurnIndicator(
       (this._isFoundry || this._isBeyond) ? null : this._element.querySelector(".scry-turn-indicator")
     );
@@ -300,7 +300,7 @@ export class ScryView {
     const el = this._element;
     this._wirePortraitSwitcher();
 
-    // HP buttons — damage / heal / temp
+    // HP buttons: damage / heal / temp
     el.querySelectorAll(".sfnd-pbtn[data-action]").forEach(btn => {
       btn.addEventListener("click", () => this._hpDialog(btn.dataset.action));
     });
@@ -308,7 +308,7 @@ export class ScryView {
     // Rest modal
     el.querySelector(".sfnd-pbtn-rest")?.addEventListener("click", () => this._openRestModal());
 
-    // Status / conditions panel — open Actions tab in status eco view
+    // Status / conditions panel opens the Actions tab in the status eco view
     el.querySelector(".sfnd-pbtn-status")?.addEventListener("click", () => {
       if (!this._foundryHandlers["actions"]) {
         this._foundryHandlers["actions"] = FOUNDRY_TAB_HANDLERS["actions"]?.();
@@ -324,7 +324,7 @@ export class ScryView {
       await this.actor.update({ "system.attributes.inspiration": !current });
     });
 
-    // Initiative diamond — open Scry numpad dialog (only for this character)
+    // Initiative diamond opens the Scry numpad dialog (only for this character)
     el.querySelector(".sfnd-diamond-init")?.addEventListener("click", () => {
       this._openInitiativeDialog();
     });
@@ -378,7 +378,7 @@ export class ScryView {
       btn.addEventListener("click", () => this._hpDialog(btn.dataset.action));
     });
 
-    // Status shortcut — opens Actions tab with Status panel; marks button open
+    // Status shortcut opens the Actions tab on the Status panel and marks the button open
     el.querySelector(".scry-btn-status")?.addEventListener("click", () => {
       if (!this._tabHandlers["actions"]) {
         this._tabHandlers["actions"] = TAB_HANDLERS["actions"]?.() ?? null;
@@ -389,13 +389,13 @@ export class ScryView {
       this.switchTab("actions");
     });
 
-    // Rest shortcut — scry-styled modal with HD roll + short/long rest
+    // Rest shortcut: Scry modal with HD roll + short/long rest
     el.querySelector(".scry-btn-rest")?.addEventListener("click", () => this._openRestModal());
 
     // Table tools panel
     el.querySelector(".scry-btn-tools")?.addEventListener("click", () => this._openTableTools());
 
-    // Portrait tap — actor switcher
+    // Portrait tap opens the actor switcher
     this._wirePortraitSwitcher();
 
     // Slide-down expanded content interactions
@@ -477,7 +477,7 @@ export class ScryView {
       this._onActorUpdate();
     });
 
-    // Status effect changes — toggleStatusEffect fires create/delete, not updateActor
+    // toggleStatusEffect fires create/delete on the effect, not updateActor
     addHook("createActiveEffect", (effect) => {
       if (effect.parent?.id !== this.actor.id) return;
       this._onActorUpdate();
@@ -491,7 +491,7 @@ export class ScryView {
       this._turnIndicator?.onDeleteCombat();
     });
 
-    // Combat start — compact horizontal banner at top of phone
+    // Combat start: compact banner across the top of the phone
     addHook("updateCombat", (combat) => {
       if (!combat.started || combat.round !== 1) return;
       if (this._shownCombatStart === combat.id) return;
@@ -509,7 +509,7 @@ export class ScryView {
       } catch (_) {}
     });
 
-    // Critical roll notifications (midi-qol path — fires on attacker's client)
+    // Critical roll notifications, midi-qol path. Fires on the attacker's client only.
     addHook("dnd5e.rollAttack", (rolls) => {
       try {
         const roll   = Array.isArray(rolls) ? rolls[0] : rolls;
@@ -519,21 +519,21 @@ export class ScryView {
       } catch (_) {}
     });
 
-    // Enter mode crits — TableOS fires this when player types a die value manually
+    // Enter mode crits. TableOS fires this when the player types a die value by hand.
     addHook("tableos.manualRollResult", (dieValue) => {
       if      (dieValue === 20) this._showScryBanner("CRITICAL SUCCESS", "", "crit");
       else if (dieValue === 1)  this._showScryBanner("EPIC FAIL",        "", "fail");
     });
 
-    // Initiative dialog suppression is handled by _startInitiativeObserver()
-    // (MutationObserver on document.body — catches TABLE-OS raw DOM injection
-    //  which bypasses all Foundry hooks).
+    // Initiative dialog suppression is in _startInitiativeObserver(). TableOS builds
+    // that dialog in raw DOM, so no Foundry hook fires for it; only a MutationObserver
+    // on document.body sees it.
 
     addHook("createCombatant", () => {
       this._turnIndicator?.onUpdateCombat(game.combat);
     });
 
-    // Movement tracking — updateToken fires on ALL clients (preUpdateToken only fires on initiator)
+    // Movement tracking uses updateToken because it fires on every client. preUpdateToken only fires on the one that moved.
     // Seed _lastKnownPos from the current canvas token position
     const seedToken = canvas?.tokens?.placeables?.find(t =>
       t.document?.actorId === this.actor.id || t.actor?.id === this.actor.id
@@ -572,10 +572,8 @@ export class ScryView {
     addHook("updateCombat", (combat) => {
       const combatant = combat.combatants?.find(c => c.actorId === this.actor.id);
       if (combatant && combat.current?.combatantId === combatant.id) {
-        // Reset movement
         this._movementUsed = 0;
         this._refreshMovement();
-        // Reset action economy pips
         const handlerStore = this._isFoundry ? this._foundryHandlers
           : this._isBeyond ? this._beyondHandlers : this._tabHandlers;
         const actionsHandler = handlerStore["actions"];
@@ -801,7 +799,7 @@ export class ScryView {
           this._openJournalReader(entry);
         });
 
-        // Open the specific page being viewed — no sidebar, full-width editor, works on mobile
+        // Open the page being viewed, not the whole journal: no sidebar, full-width editor, usable on a phone
         const currentPage = entry.pages?.get(pages[pageIdx]?.id);
         if (currentPage) {
           currentPage.sheet?.render(true);
@@ -885,7 +883,7 @@ export class ScryView {
 
     this._element.appendChild(panel);
 
-    // Color the name text via canvas — 100% immune to CSS cascade
+    // Color the name text through a canvas so no theme CSS can override it
     requestAnimationFrame(() => {
       panel.querySelectorAll(".scry-tp-row[data-theme]").forEach(row => {
         const t = THEME_DEFS.find(x => x.id === row.dataset.theme);
@@ -909,7 +907,7 @@ export class ScryView {
         await ScrySettings.setClientTheme(themeId);
 
         if (wasFamily !== willBeFamily) {
-          // Template family changed — destroy overlay and rebuild with new layout
+          // Template family changed. The layouts differ, so tear down the overlay and rebuild.
           this.destroy();
           this.render();
           return;
@@ -927,7 +925,7 @@ export class ScryView {
 
   // --- Scry modal system ---
 
-  // --- Actor switching -------------------------------------------------------
+  // --- Actor switching ---
 
   _getOwnedActors() {
     return game.actors
@@ -1110,7 +1108,7 @@ export class ScryView {
   // Restructure TABLE-OS's raw-DOM initiative dialog to match Scry's numpad layout.
   // Called by MutationObserver when the dialog is for the active character.
   _restructureInitDialog(el) {
-    // Anchor to top — avoids bottom cutoff that happens when vertically centered
+    // Anchor to the top. Centered vertically, the bottom row gets cut off on a phone.
     el.style.setProperty("position",   "fixed",            "important");
     el.style.setProperty("top",        "8px",              "important");
     el.style.setProperty("left",       "50%",              "important");
@@ -1124,18 +1122,17 @@ export class ScryView {
     const allBtns = [...el.querySelectorAll("button")];
     const orig    = (txt) => allBtns.find(b => b.textContent.trim() === txt);
 
-    // Store before hiding — hidden elements still fire .click()
+    // Grab these before hiding. Hidden buttons still work with .click().
     const submitBtn = orig("Initiative");
     const bonusBtn  = orig("Auto Init Bonus");
 
-    // Hide ALL original buttons
     allBtns.forEach(b => b.style.setProperty("display","none","important"));
 
     // Restore top-right Close only (first Close in DOM = header)
     const allClose = allBtns.filter(b => b.textContent.trim() === "Close");
     if (allClose[0]) allClose[0].style.removeProperty("display");
 
-    // Use TreeWalker on raw text nodes — reliable regardless of element depth
+    // Walk the text nodes. The labels sit at different depths in TableOS's markup.
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     let tnode;
     while ((tnode = walker.nextNode())) {
@@ -1147,7 +1144,7 @@ export class ScryView {
     [...el.querySelectorAll("input")].forEach(n =>
       n.style.setProperty("display","none","important"));
 
-    // Inject phone keypad
+    // Phone keypad
     const BS = "background:#1e1e2a;color:#fff;border:1px solid #3a3a4a;border-radius:8px;" +
                "font-size:1.15rem;font-weight:700;padding:.6rem .3rem;cursor:pointer;touch-action:manipulation;";
 
@@ -1455,9 +1452,9 @@ export class ScryView {
         const overlay = document.getElementById("scry-overlay");
         overlay?.classList.add("hidden");
 
-        // Open Game Settings — correct v13 namespace.
+        // Open Game Settings (v13 namespace).
         // _updatePosition reads el.offsetWidth only when width is not supplied,
-        // but el is null at that point in the async pipeline → pass explicit dims to bypass.
+        // but el is null at that point in the async pipeline, so pass explicit dims.
         const _scW = Math.min(800, window.innerWidth  - 40);
         const _scH = Math.min(700, window.innerHeight - 60);
         const settingsApp = new foundry.applications.settings.SettingsConfig();
@@ -1517,8 +1514,8 @@ export class ScryView {
   }
 
   // --- Initiative observer (MutationObserver) ---
-  // Watches document.body for ANY element TABLE-OS injects.
-  // Hooks can't catch raw DOM injection — MutationObserver can.
+  // Watches document.body for anything TableOS injects.
+  // Hooks can't see raw DOM injection; a MutationObserver can.
 
   _startInitiativeObserver() {
     if (this._initObserver) return;
@@ -1529,7 +1526,7 @@ export class ScryView {
       const lc   = text.toLowerCase();
 
       // Detection: must contain "initiative" + at least one of the button texts
-      // present in EITHER TABLE-OS dialog (Enter/Roll/Skip OR keypad numbers).
+      // present in either TableOS dialog (Enter/Roll/Skip or the keypad numbers).
       if (!lc.includes("initiative")) return;
       if (!lc.includes("roll") && !lc.includes("enter") && !lc.includes("skip")) return;
 
@@ -1537,14 +1534,14 @@ export class ScryView {
       if (!myName) return;
 
       if (!text.includes(myName)) {
-        // Other player's dialog — remove immediately
+        // Another player's dialog. Remove it so it doesn't cover this phone.
         el.remove();
         return;
       }
 
       // It's for our character.
-      // If it's the keypad dialog (has "keypad" in text) → restructure it.
-      // If it's the first chooser (Enter/Roll/Skip only) → just center it.
+      // Keypad dialog (has "keypad" in its text): restructure it.
+      // First chooser (Enter/Roll/Skip only): just center it.
       if (lc.includes("keypad")) {
         this._restructureInitDialog(el);
       } else {

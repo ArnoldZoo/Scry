@@ -1,17 +1,17 @@
 ﻿/* Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE. */
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry-anvil.css
-Purpose: Scry-ANVIL template — theme variables and structural overrides (Forge, Brass, Parchment).
+Purpose: Scry-ANVIL template: theme variables and structural overrides (Forge, Brass, Parchment).
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 /* ============================================================
-   THEME: Forge — Variables
-   Dark iron & gold — metalwork, angular, premium dark fantasy
+   THEME: Forge, Variables
+   Dark iron & gold: metalwork, angular, premium dark fantasy
    ============================================================ */
 .scry-overlay.theme-forge {
   --scry-bg:           #0d0a06;
@@ -38,7 +38,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   FORGE — Structural Design Overrides
+   FORGE: Structural Design Overrides
    Angular metalwork aesthetic, gold accents, premium dark feel
    ============================================================ */
 
@@ -167,7 +167,7 @@ Revision: 2.5.14
 }
 .theme-forge .scry-save-row:hover { background: rgba(200,144,26,.06); }
 
-/* Skills: 2-column layout via CSS columns — no HTML changes needed */
+/* Skills: 2-column layout via CSS columns, no HTML changes needed */
 .theme-forge .scry-skills-section {
   display: block;
   columns: 2;
@@ -298,7 +298,7 @@ Revision: 2.5.14
 
 /* ============================================================
    THEME: Brass
-   Warm light ivory & gold — forge workshop in daylight
+   Warm light ivory & gold: forge workshop in daylight
    ============================================================ */
 .scry-overlay.theme-brass {
   --scry-bg:           #f5f0e4;
@@ -326,7 +326,7 @@ Revision: 2.5.14
 
 /* ============================================================
    THEME: Parchment
-   Aged paper & brown-gold ink — old manuscript meets metalwork
+   Aged paper & brown-gold ink: old manuscript meets metalwork
    ============================================================ */
 .scry-overlay.theme-parchment {
   --scry-bg:           #e8dcc0;
@@ -353,9 +353,9 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   FORGE FAMILY — Brass & Parchment
+   FORGE FAMILY: Brass & Parchment
    Share Forge's angular metalwork design language.
-   CSS variables handle all color differences — only structural
+   CSS variables handle all color differences: only structural
    rules that differ from the dark Forge base are listed here.
    ============================================================ */
 

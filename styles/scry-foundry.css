@@ -1,16 +1,16 @@
 ﻿/* Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE. */
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry-foundry.css
-Purpose: Scry-FOUNDRY template — theme variables (Classic, Modern, Enhanced) + full layout CSS.
+Purpose: Scry-FOUNDRY template: theme variables (Classic, Modern, Enhanced) + full layout CSS.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 /* ============================================================
-   THEME: Classic  (Artist palette — light parchment / crimson)
+   THEME: Classic  (Artist palette, light parchment / crimson)
    ============================================================ */
 .scry-overlay.theme-classic {
   --scry-bg:           #E9E3D3;
@@ -46,7 +46,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Modern  (Artist palette — dark charcoal / warm gold)
+   THEME: Modern  (Artist palette, dark charcoal / warm gold)
    ============================================================ */
 .scry-overlay.theme-modern {
   --scry-bg:           #1B1922;
@@ -82,7 +82,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Frost  (Artist palette — dark slate / ice blue)
+   THEME: Frost  (Artist palette, dark slate / ice blue)
    ============================================================ */
 .scry-overlay.theme-frost {
   --scry-bg:           #2B2F36;
@@ -439,7 +439,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   FOUNDRY TEMPLATE — SHARED CONTENT COMPONENTS
+   FOUNDRY TEMPLATE: SHARED CONTENT COMPONENTS
    ============================================================ */
 
 /* Section header strip */
@@ -796,13 +796,13 @@ Revision: 2.5.14
 .sfnd-trait-use-btn.hidden   { display: none; }
 
 /* ============================================================
-   FOUNDRY TEMPLATE — CORE CONTENT OVERRIDES
+   FOUNDRY TEMPLATE: CORE CONTENT OVERRIDES
    ============================================================ */
 
 /* Sharper card corners */
 .sfnd-layout .scry-card { border-radius: 4px; }
 
-/* Economy tab active — use theme accent */
+/* Economy tab active: use theme accent */
 .sfnd-layout .scry-eco-tab.is-active {
   border-color: var(--scry-tab-active);
   background: color-mix(in srgb, var(--scry-tab-active) 12%, transparent);
@@ -934,7 +934,7 @@ Revision: 2.5.14
 }
 
 /* ── Classic light-theme corrections ──────────────────────── */
-/* Classic is a light theme — some Core hardcoded darks need overriding */
+/* Classic is a light theme: some Core hardcoded darks need overriding */
 .sfnd-layout.theme-classic .scry-eco-tab {
   background: var(--scry-btn-bg);
   color: var(--scry-text);
@@ -961,7 +961,7 @@ Revision: 2.5.14
   background: rgba(58,46,36,.06);
 }
 
-/* ── Ability score card — shield badge style ───────────────── */
+/* ── Ability score card: shield badge style ───────────────── */
 .sfnd-layout .scry-ability-score {
   background: var(--scry-bg-card);
   border: 1px solid var(--scry-border);
@@ -1071,7 +1071,7 @@ Revision: 2.5.14
    ============================================================ */
 
 /* ============================================================
-   THEME: Nightfall — deep purple-slate / ice blue
+   THEME: Nightfall, deep purple-slate / ice blue
    ============================================================ */
 .scry-overlay.theme-nightfall {
   --scry-bg:           #2C2B36;
@@ -1106,7 +1106,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Twilight — dark blue-grey / ice blue
+   THEME: Twilight, dark blue-grey / ice blue
    ============================================================ */
 .scry-overlay.theme-twilight {
   --scry-bg:           #2B2F36;
@@ -1156,7 +1156,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Crystal — near-white blue / strong blue accent
+   THEME: Crystal, near-white blue / strong blue accent
    ============================================================ */
 .scry-overlay.theme-crystal {
   --scry-bg:           #F2F7FF;
@@ -1200,7 +1200,7 @@ Revision: 2.5.14
 .theme-crystal .sfnd-diamond-inner { color: var(--scry-accent); font-weight: 700; }
 
 /* ============================================================
-   THEME: Vellum — warm parchment / blue accent
+   THEME: Vellum, warm parchment / blue accent
    ============================================================ */
 .scry-overlay.theme-vellum {
   --scry-bg:           #F7F2E8;
@@ -1239,7 +1239,7 @@ Revision: 2.5.14
   overflow: hidden;
   background: linear-gradient(180deg, #F2E8D6 0%, #F7F0E0 30%, #F2E8D6 70%, #EAD8C0 100%);
 }
-/* Vellum: top ornamental rule — gradient shimmer with center highlight */
+/* Vellum: top ornamental rule, gradient shimmer with center highlight */
 .theme-vellum .sfnd-portrait-panel::before {
   content: '';
   position: absolute;
@@ -1252,7 +1252,7 @@ Revision: 2.5.14
   opacity: .75;
   pointer-events: none;
 }
-/* Vellum: triquetra emblem — warm gold, Celtic knot fits the manuscript theme */
+/* Vellum: triquetra emblem, warm gold, Celtic knot fits the manuscript theme */
 .theme-vellum .sfnd-portrait-panel::after {
   content: '';
   position: absolute;
@@ -1286,7 +1286,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Amber — dark charcoal / warm orange
+   THEME: Amber, dark charcoal / warm orange
    ============================================================ */
 .scry-overlay.theme-amber {
   --scry-bg:           #1B1922;
@@ -1332,7 +1332,7 @@ Revision: 2.5.14
     linear-gradient(90deg, transparent 0%, rgba(242,140,40,.3) 10%, rgba(242,140,40,.3) 90%, transparent 100%) 0 100% / 100% 1px no-repeat;
   pointer-events: none;
 }
-/* Amber: no lower emblem — clean portrait panel */
+/* Amber: no lower emblem, clean portrait panel */
 /* Amber: angular cards, orange accent overrides */
 .theme-amber .scry-card {
   border-radius: 2px;
@@ -1363,7 +1363,7 @@ Revision: 2.5.14
    8 gradient layers = 4 corners × (H + V) bracket arms + 1 base layer.
    ----------------------------------------------------------------- */
 
-/* Nightfall — deep purple corners, triquetra emblem boosted */
+/* Nightfall: deep purple corners, triquetra emblem boosted */
 .theme-nightfall .sfnd-portrait-panel {
   border-right: 1px solid rgba(166,217,255,.18);
   box-shadow: 2px 0 20px rgba(0,0,0,.5), inset 0 0 30px rgba(0,0,0,.25);
@@ -1380,7 +1380,7 @@ Revision: 2.5.14
 }
 .theme-nightfall .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .22; }
 
-/* Twilight — blue-grey corners */
+/* Twilight: blue-grey corners */
 .theme-twilight .sfnd-portrait-panel {
   border-right: 1px solid rgba(166,217,255,.15);
   box-shadow: 2px 0 16px rgba(0,0,0,.4), inset 0 0 24px rgba(0,0,0,.2);
@@ -1397,7 +1397,7 @@ Revision: 2.5.14
 }
 .theme-twilight .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .22; }
 
-/* Crystal — clean blue corner brackets on light panel */
+/* Crystal: clean blue corner brackets on light panel */
 .theme-crystal .sfnd-portrait-panel {
   border-right: 1px solid rgba(37,99,235,.2);
   box-shadow: 2px 0 12px rgba(37,99,235,.08);
@@ -1413,7 +1413,7 @@ Revision: 2.5.14
     linear-gradient(180deg, #DDE8FC 0%, #E8F0FF 50%, #D8E4F8 100%);
 }
 
-/* Vellum — warm parchment corner brackets + paper texture overlay */
+/* Vellum: warm parchment corner brackets + paper texture overlay */
 .theme-vellum .sfnd-portrait-panel {
   border-right: 1px solid rgba(143,174,235,.3);
   box-shadow: 2px 0 10px rgba(0,0,0,.1);
@@ -1436,7 +1436,7 @@ Revision: 2.5.14
 .theme-vellum .sfnd-portrait-panel::before { height: 4px; opacity: .9; top: 4px; }
 .theme-vellum .sfnd-portrait-panel::after  { width: 56px; height: 56px; opacity: .28; }
 
-/* Amber — warm orange corner brackets + richer panel */
+/* Amber: warm orange corner brackets + richer panel */
 .theme-amber .sfnd-portrait-panel {
   border-right: 1px solid rgba(242,140,40,.2);
   box-shadow: 2px 0 18px rgba(0,0,0,.5), inset 0 0 24px rgba(0,0,0,.3);
@@ -1492,7 +1492,7 @@ Revision: 2.5.14
    High-DPI phones won't shrink it to sub-pixel nothing.
    --------------------------------------------------------------- */
 
-/* Parchment grain — warm, clearly visible paper texture */
+/* Parchment grain: warm, clearly visible paper texture */
 .theme-vellum.scry-overlay {
   background-color: var(--scry-bg);
   background-image:
@@ -1501,7 +1501,7 @@ Revision: 2.5.14
   background-repeat: repeat;
 }
 
-/* Dark grain — fine steel texture for Nightfall / Twilight */
+/* Dark grain: fine steel texture for Nightfall / Twilight */
 .theme-nightfall.scry-overlay {
   background-image:
     radial-gradient(ellipse 70% 50% at 12% 25%, rgba(166,217,255,.05) 0%, transparent 100%),
@@ -1526,7 +1526,7 @@ Revision: 2.5.14
   background-repeat: no-repeat, repeat;
 }
 
-/* Crystal: very light grain — barely-there but gives depth on white */
+/* Crystal: very light grain, barely-there but gives depth on white */
 .theme-crystal.scry-overlay {
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32 0.48' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
@@ -1551,7 +1551,7 @@ Revision: 2.5.14
   background-size: 128px 128px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 20px 1.5px, 1.5px 20px, 100% 100%;
 }
 
-/* Nightfall/Twilight triquetra — slightly larger for prominence */
+/* Nightfall/Twilight triquetra: slightly larger for prominence */
 .theme-nightfall .sfnd-portrait-panel::after,
 .theme-twilight  .sfnd-portrait-panel::after { width: 64px; height: 64px; opacity: .2; }
 
@@ -1562,7 +1562,7 @@ Revision: 2.5.14
    the color difference per theme automatically.
    ============================================================ */
 
-/* Action economy tiles — subtle glass base */
+/* Action economy tiles: subtle glass base */
 .sfnd-layout .scry-eco-tab {
   background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.08) 100%);
   border: 1px solid rgba(255,255,255,.1);
@@ -1630,14 +1630,14 @@ Revision: 2.5.14
   box-shadow: 0 0 8px var(--scry-accent-glow);
 }
 
-/* Diamond badges (INIT / MOVE / PROF) — accent border + glow */
+/* Diamond badges (INIT / MOVE / PROF): accent border + glow */
 .sfnd-layout .sfnd-diamond {
   box-shadow: 0 0 0 1px var(--scry-accent), 0 0 10px var(--scry-accent-glow);
   color: var(--scry-accent);
   font-weight: 800;
 }
 
-/* Portrait image — accent border ring */
+/* Portrait image: accent border ring */
 .sfnd-layout .sfnd-portrait-img {
   border: 2px solid var(--scry-accent) !important;
   box-shadow: 0 0 0 1px var(--scry-accent-glow), 0 0 16px var(--scry-accent-glow);
@@ -1653,7 +1653,7 @@ Revision: 2.5.14
   margin: 3px 8px;
 }
 
-/* Light theme overrides — glass uses dark tones not white */
+/* Light theme overrides: glass uses dark tones not white */
 .theme-crystal .scry-eco-tab,
 .theme-vellum  .scry-eco-tab {
   background: linear-gradient(180deg, rgba(0,0,0,.04) 0%, rgba(0,0,0,.07) 100%);
@@ -1678,19 +1678,19 @@ Revision: 2.5.14
 
 /* ============================================================
    REAL TEXTURE BACKGROUNDS
-   PNG files in /styles/ — blend mode handles color integration.
+   PNG files in /styles/: blend mode handles color integration.
    overlay = texture on dark bg  |  multiply = texture on light bg
    ============================================================ */
 
 /* --- Full overlay --- */
-/* Nightfall: dark stone — cool purple-slate, rough rock texture */
+/* Nightfall: dark stone, cool purple-slate, rough rock texture */
 .theme-nightfall.scry-overlay {
   background-color: #2C2B36;
   background-image: url("tex-nightfall.png");
   background-size: cover;
   background-blend-mode: overlay;
 }
-/* Twilight: brushed steel — add blue shift gradient on top of metal */
+/* Twilight: brushed steel, add blue shift gradient on top of metal */
 .theme-twilight.scry-overlay {
   background-color: #2B2F36;
   background-image:
@@ -1699,7 +1699,7 @@ Revision: 2.5.14
   background-size: auto, cover;
   background-blend-mode: normal, luminosity;
 }
-/* Crystal: linen — soft-light is much gentler than multiply on white */
+/* Crystal: linen, soft-light is much gentler than multiply on white */
 .theme-crystal.scry-overlay {
   background-color: #F2F7FF;
   background-image: url("tex-crystal.png");
@@ -1775,7 +1775,7 @@ Revision: 2.5.14
 .theme-amber     .sfnd-content { background-color: var(--scry-bg); background-image: url("tex-amber.png");     background-size: 600px;  background-blend-mode: overlay; }
 
 /* ============================================================
-   CORNER FLOURISH — botanical SVG in portrait panel top-left.
+   CORNER FLOURISH: botanical SVG in portrait panel top-left.
    fill="#000000" in SVG + CSS filter colorizes per theme.
    isolation: isolate on parent creates stacking context so
    z-index: -1 ::before sits above bg but below panel content.
@@ -1794,28 +1794,28 @@ Revision: 2.5.14
   z-index: -1;
 }
 
-/* Ice blue — Nightfall */
+/* Ice blue: Nightfall */
 .theme-nightfall .sfnd-portrait-panel::before {
   filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(1.4);
   opacity: .45;
 }
-/* Blue-steel — Twilight */
+/* Blue-steel: Twilight */
 .theme-twilight .sfnd-portrait-panel::before {
   filter: invert(1) sepia(1) saturate(2) hue-rotate(195deg) brightness(1.2);
   opacity: .38;
 }
-/* Soft blue — Crystal */
+/* Soft blue: Crystal */
 .theme-crystal .sfnd-portrait-panel::before {
   filter: invert(0.5) sepia(1) saturate(2) hue-rotate(200deg);
   opacity: .28;
 }
-/* Orange — Amber */
+/* Orange: Amber */
 .theme-amber .sfnd-portrait-panel::before {
   filter: invert(1) sepia(1) saturate(4) hue-rotate(335deg) brightness(1.1);
   opacity: .45;
 }
 
-/* Vellum: ::before used for top rule — add flourish via extra bg layer */
+/* Vellum: ::before used for top rule, add flourish via extra bg layer */
 .theme-vellum .sfnd-portrait-panel {
   background-image:
     url("corner-flourish.svg"),

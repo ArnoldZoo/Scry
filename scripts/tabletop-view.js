@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabletop-view.js
-Purpose: Canvas toggle — enter/exit Tabletop View, touch tap targeting/movement,
+Purpose: Canvas toggle: enter/exit Tabletop View, touch tap targeting/movement,
          zoom/pan buttons, sidebar toggle, token-list targeting fallback.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 const TV_OVERRIDE_ID = "scry-tv-override";
@@ -33,7 +33,7 @@ export class TabletopView {
 
   get active() { return this._active; }
 
-  // -- Enter / Exit ------------------------------------------
+  // --- Enter / Exit ---
 
   enter(initialMode = "none") {
     if (this._active) return;
@@ -120,22 +120,22 @@ export class TabletopView {
     }
   }
 
-  // -- Controllers -------------------------------------------
+  // --- Controllers ---
 
   _initControllers() {
     if (globalThis.TableOSTargetModeController) {
       this._targetCtrl = new globalThis.TableOSTargetModeController();
     }
-    // Enhanced movement — only available when TableOS is also installed
+    // Enhanced movement needs TableOS installed
     if (globalThis.TableOSTokenMover && globalThis.TABLE_OS) {
       try { this._tokenMover = new globalThis.TableOSTokenMover(() => null); } catch (_) {}
     }
   }
 
-  // -- TableOS element hide/restore -------------------------
+  // --- TableOS element hide/restore ---
 
   _hideTableOSElements() {
-    // CSS !important can't beat JS inline styles — set them directly.
+    // CSS !important can't beat TableOS's inline styles, so set them inline too.
     const dock = document.getElementById("tableos-battle-dock");
     if (dock) dock.style.setProperty("display", "none", "important");
     document.querySelectorAll(".tableos-turn-timer").forEach(el =>
@@ -151,12 +151,12 @@ export class TabletopView {
     );
   }
 
-  // -- Touch tap handler -------------------------------------
+  // --- Touch tap handler ---
 
   _bindTapHandler() {
     let _start = null;
 
-    // Listen at document level — PIXI v8 calls stopPropagation on the canvas element,
+    // Listen at document level. PIXI v8 calls stopPropagation on the canvas element,
     // so listeners on #board never fire. document-level capture runs before PIXI can stop it.
     const _isScryUI = (el) => !!el?.closest(
       "#scry-tabletop-bar,#scry-overlay,#scry-nav-panel,#scry-token-picker"
@@ -179,7 +179,7 @@ export class TabletopView {
       const dy = t.clientY - _start.y;
       _start = null;
 
-      if (Math.hypot(dx, dy) > 15) return; // drag — ignore
+      if (Math.hypot(dx, dy) > 15) return; // a drag, not a tap
       if (this._mode === "none") return;
 
       const world = this._clientToWorld(t.clientX, t.clientY);
@@ -204,7 +204,7 @@ export class TabletopView {
     this._onTouchStart = this._onTouchEnd = null;
   }
 
-  // -- Target tap --------------------------------------------
+  // --- Target tap ---
 
   _handleTargetTap(token) {
     if (!token) return;
@@ -220,21 +220,21 @@ export class TabletopView {
     this._updateReticules();
   }
 
-  // -- Walk tap ----------------------------------------------
+  // --- Walk tap ---
 
   _handleWalkTap(world, token) {
     const ownToken = canvas.tokens?.placeables?.find(t => t.actor?.id === this._scry.actor?.id);
     if (!ownToken) return;
 
     if (this._tokenMover) {
-      // Tapping own token while a path exists → cancel and exit walk mode
+      // Tapping your own token while a path exists cancels it and exits walk mode
       if (token?.id === ownToken.id && this._tokenMover.state !== "IDLE") {
         this._tokenMover.cancel();
         this._removeWalkIcon();
         this._setMode("none");
         return;
       }
-      // Route to waypoint system — builds path, shows green/yellow/red preview
+      // Waypoint system builds the path and shows the green/yellow/red preview
       this._tokenMover.handleDestinationTap(world);
       return;
     }
@@ -308,7 +308,6 @@ export class TabletopView {
     if (!canvas?.ready) return;
     const currentIds = new Set([...game.user.targets].map(t => t.id));
 
-    // Remove stale sprites
     for (const [id, sprite] of this._reticuleSprites) {
       if (!currentIds.has(id)) {
         try { sprite.parent?.removeChild(sprite); sprite.destroy(); } catch(_) {}
@@ -316,7 +315,6 @@ export class TabletopView {
       }
     }
 
-    // Add new sprites
     for (const token of game.user.targets) {
       if (this._reticuleSprites.has(token.id)) continue;
       try {
@@ -406,7 +404,7 @@ export class TabletopView {
     return null;
   }
 
-  // -- Mode management ---------------------------------------
+  // --- Mode management ---
 
   _setMode(mode) {
     this._mode = mode;
@@ -456,7 +454,7 @@ export class TabletopView {
     this._setMode(next);
   }
 
-  // -- Override style ----------------------------------------
+  // --- Override style ---
 
   _injectOverrideStyle() {
     if (document.getElementById(TV_OVERRIDE_ID)) return;
@@ -473,7 +471,7 @@ export class TabletopView {
     document.head.appendChild(s);
   }
 
-  // -- Bar ---------------------------------------------------
+  // --- Bar ---
 
   _injectBar() {
     this._bar?.remove();
@@ -481,7 +479,7 @@ export class TabletopView {
     const bar = document.createElement("div");
     bar.id        = "scry-tabletop-bar";
     bar.className = "scry-tabletop-bar";
-    // Timer badge — top-left corner, always visible when active
+    // Timer badge, top-left, visible whenever a timer is running
     const timerBadge = document.createElement("div");
     timerBadge.id = "scry-tv-timer-badge";
     timerBadge.style.cssText = [
@@ -494,8 +492,8 @@ export class TabletopView {
     ].join(";");
     document.body.appendChild(timerBadge);
 
-    // Combatant image moved to Scry portrait panel (sfnd-combat-strip)
-    // — no longer injected as a floating overlay here
+    // The combatant image moved to the Scry portrait panel (sfnd-combat-strip).
+    // It is no longer injected here as a floating overlay.
 
     // Copy theme CSS variables from overlay so bar inherits the current theme
     const overlay = document.getElementById("scry-overlay");
@@ -543,7 +541,7 @@ export class TabletopView {
     bar.querySelector(".scry-tv-ruler")  .addEventListener("click", () => this._toggleMode("ruler"));
   }
 
-  // -- Info strip update -------------------------------------
+  // --- Info strip update ---
 
   _updateEndTurnBtn() {
     const row = document.getElementById("scry-tv-end-turn-row");
@@ -597,7 +595,7 @@ export class TabletopView {
     const overlayOpen = document.getElementById("scry-overlay")?.classList.contains("tv-overlay-mode");
     if (overlayOpen) return;
 
-    // Timer badge (top-left floater) — read TableOS timer even when it's CSS-hidden
+    // Timer badge reads the TableOS timer even while TableOS's own timer is hidden
     const tvTimer = document.getElementById("scry-tv-timer-badge");
     if (tvTimer) {
       const src = document.querySelector(".tableos-turn-timer__time");
@@ -615,13 +613,13 @@ export class TabletopView {
     // Combatant display is handled in Scry portrait panel (sfnd-combat-strip)
   }
 
-  // -- Navigation --------------------------------------------
+  // --- Navigation ---
 
   _openNav() {
     this._toggleFallbackNav();
   }
 
-  // -- Ping mode (tap canvas after pressing Ping) -----------
+  // --- Ping mode (tap canvas after pressing Ping) ---
 
   _handleZoomTap(world) {
     if (!world) return;
@@ -647,7 +645,7 @@ export class TabletopView {
     this._setMode("none");
   }
 
-  // -- Custom two-tap ruler ----------------------------------
+  // --- Custom two-tap ruler ---
 
   _handleRulerTap(screenX, screenY, world) {
     if (!world) return;
@@ -656,7 +654,6 @@ export class TabletopView {
     const svg = document.getElementById("scry-ruler-svg");
     if (!svg) return;
 
-    // Draw dot at tap point
     const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     dot.setAttribute("cx", screenX);
     dot.setAttribute("cy", screenY);
@@ -678,7 +675,6 @@ export class TabletopView {
       line.setAttribute("stroke-dasharray", "10,5");
       svg.insertBefore(line, svg.firstChild);
 
-      // Calculate grid distance
       const dx = b.world.x - a.world.x;
       const dy = b.world.y - a.world.y;
       const worldDist = Math.hypot(dx, dy);
@@ -689,7 +685,7 @@ export class TabletopView {
       const readout = document.getElementById("scry-ruler-readout");
       if (readout) { readout.textContent = `${feet} ft`; readout.style.display = "block"; }
 
-      // Reset points — ruler mode stays active for another measurement
+      // Ruler mode stays on for the next measurement
       this._rulerPoints = [];
     }
   }
@@ -804,7 +800,7 @@ export class TabletopView {
     document.body.appendChild(panel);
   }
 
-  // -- Token picker (Actions tab targeting fallback) ---------
+  // --- Token picker (Actions tab targeting fallback) ---
 
   openTokenPicker() {
     this.closeTokenPicker();
@@ -890,7 +886,7 @@ export class TabletopView {
     setTimeout(() => ann?.isConnected && ann.remove(), 3500);
   }
 
-  // -- Overlay (from tabletop bar) ---------------------------
+  // --- Overlay (from tabletop bar) ---
 
   _openOverlay(tabId) {
     this._bar?.style.setProperty("display", "none", "important");

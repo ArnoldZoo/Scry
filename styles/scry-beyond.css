@@ -1,16 +1,16 @@
 ﻿/* Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE. */
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: scry-beyond.css
-Purpose: Scry-BEYOND template — theme variables (Dark, Light, Parchment) + full layout CSS.
+Purpose: Scry-BEYOND template: theme variables (Dark, Light, Parchment) + full layout CSS.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 /* ============================================================
-   THEME: Beyond Dark  (D&D Beyond dark mode — near-black / blue)
+   THEME: Beyond Dark  (D&D Beyond dark mode, near-black / blue)
    ============================================================ */
 .scry-overlay.theme-beyond-dark {
   --scry-bg:           #0e0e12;
@@ -65,7 +65,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Beyond Light  (Atlas-inspired — off-white / navy / blue)
+   THEME: Beyond Light  (Atlas-inspired, off-white / navy / blue)
    ============================================================ */
 .scry-overlay.theme-beyond-light {
   --scry-bg:           #eef2f8;
@@ -120,7 +120,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   THEME: Beyond Parchment  (Aged paper — warm cream / saddle brown)
+   THEME: Beyond Parchment  (Aged paper, warm cream / saddle brown)
    ============================================================ */
 .scry-overlay.theme-beyond-parchment {
   --scry-bg:           #f0e8d5;
@@ -175,7 +175,7 @@ Revision: 2.5.14
 }
 
 /* ============================================================
-   LAYOUT — Shell
+   LAYOUT: Shell
    ============================================================ */
 #scry-overlay.sbnd-layout {
   display: flex;
@@ -354,7 +354,7 @@ Revision: 2.5.14
   background: var(--scry-bg);
 }
 
-/* Unprepared spells — base scry.css uses opacity:.5 which is too invisible on dark Beyond themes */
+/* Unprepared spells: base scry.css uses opacity:.5 which is too invisible on dark Beyond themes */
 #scry-overlay.sbnd-layout .scry-spell-row.unprepared { opacity: 0.72; }
 
 /* ============================================================
@@ -409,7 +409,7 @@ Revision: 2.5.14
   padding: 10px 10px 4px;
 }
 
-/* Card container — aspect ratio matches SVG viewBox 100:142 */
+/* Card container: aspect ratio matches SVG viewBox 100:142 */
 .sbnd-ability-card {
   position: relative;
   aspect-ratio: 100 / 142;
@@ -472,7 +472,7 @@ Revision: 2.5.14
   stroke-width: 0.7;
 }
 
-/* Text layers — absolute over the SVG */
+/* Text layers: absolute over the SVG */
 .sbnd-ability-name {
   position: absolute;
   top: 8%;

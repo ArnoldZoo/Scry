@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: tabs/tab-gear.js
-Purpose: Gear tab — currency, encumbrance, inventory, containers.
+Purpose: Gear tab: currency, encumbrance, inventory, containers.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export class TabGear {
@@ -26,8 +26,8 @@ export class TabGear {
   }
 
   activate(element, actor) {
-    // Single delegated handler — all sub-sections are replaced by refresh() via outerHTML,
-    // so element-level listeners would be lost. Delegating to the outer element avoids that.
+    // One delegated handler. refresh() replaces every sub-section through outerHTML,
+    // so listeners on the inner elements would be lost.
     element.addEventListener("click", async e => {
       // Qty +/-
       const qty = e.target.closest(".scry-qty-btn");
@@ -61,7 +61,7 @@ export class TabGear {
         return;
       }
 
-      // Gear row tap — show item description
+      // Gear row tap shows the item description
       const row = e.target.closest(".scry-gear-row[data-item-id]");
       if (row) { this._showDescription(row.dataset.itemId, actor); return; }
     });
@@ -180,7 +180,7 @@ export class TabGear {
         <button class="scry-qty-btn" data-item-id="${item.id}" data-delta="1">+</button>
       </div>`;
 
-    // Container move button — shown when containers exist and this isn't itself a container
+    // Container move button, only when containers exist and this item isn't one
     const containerBtn = !item.isContainer && this._containers.length > 0
       ? `<button class="scry-container-btn scry-btn-sm ${nested ? "in-container" : ""}"
                data-item-id="${item.id}" title="${nested ? "Remove from container" : "Move to container"}">📦</button>`
@@ -208,7 +208,7 @@ export class TabGear {
     const currentContainer = item.system.container;
 
     if (isNested) {
-      // Item is already in a container — just remove it
+      // Already in a container, so just take it out
       await item.update({ "system.container": null });
       return;
     }

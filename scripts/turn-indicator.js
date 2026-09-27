@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: turn-indicator.js
-Purpose: Persistent corner widget — active combatant portrait, name, timer, round number.
+Purpose: Persistent corner widget: active combatant portrait, name, timer, round number.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 export class TurnIndicator {
@@ -20,7 +20,7 @@ export class TurnIndicator {
     this._updateFromCombat(game.combat);
   }
 
-  // Hook handlers — called by ScryView's registered hooks
+  // Hook handlers, called from the hooks ScryView registers
   onUpdateCombat(combat) {
     this._updateFromCombat(combat);
   }

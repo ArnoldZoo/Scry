@@ -2,7 +2,7 @@
   "id": "table-os-scry",
   "title": "TableOS Scry - Mobile Player Companion",
   "description": "Full-screen touch character sheet for players on phones and tablets at an in-person Foundry table. Roll, cast, track HP and target tokens without the desktop UI.",
-  "version": "2.5.14",
+  "version": "2.5.15",
   "authors": [
     { "name": "Loremaster", "url": "https://arcanelogix.com" },
     { "name": "ArcaneLogix", "url": "https://arcanelogix.com" }

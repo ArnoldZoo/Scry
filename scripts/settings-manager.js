@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2026 ArcaneLogix. All rights reserved. See LICENSE.
 /*
-Module: TableOS Scry — Mobile Player Companion
+Module: TableOS Scry - Mobile Player Companion
 Component: settings-manager.js
 Purpose: Setting registration, user-type detection, device type resolution.
 
 Author: Loremaster
 Coder: ArcaneLogix
-Revision: 2.5.14
+Revision: 2.5.15
 */
 
 const MODULE_ID = "table-os-scry";
@@ -25,7 +25,7 @@ export class ScrySettings {
   }
 
   static register() {
-    // GM-assigned device types per user — stored as {userId: "phone"|"tablet"|"none"|"auto"}
+    // GM-assigned device type per user, stored as {userId: "phone"|"tablet"|"none"|"auto"}
     game.settings.register(MODULE_ID, "userDevices", {
       name: "Scry User Devices",
       scope: "world",
@@ -59,7 +59,7 @@ export class ScrySettings {
       default: "cobalt"
     });
 
-    // Per-client theme — each player picks their own on their device
+    // Per-client theme. Each player picks their own on their device.
     game.settings.register(MODULE_ID, "clientTheme", {
       name: "My Theme (Scry)",
       hint: "Your personal Scry theme. Overrides the GM default on your device.",
@@ -123,7 +123,7 @@ export class ScrySettings {
     if (assigned === "tablet") return "tablet";
     if (assigned === "none" || !assigned) return null;
 
-    // assigned === "auto" — check TableOS; IR-table users skip Scry by default
+    // assigned === "auto": check TableOS. IR-table users skip Scry by default.
     if (game.modules.get("table-os")?.active) {
       try {
         const rawProfiles = game.settings.get("table-os", "userProfiles");
