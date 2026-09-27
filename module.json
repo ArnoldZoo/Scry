@@ -2,7 +2,7 @@
   "id": "table-os-scry",
   "title": "TableOS Scry - Mobile Player Companion",
   "description": "Personal device companion for TableOS. Gives players a phone and tablet optimized character interface during in-person Foundry VTT sessions.",
-  "version": "2.5.12",
+  "version": "2.5.13",
   "authors": [
     { "name": "Loremaster-DudleyDoRight" },
     { "name": "ArcaneLogix - ArnoldZoo" }

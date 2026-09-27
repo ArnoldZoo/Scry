@@ -5,7 +5,7 @@ Purpose: Entry point. Detects personal device users and boots the Scry overlay.
 
 Author: Loremaster-DudleyDoRight
 Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.12
+Revision: 2.5.13
 Copyright (c) 2026 ArcaneLogix. All rights reserved.
 Licensed for personal tabletop play only - see LICENSE.
 No redistribution, derivative works, or resale without written permission.
@@ -140,13 +140,25 @@ function _startNotificationSuppressor() {
           && _SIZE_WARN.test(node.textContent)) node.remove();
     });
   };
+  // Foundry can raise the warning before a module gets to init, in which case
+  // the node is already in the DOM and the observer will never see it added.
+  const sweepExisting = () => {
+    document.querySelectorAll(".notification").forEach(node => {
+      if (_SIZE_WARN.test(node.textContent)) node.remove();
+    });
+  };
+
   const obs = new MutationObserver(m => m.forEach(r => removeMatching(r.addedNodes)));
   window._scryNotifObserver = obs;
 
   // Watch body with subtree so we catch the notification regardless of container ID/structure
   const attach = () => {
     if (document.body) {
+      sweepExisting();
       obs.observe(document.body, { childList: true, subtree: true });
+      // The warning is also re-raised on resize, and a phone fires that on
+      // rotate and on browser-chrome show/hide.
+      window.addEventListener("resize", sweepExisting);
     } else {
       setTimeout(attach, 50);
     }

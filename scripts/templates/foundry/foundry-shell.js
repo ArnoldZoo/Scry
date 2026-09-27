@@ -5,7 +5,7 @@ Purpose: Scry-FOUNDRY template shell — portrait panel, diamond stat badges, na
 
 Author: Loremaster-DudleyDoRight
 Coder: ArcaneLogix-ArnoldZoo
-Revision: 2.5.12
+Revision: 2.5.13
 Copyright (c) 2026 ArcaneLogix. All rights reserved.
 Licensed for personal tabletop play only - see LICENSE.
 No redistribution, derivative works, or resale without written permission.
@@ -82,7 +82,7 @@ export class FoundryShell {
       </div>
     </div>
     <div class="sfnd-panel-timer hidden" id="sfnd-panel-timer"></div>
-    <div class="sfnd-version-badge">v2.5.12 · FND 1.2.01</div>
+    <div class="sfnd-version-badge">v2.5.13 · FND 1.2.02</div>
     <button class="sfnd-tools-btn" title="Table Tools"><i class="fas fa-bars"></i></button>
   </aside>
   <div class="sfnd-body">
